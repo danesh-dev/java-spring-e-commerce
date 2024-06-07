@@ -34,11 +34,15 @@ public class SecurityConfig {
 
         http.csrf(c -> c.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/admin-panel").hasAuthority("ADMIN")
-                        .requestMatchers("/user-panel").hasAuthority("USER")
-                        .requestMatchers("/seller-panel").hasAuthority("SELLER")
-                        .requestMatchers("/register", "/login", "/error", "assets/css/**").permitAll()
-                        .anyRequest().authenticated()  // Require authentication for any other requests
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("USER")
+
+                        .requestMatchers("/register", "/login", "/error", "assets/**").permitAll()
+                        .anyRequest().authenticated()
+
+//                        .requestMatchers("/seller-panel").hasAuthority("SELLER") todo seller panel
+
+
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
