@@ -16,7 +16,11 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void create(UserDto userDto){
+    public void create(UserDto userDto) throws Exception {
+        if (userRepository.existsByEmail(userDto.getEmail())) {
+            throw new Exception("Email already in use");
+        }
+
         User user = new User();
         user.setName(userDto.getName());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -26,4 +30,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public boolean verifyPassword(String rawPassword, String email) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            return passwordEncoder.matches(rawPassword, user.getPassword());
+        }
+        return false;
+    }
 }
