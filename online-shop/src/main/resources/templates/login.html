@@ -25,6 +25,10 @@
                 Logout Successfully!
             </div>
 
+            <div class="alert alert-info" role="alert" th:if="${message != null}">
+                [[${message}]]
+            </div>
+
             <form class="login100-form validate-form" th:action="@{/login}" method="post" role="form">
                 <span class="login100-form-title pb-2">
                     Login

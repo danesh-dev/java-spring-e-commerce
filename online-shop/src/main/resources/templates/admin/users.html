@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -12,14 +12,14 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <!-- bootstrap rtl -->
-  <link rel="stylesheet" href="assets/dist/css/bootstrap-rtl.min.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/bootstrap-rtl.min.css}">
   <!-- template rtl version -->
-  <link rel="stylesheet" href="assets/dist/css/custom-style.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/custom-style.css}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -48,7 +48,7 @@
               <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <a href="/admin" class="nav-link">
+                <a th:href="@{/admin}" class="nav-link">
                   <i class="nav-icon fa fa-dashboard"></i>
                   <p>
                     داشبورد
@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/add-product" class="nav-link">
+                <a th:href="@{/admin/add-product}" class="nav-link">
                   <i class="nav-icon fa fa-th"></i>
                   <p>
                     افزودن کالا
@@ -65,7 +65,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/users" class="nav-link active">
+                <a th:href="@{/admin/users}" class="nav-link active">
                   <i class="nav-icon fa fa-pie-chart"></i>
                   <p>
                     کاربران
@@ -545,17 +545,17 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
+  <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
   <!-- Bootstrap 4 -->
-  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
   <!-- ChartJS 1.0.1 -->
-  <script src="assets/plugins/chartjs-old/Chart.min.js"></script>
+  <script th:src="@{/assets/plugins/chartjs-old/Chart.min.js}"></script>
   <!-- FastClick -->
-  <script src="assets/plugins/fastclick/fastclick.js"></script>
+  <script th:src="@{/assets/plugins/fastclick/fastclick.js}"></script>
   <!-- AdminLTE App -->
-  <script src="assets/dist/js/adminlte.min.js"></script>
+  <script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script>
+  <script th:src="@{/assets/dist/js/demo.js}"></script>
   <!-- page script -->
   <script>
     $(function () {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl">
+<html dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -12,224 +12,224 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <!-- bootstrap rtl -->
-  <link rel="stylesheet" href="assets/dist/css/bootstrap-rtl.min.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/bootstrap-rtl.min.css}">
   <!-- template rtl version -->
-  <link rel="stylesheet" href="assets/dist/css/custom-style.css">
+  <link rel="stylesheet" th:href="@{/assets/dist/css/custom-style.css}">
 
 </head>
 
 <body class="hold-transition sidebar-mini">
-  <div class="wrapper">
+<div class="wrapper">
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <div>
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g"
-                class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info d-block text-light">
-              حسام موسوی
-            </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div>
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g"
+                 class="img-circle elevation-2" alt="User Image">
           </div>
-
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-                 with font-awesome or any other icon font library -->
-              <li class="nav-item">
-                <a href="/admin/index" class="nav-link">
-                  <i class="nav-icon fa fa-dashboard"></i>
-                  <p>
-                    داشبورد
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/add-product" class="nav-link active">
-                  <i class="nav-icon fa fa-th"></i>
-                  <p>
-                    افزودن کالا
-                    <span class="right badge badge-danger">جدید</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/users" class="nav-link">
-                  <i class="nav-icon fa fa-pie-chart"></i>
-                  <p>
-                    کاربران
-                    <i class="right fa"></i>
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <!-- /.sidebar-menu -->
+          <div class="info d-block text-light">
+            حسام موسوی
+          </div>
         </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a th:href="@{/admin}" class="nav-link">
+                <i class="nav-icon fa fa-dashboard"></i>
+                <p>
+                  داشبورد
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="add-product.html" class="nav-link active">
+                <i class="nav-icon fa fa-th"></i>
+                <p>
+                  افزودن کالا
+                  <span class="right badge badge-danger">جدید</span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/users}" class="nav-link">
+                <i class="nav-icon fa fa-pie-chart"></i>
+                <p>
+                  کاربران
+                  <i class="right fa"></i>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
       </div>
-      <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="card card-warning">
-          <div class="card-header">
-            <h3 class="card-title">اجزای کلی</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <form role="form">
-              <!-- text input -->
-              <div class="form-group">
-                <label>نوشته</label>
-                <input type="text" class="form-control" placeholder="وارد کردن اطلاعات ...">
-              </div>
-              <div class="form-group">
-                <label>نوشته غیرفعال</label>
-                <input type="text" class="form-control" placeholder="وارد کردن اطلاعات ..." disabled>
-              </div>
-
-              <!-- textarea -->
-              <div class="form-group">
-                <label>متن</label>
-                <textarea class="form-control" rows="3" placeholder="وارد کردن اطلاعات ..."></textarea>
-              </div>
-              <div class="form-group">
-                <label>متن غیرفعال</label>
-                <textarea class="form-control" rows="3" placeholder="وارد کردن اطلاعات ..." disabled></textarea>
-              </div>
-
-              <!-- input states -->
-              <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> مقدار درست</label>
-                <input type="text" class="form-control" id="inputSuccess" placeholder="وارد کردن اطلاعات ...">
-              </div>
-              <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> با اخطار</label>
-                <input type="text" class="form-control" id="inputWarning" placeholder="وارد کردن اطلاعات ...">
-              </div>
-              <div class="form-group has-error">
-                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> با ارور</label>
-                <input type="text" class="form-control" id="inputError" placeholder="وارد کردن اطلاعات ...">
-              </div>
-
-              <!-- checkbox -->
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="option1">
-                  <label class="form-check-label">چک باکس</label>
-                </div>
-
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="option1" disabled>
-                  <label class="form-check-label">چک باکس غیرفعال</label>
-                </div>
-              </div>
-
-              <!-- radio -->
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" value="option1">
-                  <label class="form-check-label">رادیو</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" value="option1" disabled>
-                  <label class="form-check-label">رادیو غیرفعال</label>
-                </div>
-              </div>
-
-              <!-- select -->
-              <div class="form-group">
-                <label>انتخاب کنید</label>
-                <select class="form-control">
-                  <option>گزینه 1</option>
-                  <option>گزینه 2</option>
-                  <option>گزینه 3</option>
-                  <option>گزینه 4</option>
-                  <option>گزینه 5</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>انتخاب کننده غیرفعال</label>
-                <select class="form-control" disabled>
-                  <option>گزینه 1</option>
-                  <option>گزینه 2</option>
-                  <option>گزینه 3</option>
-                  <option>گزینه 4</option>
-                  <option>گزینه 5</option>
-                </select>
-              </div>
-
-              <!-- Select multiple-->
-              <div class="form-group">
-                <label>چند انتخابی</label>
-                <select multiple class="form-control">
-                  <option>گزینه 1</option>
-                  <option>گزینه 2</option>
-                  <option>گزینه 3</option>
-                  <option>گزینه 4</option>
-                  <option>گزینه 5</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>چند انتخابی غیرفعال</label>
-                <select multiple class="form-control" disabled>
-                  <option>گزینه 1</option>
-                  <option>گزینه 2</option>
-                  <option>گزینه 3</option>
-                  <option>گزینه 4</option>
-                  <option>گزینه 5</option>
-                </select>
-              </div>
-
-            </form>
-          </div>
-          <!-- /.card-body -->
-        </div>
-      </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.sidebar -->
+  </aside>
 
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.0.0-alpha
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">اجزای کلی</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <form role="form">
+            <!-- text input -->
+            <div class="form-group">
+              <label>نوشته</label>
+              <input type="text" class="form-control" placeholder="وارد کردن اطلاعات ...">
+            </div>
+            <div class="form-group">
+              <label>نوشته غیرفعال</label>
+              <input type="text" class="form-control" placeholder="وارد کردن اطلاعات ..." disabled>
+            </div>
+
+            <!-- textarea -->
+            <div class="form-group">
+              <label>متن</label>
+              <textarea class="form-control" rows="3" placeholder="وارد کردن اطلاعات ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>متن غیرفعال</label>
+              <textarea class="form-control" rows="3" placeholder="وارد کردن اطلاعات ..." disabled></textarea>
+            </div>
+
+            <!-- input states -->
+            <div class="form-group has-success">
+              <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> مقدار درست</label>
+              <input type="text" class="form-control" id="inputSuccess" placeholder="وارد کردن اطلاعات ...">
+            </div>
+            <div class="form-group has-warning">
+              <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> با اخطار</label>
+              <input type="text" class="form-control" id="inputWarning" placeholder="وارد کردن اطلاعات ...">
+            </div>
+            <div class="form-group has-error">
+              <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> با ارور</label>
+              <input type="text" class="form-control" id="inputError" placeholder="وارد کردن اطلاعات ...">
+            </div>
+
+            <!-- checkbox -->
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option1">
+                <label class="form-check-label">چک باکس</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option1" disabled>
+                <label class="form-check-label">چک باکس غیرفعال</label>
+              </div>
+            </div>
+
+            <!-- radio -->
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="option1">
+                <label class="form-check-label">رادیو</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="option1" disabled>
+                <label class="form-check-label">رادیو غیرفعال</label>
+              </div>
+            </div>
+
+            <!-- select -->
+            <div class="form-group">
+              <label>انتخاب کنید</label>
+              <select class="form-control">
+                <option>گزینه 1</option>
+                <option>گزینه 2</option>
+                <option>گزینه 3</option>
+                <option>گزینه 4</option>
+                <option>گزینه 5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>انتخاب کننده غیرفعال</label>
+              <select class="form-control" disabled>
+                <option>گزینه 1</option>
+                <option>گزینه 2</option>
+                <option>گزینه 3</option>
+                <option>گزینه 4</option>
+                <option>گزینه 5</option>
+              </select>
+            </div>
+
+            <!-- Select multiple-->
+            <div class="form-group">
+              <label>چند انتخابی</label>
+              <select multiple class="form-control">
+                <option>گزینه 1</option>
+                <option>گزینه 2</option>
+                <option>گزینه 3</option>
+                <option>گزینه 4</option>
+                <option>گزینه 5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>چند انتخابی غیرفعال</label>
+              <select multiple class="form-control" disabled>
+                <option>گزینه 1</option>
+                <option>گزینه 2</option>
+                <option>گزینه 3</option>
+                <option>گزینه 4</option>
+                <option>گزینه 5</option>
+              </select>
+            </div>
+
+          </form>
+        </div>
+        <!-- /.card-body -->
       </div>
-
-      <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    </section>
+    <!-- /.content -->
   </div>
-  <!-- ./wrapper -->
+  <!-- /.content-wrapper -->
 
-  <!-- jQuery -->
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="assets/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script>
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.0-alpha
+    </div>
+
+    <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/assets/dist/js/demo.js}"></script>
 </body>
 
 </html>

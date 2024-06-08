@@ -37,10 +37,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/user/**").hasAuthority("USER")
-
-                        .requestMatchers("/register", "/login", "/error", "assets/**").permitAll()
-                        .anyRequest().authenticated()
-
+                        .requestMatchers("/register", "/login", "/error", "assets/**", "/home").permitAll()
+//                        .anyRequest().authenticated()
 //                        .requestMatchers("/seller-panel").hasAuthority("SELLER") todo seller panel
 
 
