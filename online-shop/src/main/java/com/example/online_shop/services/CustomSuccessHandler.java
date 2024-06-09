@@ -20,7 +20,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             response.sendRedirect("/admin");
 
         } else if (roles.orElse("").equals("USER")) {
-            response.sendRedirect("/user");
+            response.sendRedirect("/");
 
         } else {
             response.sendRedirect("/error");

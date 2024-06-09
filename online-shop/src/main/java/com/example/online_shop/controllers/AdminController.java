@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping
-    public String index(){
+    public String showIndexPage(){
         return "admin/index";
     }
 
@@ -18,9 +18,30 @@ public class AdminController {
         return "admin/users";
     }
 
-    @GetMapping("/add-product")
-    public String showAddProductPage(){
-        return "admin/add-product";
+    @GetMapping("/add-category")
+    public String showAddCategoryPage(){
+        return "admin/add-category";
     }
+
+    @GetMapping("/categories")
+    public String showCategoriesPage(){
+        return "admin/categories";
+    }
+
+    @GetMapping("/add-seller")
+    public String showAddSellerPage(){
+        return "admin/add-seller";
+    }
+
+    @GetMapping("/sellers")
+    public String showSellersPage(){
+        return "admin/sellers";
+    }
+
+    @GetMapping("/products")
+    public String showProductsPage(){
+        return "admin/products";
+    }
+
 
 }
