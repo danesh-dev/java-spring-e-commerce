@@ -1,11 +1,15 @@
 package com.example.online_shop.services;
 
+import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.dto.UserDto;
 import com.example.online_shop.models.User;
 import com.example.online_shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -40,5 +44,15 @@ public class UserService {
             return passwordEncoder.matches(rawPassword, user.getPassword());
         }
         return false;
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(item -> new UserDto(
+                        item.getName(),
+                        item.getEmail(),
+                        item.getRole()
+                ))
+                .collect(Collectors.toList());
     }
 }

@@ -2,7 +2,6 @@ package com.example.online_shop.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class UserDto {
@@ -20,6 +19,16 @@ public class UserDto {
     private String password;
 
     private String role;
+
+    public UserDto(String name, String email, String role) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
+
+    public UserDto(){
+
+    }
 
     public String getPassword() {
         return password;
