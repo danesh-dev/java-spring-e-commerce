@@ -38,6 +38,12 @@ public class AdminController {
         return "admin/users";
     }
 
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable int id) {
+        userService.deleteUsertById(id);
+        return "redirect:/admin/users";
+    }
+
     //category management
     @GetMapping("/add-category")
     public String showAddCategoryPage(Model model){
