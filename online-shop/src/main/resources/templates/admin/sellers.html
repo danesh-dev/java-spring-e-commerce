@@ -136,7 +136,10 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            <section class="content">
+            <section class="content ">
+                <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${message != null}">
+                    [[${message}]]
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
