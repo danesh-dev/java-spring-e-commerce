@@ -50,20 +50,21 @@ public class AdminController {
     public String addCategory(@ModelAttribute("category") CategoryDto categoryDto, Model model){
         categoryService.create(categoryDto);
         model.addAttribute("message", "دسته بندی با موفقیت اضافه شد");
-        return "admin/categories";
+        return "redirect:/admin/categories";
     }
 
-    //todo
-//    @PostMapping("/delete-category")
-//    public String deleteCategory(){
-//
-//    }
 
     @GetMapping("/categories")
     public String showCategoriesPage(Model model){
         List<CategoryDto> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         return "admin/categories";
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategories(@PathVariable int id) {
+        categoryService.deleteCategoryById(id);
+        return "redirect:/admin/categories";
     }
 
     //seller management
