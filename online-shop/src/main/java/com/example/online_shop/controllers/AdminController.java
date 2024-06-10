@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.services.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -96,5 +93,11 @@ public class AdminController {
         List<ProductDto> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "admin/products"; // This is the name of the Thymeleaf template
+    }
+
+    @DeleteMapping("/products/{id}")
+    public String deleteProduct(@PathVariable int id) {
+        productService.deleteProductById(id);
+        return "redirect:/admin/products";
     }
 }

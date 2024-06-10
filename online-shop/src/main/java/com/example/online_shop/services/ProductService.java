@@ -44,4 +44,8 @@ public class ProductService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public void deleteProductById(int id) {
+        productRepository.deleteById(id);
+    }
 }
