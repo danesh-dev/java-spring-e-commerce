@@ -40,7 +40,7 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable int id) {
-        userService.deleteUsertById(id);
+        userService.deleteUserById(id);
         return "redirect:/admin/users";
     }
 
