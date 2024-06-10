@@ -1,6 +1,5 @@
 package com.example.online_shop.services;
 
-import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.dto.UserDto;
 import com.example.online_shop.models.User;
 import com.example.online_shop.repositories.UserRepository;
@@ -55,4 +54,9 @@ public class UserService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public void deleteUserById(int id) {
+        userRepository.deleteById(id);
+    }
+
 }

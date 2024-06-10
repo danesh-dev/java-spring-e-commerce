@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.services.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +38,12 @@ public class AdminController {
         return "admin/users";
     }
 
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable int id) {
+        userService.deleteUserById(id);
+        return "redirect:/admin/users";
+    }
+
     //category management
     @GetMapping("/add-category")
     public String showAddCategoryPage(Model model){
@@ -53,20 +56,21 @@ public class AdminController {
     public String addCategory(@ModelAttribute("category") CategoryDto categoryDto, Model model){
         categoryService.create(categoryDto);
         model.addAttribute("message", "دسته بندی با موفقیت اضافه شد");
-        return "admin/categories";
+        return "redirect:/admin/categories";
     }
 
-    //todo
-//    @PostMapping("/delete-category")
-//    public String deleteCategory(){
-//
-//    }
 
     @GetMapping("/categories")
     public String showCategoriesPage(Model model){
         List<CategoryDto> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         return "admin/categories";
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategories(@PathVariable int id) {
+        categoryService.deleteCategoryById(id);
+        return "redirect:/admin/categories";
     }
 
     //seller management
@@ -96,5 +100,11 @@ public class AdminController {
         List<ProductDto> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "admin/products"; // This is the name of the Thymeleaf template
+    }
+
+    @DeleteMapping("/products/{id}")
+    public String deleteProduct(@PathVariable int id) {
+        productService.deleteProductById(id);
+        return "redirect:/admin/products";
     }
 }

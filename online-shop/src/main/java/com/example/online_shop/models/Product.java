@@ -10,8 +10,7 @@ public class Product {
 
     private String name;
 
-    //private String imagePath = ........... -> to set the default image path if not given or uploaded bu seller
-    private String imagePath;
+    private String imagePath = "/assets/images/default-image.jpeg";
 
     private int price;
 

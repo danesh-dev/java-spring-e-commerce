@@ -30,4 +30,8 @@ public class CategoryService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public void deleteCategoryById(int id) {
+        categoryRepository.deleteById(id);
+    }
 }

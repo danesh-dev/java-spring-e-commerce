@@ -1,6 +1,5 @@
 package com.example.online_shop.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -11,8 +10,7 @@ public class ProductDto {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    //private String imagePath = ........... -> to set the default image path if not given or uploaded bu seller
-    private String imagePath;
+    private String imagePath = "/assets/images/default-image.jpeg";
 
     @Positive(message = "product can't be free")
     @NotBlank(message = "Price not added !")
