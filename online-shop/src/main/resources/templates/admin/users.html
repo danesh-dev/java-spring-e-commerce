@@ -123,8 +123,11 @@
                   </li>
                 </ul>
               </li>
-
             </ul>
+
+            <div class="fixed-bottom mx-auto">
+              <a th:href="@{/logout}" ><button class="btn btn-warning btn-md"> <i class="fa fa-sign-out" aria-hidden="true"></i> خروج</button></a>
+            </div>
           </nav>
           <!-- /.sidebar-menu -->
         </div>
@@ -137,6 +140,9 @@
       <!-- Content Header (Page header) -->
 
       <section class="content">
+        <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${message != null}">
+          [[${message}]]
+        </div>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -162,7 +168,7 @@
                       <td th:text="${user.email}"></td>
                       <td th:text="${user.role}"></td>
                       <td>
-                        <a href=""><button class="btn btn-danger btn-sm"> حذف</button></a>
+                        <a th:href="@{/admin/delete-user/{name}(name=${user.name})}"><button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> حذف</button></a>
                       </td>
                     </tr>
                   </tbody>

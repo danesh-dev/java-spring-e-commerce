@@ -30,7 +30,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
 
-        if(userDto.getRole().isBlank())
+        if(userDto.getRole() == null)
             user.setRole("USER");
         else
             user.setRole(userDto.getRole());
@@ -54,5 +54,21 @@ public class UserService {
                         item.getRole()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public void deleteUser(User entity) {
+        userRepository.delete(entity);
+    }
+
+    public User findByName(String name){
+        return userRepository.findByName(name);
+    }
+
+    public List<User> getSellers() {
+        return userRepository.findByRole("SELLER");
+    }
+
+    public int getUserId(String name){
+        return findByName(name).getId();
     }
 }

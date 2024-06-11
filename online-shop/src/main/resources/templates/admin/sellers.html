@@ -123,8 +123,11 @@
                           </li>
                         </ul>
                       </li>
-        
                     </ul>
+
+                      <div class="fixed-bottom mx-auto">
+                          <a th:href="@{/logout}" ><button class="btn btn-warning btn-md"> <i class="fa fa-sign-out" aria-hidden="true"></i> خروج</button></a>
+                      </div>
                   </nav>
                   <!-- /.sidebar-menu -->
                 </div>
@@ -153,18 +156,18 @@
                                         <tr>
                                             <th>ردیف</th>
                                             <th>نام</th>
-                                            <th>تاریخ عضویت</th>
+                                            <th> ایمیل</th>
                                             <th>عملیات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>183</td>
-                                            <td>محمد</td>
-                                            <td>11-7-2014</td>
-                                            <td>
-                                                <a href=""><button class="btn btn-danger btn-sm"> حذف</button></a>
-                                            </td>
+                                    <tr th:each="seller, index : ${sellers}">
+                                        <td th:text="${index.index + 1}" ></td>
+                                        <td th:text="${seller.name}"></td>
+                                        <td th:text="${seller.email}"></td>
+                                        <td>
+                                                <a th:href="@{/admin/delete-seller/{name}(name=${seller.name})}"><button class="btn btn-danger btn-sm"> حذف</button></a>
+                                        </td>
                                         </tr>
                                     </tbody>
                                 </table>

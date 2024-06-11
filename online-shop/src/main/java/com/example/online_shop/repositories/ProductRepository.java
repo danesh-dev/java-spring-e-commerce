@@ -4,12 +4,16 @@ import com.example.online_shop.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    Product findById(int id);
+    public Product findById(int id);
 
-    Product findByName(String name);
+    public Product findByName(String name);
 
-    boolean existsByNameAndCategory(String name, String category);
+    public boolean existsByNameAndCategory(String name, String category);
+
+    public List<Product> findBySellerId(int sellerId);
 }

@@ -124,8 +124,11 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
+
+                    <div class="fixed-bottom mx-auto">
+                        <a th:href="@{/logout}" ><button class="btn btn-warning btn-md"> <i class="fa fa-sign-out" aria-hidden="true"></i> خروج</button></a>
+                    </div>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -138,6 +141,9 @@
         <!-- Content Header (Page header) -->
 
         <section class="content">
+            <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${message != null}">
+                [[${message}]]
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -155,7 +161,6 @@
                                     <th>قیمت</th>
                                     <th>موجودی</th>
                                     <th>دسته بندی</th>
-                                    <th>فروشنده</th>
                                     <th>عملیات</th>
                                 </tr>
                                 </thead>
@@ -171,10 +176,8 @@
                                     <td th:text="${product.price}"></td>
                                     <td th:text="${product.stock}"></td>
                                     <td th:text="${product.category}"></td>
-                                    <td th:text="${product.seller}"></td>
                                     <td>
-                                        <!-- Add delete button with appropriate link -->
-                                        <a href="#"><button class="btn btn-danger btn-sm"> حذف</button></a>
+                                        <a th:href="@{/admin/delete-product/{name}(name=${product.name})}"><button class="btn btn-danger btn-sm"> حذف</button></a>
                                     </td>
                                 </tr>
                                 </tbody>

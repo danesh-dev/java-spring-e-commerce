@@ -10,7 +10,7 @@ public class Product {
 
     private String name;
 
-    //private String imagePath = ........... -> to set the default image path if not given or uploaded bu seller
+    //private String imagePath = ........... -> to set the default image path if not given or uploaded by seller
     private String imagePath;
 
     private int price;
@@ -19,15 +19,15 @@ public class Product {
 
     private String category;
 
-    private String seller;
+    private int sellerId;
 
-    public Product(String name, String imagePath, int price, int stock, String category, String seller) {
+    public Product(String name, String imagePath, int price, int stock, String category, int seller) {
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
         this.category = category;
-        this.seller = seller;
+        this.sellerId = seller;
     }
 
     public Product(){}
@@ -81,11 +81,11 @@ public class Product {
         this.category = category;
     }
 
-    public String getSeller() {
-        return seller;
+    public int getSellerId() {
+        return sellerId;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 }

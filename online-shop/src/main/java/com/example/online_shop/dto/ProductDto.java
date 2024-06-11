@@ -1,6 +1,5 @@
 package com.example.online_shop.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -11,7 +10,7 @@ public class ProductDto {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    //private String imagePath = ........... -> to set the default image path if not given or uploaded bu seller
+    //private String imagePath = ........... -> to set the default image path if not given or uploaded by seller
     private String imagePath;
 
     @Positive(message = "product can't be free")
@@ -25,15 +24,19 @@ public class ProductDto {
     @NotBlank(message = "Category not added !")
     private String category;
 
-    private String seller;
+    private int sellerId;
 
-    public ProductDto(String name, String imagePath, int price, int stock, String category, String seller) {
+    public ProductDto(){
+
+    }
+
+    public ProductDto(String name, String imagePath, int price, int stock, String category, int seller_id) {
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
         this.category = category;
-        this.seller = seller;
+        this.sellerId = seller_id;
     }
 
     public String getName() {
@@ -76,12 +79,12 @@ public class ProductDto {
         this.category = category;
     }
 
-    public String getSeller() {
-        return seller;
+    public int getSellerId() {
+        return sellerId;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 
 }

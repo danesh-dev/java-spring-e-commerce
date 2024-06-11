@@ -2,6 +2,7 @@ package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.CategoryDto;
 import com.example.online_shop.dto.UserDto;
+import com.example.online_shop.models.User;
 import com.example.online_shop.services.CategoryService;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.services.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -41,6 +40,13 @@ public class AdminController {
         return "admin/users";
     }
 
+    @GetMapping("/delete-user/{name}")
+    public String deleteUser(@PathVariable String name, RedirectAttributes redirectAttributes) {
+        userService.deleteUser(userService.findByName(name));
+        redirectAttributes.addFlashAttribute("message", "کاربر با موفقیت حذف شد");
+        return "redirect:/admin/users";
+    }
+
     //category management
     @GetMapping("/add-category")
     public String showAddCategoryPage(Model model){
@@ -56,11 +62,12 @@ public class AdminController {
         return "admin/categories";
     }
 
-    //todo
-//    @PostMapping("/delete-category")
-//    public String deleteCategory(){
-//
-//    }
+    @GetMapping("/delete-category/{name}")
+    public String deleteCategory(@PathVariable String name, RedirectAttributes redirectAttributes) {
+        categoryService.deleteCategory(categoryService.findByName(name));
+        redirectAttributes.addFlashAttribute("message", "دسته بندی با موفقیت حذف شد!");
+        return "redirect:/admin/categories";
+    }
 
     @GetMapping("/categories")
     public String showCategoriesPage(Model model){
@@ -85,16 +92,33 @@ public class AdminController {
         return "admin/sellers";
     }
 
+    @GetMapping("/delete-seller/{name}")
+    public String deleteSeller(@PathVariable String name, RedirectAttributes redirectAttributes) {
+        userService.deleteUser(userService.findByName(name));
+        redirectAttributes.addFlashAttribute("message", "فروشنده با موفقیت حذف شد!");
+        return "redirect:/admin/sellers";
+    }
+
     @GetMapping("/sellers")
-    public String showSellersPage(){
+    public String showSellersPage(Model model){
+        List<User> sellers = userService.getSellers();
+        model.addAttribute("sellers", sellers);
         return "admin/sellers";
     }
+
 
     //product management
     @GetMapping("/products")
     public String getAllProducts(Model model) {
         List<ProductDto> products = productService.getAllProducts();
         model.addAttribute("products", products);
-        return "admin/products"; // This is the name of the Thymeleaf template
+        return "admin/products";
+    }
+
+    @GetMapping("/delete-product/{name}")
+    public String deleteProduct(@PathVariable String name, RedirectAttributes redirectAttributes) {
+        productService.deleteProduct(productService.findByName(name));
+        redirectAttributes.addFlashAttribute("message", "محصول با موفقیت حذف شد");
+        return "redirect:/admin/products";
     }
 }

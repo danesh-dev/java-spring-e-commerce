@@ -30,4 +30,12 @@ public class CategoryService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public void deleteCategory(Category entity) {
+        categoryRepository.delete(entity);
+    }
+
+    public Category findByName(String name){
+        return categoryRepository.findByName(name);
+    }
 }

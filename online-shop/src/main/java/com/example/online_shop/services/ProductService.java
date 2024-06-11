@@ -26,7 +26,7 @@ public class ProductService {
                 productDto.getPrice(),
                 productDto.getStock(),
                 productDto.getCategory(),
-                productDto.getSeller()
+                productDto.getSellerId()
         );
 
         productRepository.save(product);
@@ -40,8 +40,20 @@ public class ProductService {
                         item.getPrice(),
                         item.getStock(),
                         item.getCategory(),
-                        item.getSeller()
+                        item.getSellerId()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public void deleteProduct(Product entity) {
+        productRepository.delete(entity);
+    }
+
+    public List<Product> findProductsBySellerId(int sellerId) {
+        return productRepository.findBySellerId(sellerId);
+    }
+
+    public Product findByName(String name){
+        return productRepository.findByName(name);
     }
 }

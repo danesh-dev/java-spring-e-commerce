@@ -22,7 +22,11 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         } else if (roles.orElse("").equals("USER")) {
             response.sendRedirect("/");
 
-        } else {
+        }
+        else if (roles.orElse("").equals("SELLER")) {
+            response.sendRedirect("/seller");
+
+        }else {
             response.sendRedirect("/error");
         }
     }
