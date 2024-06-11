@@ -35,7 +35,11 @@ public class CategoryService {
         categoryRepository.delete(entity);
     }
 
-    public Category findByName(String name){
+    public Category findByName(String name) {
         return categoryRepository.findByName(name);
+    }
+
+    public void deleteCategoryById(int id) {
+        categoryRepository.deleteById(id);
     }
 }

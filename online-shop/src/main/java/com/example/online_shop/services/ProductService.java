@@ -53,7 +53,10 @@ public class ProductService {
         return productRepository.findBySellerId(sellerId);
     }
 
-    public Product findByName(String name){
+    public Product findByName(String name) {
         return productRepository.findByName(name);
+    }
+    public void deleteProductById(int id) {
+        productRepository.deleteById(id);
     }
 }

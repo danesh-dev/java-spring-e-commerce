@@ -1,6 +1,5 @@
 package com.example.online_shop.services;
 
-import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.dto.UserDto;
 import com.example.online_shop.models.User;
 import com.example.online_shop.repositories.UserRepository;
@@ -64,6 +63,10 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public List<User> getSellers() {
         return userRepository.findByRole("SELLER");
     }
@@ -71,4 +74,9 @@ public class UserService {
     public int getUserId(String name){
         return findByName(name).getId();
     }
+
+    public void deleteUserById(int id) {
+        userRepository.deleteById(id);
+    }
+
 }

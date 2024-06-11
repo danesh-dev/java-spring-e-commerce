@@ -5,20 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>داشبورد | لیست محصولات</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
-    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <!-- bootstrap rtl -->
     <link rel="stylesheet" th:href="@{/assets/dist/css/bootstrap-rtl.min.css}">
-    <!-- template rtl version -->
     <link rel="stylesheet" th:href="@{/assets/dist/css/custom-style.css}">
 </head>
 
@@ -27,53 +19,33 @@
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
-        <!-- Sidebar -->
         <div class="sidebar">
             <div>
-                <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img th:src="@{/assets/images/admin.png}" class="img-circle elevation-2"
-                             alt="Admin Image">
+                        <img th:src="@{/assets/images/admin.png}" class="img-circle elevation-2" alt="Admin Image">
                     </div>
-                    <div class="info d-block text-light">
-                        ادمین
-                    </div>
+                    <div class="info d-block text-light"> ادمین </div>
                 </div>
 
-                <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a th:href="@{/admin}" class="nav-link">
                                 <i class="nav-icon fa fa-dashboard"></i>
-                                <p>
-                                    داشبورد
-                                </p>
+                                <p> داشبورد </p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a th:href="@{/admin/products}" class="nav-link active">
                                 <i class="nav-icon fa fa-cubes"></i>
-                                <p>
-                                    محصولات
-                                </p>
+                                <p> محصولات </p>
                             </a>
                         </li>
-
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-child"></i>
-                                <p>
-                                    مدیریت فروشندگان
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
+                                <p> مدیریت فروشندگان <i class="right fa fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
@@ -90,24 +62,16 @@
                                 </li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a th:href="@{/admin/users}" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>
-                                <p>
-                                    کاربران
-                                    <i class="right fa"></i>
-                                </p>
+                                <p> کاربران <i class="right fa"></i> </p>
                             </a>
                         </li>
-
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-list-alt"></i>
-                                <p>
-                                    مدیریت دسته بندی ها
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
+                                <p> مدیریت دسته بندی ها <i class="right fa fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
@@ -130,16 +94,11 @@
                         <a th:href="@{/logout}" ><button class="btn btn-warning btn-md"> <i class="fa fa-sign-out" aria-hidden="true"></i> خروج</button></a>
                     </div>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
         </div>
-        <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-
         <section class="content">
             <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${message != null}">
                 [[${message}]]
@@ -150,7 +109,6 @@
                         <div class="card-header">
                             <h3 class="card-title">لیست محصولات </h3>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
@@ -165,56 +123,57 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!-- Use Thymeleaf iteration to display products -->
                                 <tr th:each="product, index : ${products}">
                                     <td th:text="${index.index + 1}"></td>
                                     <td th:text="${product.name}"></td>
                                     <td>
-                                        <!-- Use Thymeleaf attribute for image source -->
                                         <img th:src="@{${product.imagePath}}" alt="image" width="60px">
                                     </td>
                                     <td th:text="${product.price}"></td>
                                     <td th:text="${product.stock}"></td>
                                     <td th:text="${product.category}"></td>
                                     <td>
-                                        <a th:href="@{/admin/delete-product/{name}(name=${product.name})}"><button class="btn btn-danger btn-sm"> حذف</button></a>
+<!--                                        <a th:href="@{/admin/delete-product/{name}(name=${product.name})}"><button class="btn btn-danger btn-sm"> حذف</button></a>-->
+                                        <button class="btn btn-danger btn-sm" th:attr="onclick=|deleteProduct('${product.name}')|">حذف</button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
-    <!-- /.content-wrapper -->
+
     <footer class="main-footer fixed-bottom">
         <strong>CopyRight &copy; </strong>
     </footer>
-
-    <!-- Control Sidebar -->
-    <!-- Add Content Here -->
-    <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
 <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap 4 -->
 <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- ChartJS 1.0.1 -->
 <script th:src="@{/assets/plugins/chartjs-old/Chart.min.js}"></script>
-<!-- FastClick -->
 <script th:src="@{/assets/plugins/fastclick/fastclick.js}"></script>
-<!-- AdminLTE App -->
 <script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
-<!-- AdminLTE for demo purposes -->
 <script th:src="@{/assets/dist/js/demo.js}"></script>
-<!-- page script -->
-<!-- Your additional scripts here -->
-</body>
 
+<script>
+    function deleteProduct(productName) {
+        if (confirm('آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟')) {
+            $.ajax({
+                url: '/admin/products/' + productName,
+                type: 'DELETE',
+                success: function(result) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    location.reload();
+                }
+            });
+        }
+    }
+</script>
+
+</body>
 </html>

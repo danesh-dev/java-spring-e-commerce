@@ -10,8 +10,7 @@ public class ProductDto {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    //private String imagePath = ........... -> to set the default image path if not given or uploaded by seller
-    private String imagePath;
+    private String imagePath = "/assets/images/default-image.jpeg";
 
     @Positive(message = "product can't be free")
     @NotBlank(message = "Price not added !")

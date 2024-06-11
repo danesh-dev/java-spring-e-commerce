@@ -32,6 +32,7 @@ public class AdminController {
         return "admin/index";
     }
 
+
     //user management
     @GetMapping("/users")
     public String showUsersPage(Model model){
@@ -39,13 +40,13 @@ public class AdminController {
         model.addAttribute("users", users);
         return "admin/users";
     }
-
-    @GetMapping("/delete-user/{name}")
-    public String deleteUser(@PathVariable String name, RedirectAttributes redirectAttributes) {
+    @DeleteMapping("/users/{name}")
+    public String deleteUser(@PathVariable String name) {
         userService.deleteUser(userService.findByName(name));
-        redirectAttributes.addFlashAttribute("message", "کاربر با موفقیت حذف شد");
+//        redirectAttributes.addFlashAttribute("message", "کاربر با موفقیت حذف شد");
         return "redirect:/admin/users";
     }
+
 
     //category management
     @GetMapping("/add-category")
@@ -54,27 +55,24 @@ public class AdminController {
         model.addAttribute("category", category);
         return "admin/add-category";
     }
-
     @PostMapping("/add-category")
     public String addCategory(@ModelAttribute("category") CategoryDto categoryDto, Model model){
         categoryService.create(categoryDto);
         model.addAttribute("message", "دسته بندی با موفقیت اضافه شد");
-        return "admin/categories";
-    }
-
-    @GetMapping("/delete-category/{name}")
-    public String deleteCategory(@PathVariable String name, RedirectAttributes redirectAttributes) {
-        categoryService.deleteCategory(categoryService.findByName(name));
-        redirectAttributes.addFlashAttribute("message", "دسته بندی با موفقیت حذف شد!");
         return "redirect:/admin/categories";
     }
-
     @GetMapping("/categories")
     public String showCategoriesPage(Model model){
         List<CategoryDto> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         return "admin/categories";
     }
+    @DeleteMapping("/categories/{name}")
+    public String deleteCategories(@PathVariable String name) {
+        categoryService.deleteCategory(categoryService.findByName(name));
+        return "redirect:/admin/categories";
+    }
+
 
     //seller management
     @GetMapping("/add-seller")
@@ -83,19 +81,17 @@ public class AdminController {
         model.addAttribute("user", user);
         return "admin/add-seller";
     }
-
     @PostMapping("/add-seller")
-    public String addSeller(@ModelAttribute("user") UserDto userDto, Model model) throws Exception {
+    public String addSeller(@ModelAttribute("user") UserDto userDto, RedirectAttributes redirectAttributes) throws Exception {
         userDto.setRole("SELLER");
         userService.create(userDto);
-        model.addAttribute("message", "فروشنده با موفقیت اضافه شد");
-        return "admin/sellers";
+        redirectAttributes.addFlashAttribute("message", "فروشنده با موفقیت اضافه شد");
+        return "redirect:/admin/sellers";
     }
-
-    @GetMapping("/delete-seller/{name}")
-    public String deleteSeller(@PathVariable String name, RedirectAttributes redirectAttributes) {
-        userService.deleteUser(userService.findByName(name));
-        redirectAttributes.addFlashAttribute("message", "فروشنده با موفقیت حذف شد!");
+    @DeleteMapping("/sellers/{email}")
+    public String deleteSeller(@PathVariable String email) {
+//        userService.deleteUserById(id);
+        userService.deleteUser(userService.findByEmail(email));
         return "redirect:/admin/sellers";
     }
 
@@ -114,11 +110,9 @@ public class AdminController {
         model.addAttribute("products", products);
         return "admin/products";
     }
-
-    @GetMapping("/delete-product/{name}")
-    public String deleteProduct(@PathVariable String name, RedirectAttributes redirectAttributes) {
+    @DeleteMapping("/products/{name}")
+    public String deleteProduct(@PathVariable String name) {
         productService.deleteProduct(productService.findByName(name));
-        redirectAttributes.addFlashAttribute("message", "محصول با موفقیت حذف شد");
         return "redirect:/admin/products";
     }
 }
