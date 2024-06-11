@@ -59,9 +59,6 @@ public class UserService {
         userRepository.delete(entity);
     }
 
-    public User findByName(String name){
-        return userRepository.findByName(name);
-    }
 
     public User findByEmail(String email){
         return userRepository.findByEmail(email);
@@ -72,7 +69,7 @@ public class UserService {
     }
 
     public int getUserId(String name){
-        return findByName(name).getId();
+        return findByEmail(name).getId();
     }
 
     public void deleteUserById(int id) {

@@ -169,7 +169,7 @@
                       <td th:text="${user.role}"></td>
                       <td>
 <!--                        <a th:href="@{/admin/delete-user/{name}(name=${user.name})}" >-->
-                          <button class="btn btn-danger btn-sm" th:attr="onclick=|deleteUser('${user.name}')|"><i class="bi bi-trash"></i> حذف</button>
+                          <button class="btn btn-danger btn-sm" th:attr="onclick=|deleteUser('${user.email}')|"><i class="bi bi-trash"></i> حذف</button>
 <!--                        </a>-->
                       </td>
                     </tr>

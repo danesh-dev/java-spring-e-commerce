@@ -40,9 +40,9 @@ public class AdminController {
         model.addAttribute("users", users);
         return "admin/users";
     }
-    @DeleteMapping("/users/{name}")
-    public String deleteUser(@PathVariable String name) {
-        userService.deleteUser(userService.findByName(name));
+    @DeleteMapping("/users/{email}")
+    public String deleteUser(@PathVariable String email) {
+        userService.deleteUser(userService.findByEmail(email));
 //        redirectAttributes.addFlashAttribute("message", "کاربر با موفقیت حذف شد");
         return "redirect:/admin/users";
     }
