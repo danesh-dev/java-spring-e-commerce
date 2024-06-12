@@ -135,93 +135,83 @@
             <!-- /.sidebar -->
         </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
 
-        <section class="content">
-            <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${message != null}">
-                [[${message}]]
-            </div>
-            <div class="row">
-                <div class="col-10 mx-auto">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">لیست دسته بندی ها </h3>
-                        </div>
-                        <!-- /.card-body -->
-                        <section class="content">
-                            <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert"
-                                th:if="${message != null}">
-                                [[${message}]]
-                            </div>
-                            <div class="row">
-                                <div class="col-10 mx-auto">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">لیست محصولات </h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body">
-                                            <table id="example2" class="table table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ردیف</th>
-                                                        <th>عنوان دسته بندی</th>
-                                                        <th>عملیات</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr th:each="category, index : ${categories}">
-                                                        <td th:text="${index.index + 1}">1</td>
-                                                        <td th:text="${category.name}"></td>
-                                                        <td>
-                                                            <button class="btn btn-danger btn-sm"
-                                                                th:attr="onclick=|deleteCategory('${category.name}')|">
-                                                                حذف</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                    </div>
-                    <!-- /.content-wrapper -->
-                    <footer class="main-footer fixed-bottom">
-                        <strong>CopyRight &copy; </strong>
-                    </footer>
-
+            <!-- /.card-body -->
+            <section class="content">
+                <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert"
+                    th:if="${message != null}">
+                    [[${message}]]
                 </div>
-                <!-- ./wrapper -->
+                <div class="row">
+                    <div class="col-10 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">لیست دسته بندی ها </h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>عنوان دسته بندی</th>
+                                            <th>عملیات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="category, index : ${categories}">
+                                            <td th:text="${index.index + 1}">1</td>
+                                            <td th:text="${category.name}"></td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm"
+                                                    th:attr="onclick=|deleteCategory('${category.name}')|">
+                                                    حذف</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <!-- jQuery -->
-                <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
-                <!-- Bootstrap 4 -->
-                <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-                <!-- AdminLTE App -->
-                <script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
-                <!-- page script -->
-                <script>
-                    function deleteCategory(categoryName) {
-                        if (confirm('آیا مطمئن هستید که می‌خواهید این دسته بندی را حذف کنید؟')) {
-                            $.ajax({
-                                url: '/admin/categories/' + categoryName,
-                                type: 'DELETE',
-                                success: function (result) {
-                                    location.reload();
-                                },
-                                error: function (xhr, status, error) {
-                                    location.reload();
-                                }
-                            });
-                        }
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer fixed-bottom">
+            <strong>CopyRight &copy; </strong>
+        </footer>
+
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap 4 -->
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
+    <!-- page script -->
+    <script>
+        function deleteCategory(categoryName) {
+            if (confirm('آیا مطمئن هستید که می‌خواهید این دسته بندی را حذف کنید؟')) {
+                $.ajax({
+                    url: '/admin/categories/' + categoryName,
+                    type: 'DELETE',
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        location.reload();
                     }
-                </script>
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

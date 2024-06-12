@@ -43,7 +43,6 @@ public class AdminController {
     @DeleteMapping("/users/{email}")
     public String deleteUser(@PathVariable String email) {
         userService.deleteUser(userService.findByEmail(email));
-//        redirectAttributes.addFlashAttribute("message", "کاربر با موفقیت حذف شد");
         return "redirect:/admin/users";
     }
 
@@ -88,13 +87,18 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("message", "فروشنده با موفقیت اضافه شد");
         return "redirect:/admin/sellers";
     }
-    @DeleteMapping("/sellers/{email}")
-    public String deleteSeller(@PathVariable String email) {
-//        userService.deleteUserById(id);
+    //delete seller with ajax request - not working
+//    @DeleteMapping("/sellers/{email}")
+//    public String deleteSeller(@PathVariable("email") String email) {
+//        userService.deleteUser(userService.findByEmail(email));
+//        return "redirect:/admin/sellers";
+//    }
+
+    @PostMapping("/sellers/{email}")
+    public String deleteSeller(@PathVariable("email") String email) {
         userService.deleteUser(userService.findByEmail(email));
         return "redirect:/admin/sellers";
     }
-
     @GetMapping("/sellers")
     public String showSellersPage(Model model){
         List<User> sellers = userService.getSellers();
