@@ -12,11 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -72,25 +70,60 @@ public class SellerController{
         return "/seller/my-products";
     }
 
-    //edit product
-    @GetMapping("/edit-product/{id}")
-    public String showEditPage(Model model){
-
-        return "seller/edit-product";
-    }
 
     //my products
     @GetMapping("/my-products")
-    public String showMyProduct(Model model){
+    public String showMyProducts(Model model){
         String sellerName = getSellerName();
         List<Product> products = productService.findProductsBySellerId(userService.getUserId(sellerName));
 
+        System.out.println(products.size());
         model.addAttribute("products", products);
         model.addAttribute("sellerName", sellerName);
 
         return "seller/my-products";
     }
 
+
+    //update
+    @GetMapping("/products/update/{name}")
+    public String showUpdatePage(@PathVariable("name") String name, Model model){
+        ProductDto product = new ProductDto();
+        Product chosen_product = productService.findByName(name);
+        product.setName(chosen_product.getName());
+        product.setPrice(chosen_product.getPrice());
+        product.setStock(chosen_product.getStock());
+        product.setSellerId(chosen_product.getSellerId());
+        product.setCategory(chosen_product.getCategory());
+
+        model.addAttribute("product", product);
+        return "/seller/edit-product";
+    }
+
+    @PostMapping("/products/update")
+    public String updateProduct(@ModelAttribute("product") ProductDto productDto, Model model){
+        try {
+            productService.updateProduct(productDto);
+            model.addAttribute("message", "محصول با موفقیت ویرایش شد");
+        }catch (IOException e){
+            model.addAttribute("message", e.getMessage());
+        }
+
+        return "redirect:/seller/my-products";
+    }
+
+
+    //delete
+    @DeleteMapping("products/delete/{name}")
+    public String deleteProduct(@PathVariable String name){
+        productService.deleteProduct(productService.findByName(name));
+
+        return "redirect:/seller/my-product";
+    }
+
+
+
+    //---------------------------------------------------------
     private String getSellerName(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetail userDetails = (CustomUserDetail) authentication.getPrincipal();

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>داشبورد | افزودن فروشنده </title>
+  <title>داشبورد | ویرایش کالا  </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -113,21 +113,21 @@
           </div><!-- /.container-fluid -->
         </section>
 
-        <form role="form">
+        <form role="form" th:object="${product}" th:action="@{/seller/products/update}" method="post" enctype="multipart/form-data">
           <div class="card-body">
             <div class="form-group col-6">
               <label for="name">نام کالا </label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="نام کالا را وارد کنید">
+              <input type="text" class="form-control" id="name" name="name" placeholder="نام کالا را وارد کنید"  th:field="*{name}">
             </div>
 
             <div class="form-group col-8">
               <label for="price">قیمت (ریال) </label>
-              <input type="text" class="form-control" id="price" name="price" placeholder="قیمت کالا را وارد کنید">
+              <input type="text" class="form-control" id="price" name="price" placeholder="قیمت کالا را وارد کنید" th:field="*{price}">
             </div>
 
             <div class="form-group col-8">
               <label for="stock">تعداد موجودی </label>
-              <input type="number" class="form-control" id="stock" name="stock"
+              <input type="number" class="form-control" id="stock" name="stock"  th:field="*{stock}"
                 placeholder=" تعداد کالا را وارد کنید">
             </div>
             <div class="form-group col-8">
@@ -139,12 +139,12 @@
 
             <div class="form-group col-8">
               <label for="exampleInputEmail1"> تصویر کالا </label>
-              <input type="file" class="form-control" id="exampleInputEmail1"
+              <input type="file" class="form-control" id="exampleInputEmail1" th:field="*{imagePath}"
                 placeholder=" تصویر کالا را انتخاب کنید">
             </div>
 
             <div class="form-group col-4">
-                <img src="" alt="" width="60px">
+                <img th:src="@{${product.imagePath}}" alt="" width="65px">
             </div>
           </div>
           <div class="card-footer">
