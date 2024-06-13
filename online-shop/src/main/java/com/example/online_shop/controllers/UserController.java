@@ -59,10 +59,14 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/user")
     public String user(Model model){
         model.addAttribute("message", "Welcome to the User Dashboard!");
+        return "user-panel";
+    }
+
+    @GetMapping("/dashboard")
+    public String panel(){
         return "user-panel";
     }
 }

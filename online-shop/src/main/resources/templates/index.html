@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 
 <head>
   <!-- Basic -->
@@ -25,6 +26,7 @@
 
   <!-- font awesome style -->
   <link th:href="@{/assets/css/font-awesome.min.css}" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
   <!-- Custom styles for this template -->
   <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
@@ -70,9 +72,14 @@
                 </li>
               </ul>
               <div class="user_optio_box">
-                <a href="/">
+                <!--todo-->
+                <a th:href="@{/dashboard}" sec:authorize="isAuthenticated()">
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </a>
+                <a th:href="@{/login}" sec:authorize="isAnonymous()">
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </a>
+
                 <a href="">
                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 </a>
@@ -116,7 +123,6 @@
       </section>
     </div>
   </div>
-
 
   <!-- service section -->
 
@@ -258,7 +264,6 @@
 
             </div>
             <div class="btn-box ">
-              <!-- <button type="button" class="btn btn-outline-secondary mx-auto">Secondary</button> -->
               <button type="button" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
               </svg>

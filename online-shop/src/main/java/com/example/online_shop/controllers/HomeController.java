@@ -3,6 +3,8 @@ package com.example.online_shop.controllers;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model){
         List<Product> latestProducts = productService.findLatestProducts();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        model.addAttribute("authentication", authentication);
         model.addAttribute("products", latestProducts);
         return "index";
     }

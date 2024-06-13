@@ -5,15 +5,9 @@ import com.example.online_shop.models.Product;
 import com.example.online_shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-<<<<<<< HEAD
-=======
-import java.io.File;
->>>>>>> ba2770c4a6d5fd54a99a42600f43a8c606e528b0
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,7 +61,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-<<<<<<< HEAD
     public void updateProduct(ProductDto productDto) throws IOException {
         // Fetch the existing product to avoid overwriting important fields
         Product existingProduct = productRepository.findByName(productDto.getName());
@@ -94,7 +87,5 @@ public class ProductService {
     public List<Product> findLatestProducts() {
         return productRepository.findTop3ByOrderByCreatedAtDesc();
     }
-=======
 
->>>>>>> ba2770c4a6d5fd54a99a42600f43a8c606e528b0
 }
