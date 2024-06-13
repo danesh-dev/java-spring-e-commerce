@@ -25,17 +25,20 @@ public class ProductDto {
 
     private int sellerId;
 
+    private String description  = "default description";
+
     public ProductDto(){
 
     }
 
-    public ProductDto(String name, String imagePath, int price, int stock, String category, int seller_id) {
+    public ProductDto(String name, String imagePath, int price, int stock, String category, int seller_id, String description) {
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
         this.category = category;
         this.sellerId = seller_id;
+        this.description = description;
     }
 
     public String getName() {
@@ -84,6 +87,14 @@ public class ProductDto {
 
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

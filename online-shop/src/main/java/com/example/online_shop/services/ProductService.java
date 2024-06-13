@@ -27,7 +27,8 @@ public class ProductService {
                 productDto.getPrice(),
                 productDto.getStock(),
                 productDto.getCategory(),
-                productDto.getSellerId()
+                productDto.getSellerId(),
+                productDto.getDescription()
         );
 
         productRepository.save(product);
@@ -41,7 +42,8 @@ public class ProductService {
                         item.getPrice(),
                         item.getStock(),
                         item.getCategory(),
-                        item.getSellerId()
+                        item.getSellerId(),
+                        item.getDescription()
                 ))
                 .collect(Collectors.toList());
     }

@@ -104,6 +104,7 @@ public class SellerController{
         product.setStock(chosen_product.getStock());
         product.setSellerId(chosen_product.getSellerId());
         product.setCategory(chosen_product.getCategory());
+        product.setDescription(chosen_product.getDescription());
 
         model.addAttribute("product", product);
         return "/seller/edit-product";

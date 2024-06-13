@@ -22,16 +22,19 @@ public class Product {
 
     private int sellerId;
 
+    private String description = "default description";
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public Product(String name, String imagePath, int price, int stock, String category, int seller) {
+    public Product(String name, String imagePath, int price, int stock, String category, int seller, String description) {
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
         this.category = category;
         this.sellerId = seller;
+        this.description = description;
     }
 
     @PrePersist
@@ -104,4 +107,13 @@ public class Product {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

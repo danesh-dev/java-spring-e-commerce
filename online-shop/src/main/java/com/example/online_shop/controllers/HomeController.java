@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,8 +21,6 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model){
         List<Product> latestProducts = productService.findLatestProducts();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        model.addAttribute("authentication", authentication);
         model.addAttribute("products", latestProducts);
         return "index";
     }
@@ -29,5 +28,13 @@ public class HomeController {
     @GetMapping("/about")
     public String about(){
         return "about";
+    }
+
+    @GetMapping("/products/{name}")
+    public String showProduct(@PathVariable("name") String name, Model model){
+        Product product = productService.findByName(name);
+
+        model.addAttribute("product", product);
+        return "product-detail";
     }
 }

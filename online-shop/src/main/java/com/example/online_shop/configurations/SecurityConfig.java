@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/dashboard/**").hasAuthority("USER")
                         .requestMatchers("/seller/**").hasAuthority("SELLER")
-                        .requestMatchers("/register", "/login", "/error", "assets/**", "/", "/about").permitAll()
+                        .requestMatchers("/register", "/login", "/error", "assets/**", "/", "/about", "/products/**").permitAll()
                         .anyRequest().authenticated()
 
                 )
