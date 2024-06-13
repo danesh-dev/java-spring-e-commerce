@@ -20,7 +20,7 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
                 return "errors/error404";
             }
             else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "error500";
+                return "errors/error500";
             }
             else if(statusCode == HttpStatus.FORBIDDEN.value()){
                 return "errors/error403";
