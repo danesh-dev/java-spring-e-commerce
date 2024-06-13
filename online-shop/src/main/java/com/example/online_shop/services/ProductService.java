@@ -84,4 +84,8 @@ public class ProductService {
     public int getProductId(String name){
         return productRepository.findByName(name).getId();
     }
+
+    public List<Product> findLatestProducts() {
+        return productRepository.findTop3ByOrderByCreatedAtDesc();
+    }
 }

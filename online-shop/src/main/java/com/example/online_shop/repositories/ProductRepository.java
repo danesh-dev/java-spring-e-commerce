@@ -16,4 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     public boolean existsByNameAndCategory(String name, String category);
 
     public List<Product> findBySellerId(int sellerId);
+
+    public List<Product> findTop3ByOrderByCreatedAtDesc();
 }

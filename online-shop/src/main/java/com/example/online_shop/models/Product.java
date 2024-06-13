@@ -1,6 +1,8 @@
 package com.example.online_shop.models;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -19,6 +21,9 @@ public class Product {
 
     private int sellerId;
 
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
     public Product(String name, String imagePath, int price, int stock, String category, int seller) {
         this.name = name;
         this.imagePath = imagePath;
@@ -28,6 +33,10 @@ public class Product {
         this.sellerId = seller;
     }
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
     public Product(){}
 
     //getter and setter
@@ -85,5 +94,13 @@ public class Product {
 
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
