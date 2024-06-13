@@ -136,7 +136,6 @@
                                             <td th:text="${product.stock}"></td>
                                             <td th:text="${product.category}"></td>
                                             <td>
-                                                <!--                                        <a th:href="@{/admin/delete-product/{name}(name=${product.name})}"><button class="btn btn-danger btn-sm"> حذف</button></a>-->
                                                 <button class="btn btn-danger btn-sm"
                                                     th:attr="onclick=|deleteProduct('${product.name}')|">حذف</button>
                                             </td>

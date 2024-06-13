@@ -12,7 +12,7 @@ public class Product {
 
     private String name;
 
-    private String imagePath = "/assets/images/upload/default-image.jpeg";
+    private String imagePath = "/upload/default-image.jpeg";
 
     private int price;
 

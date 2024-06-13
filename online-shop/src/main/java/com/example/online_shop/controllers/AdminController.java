@@ -28,7 +28,9 @@ public class AdminController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String showIndexPage(){
+    public String showIndexPage(Model model){
+        List<ProductDto> products = productService.getAllProducts();
+        model.addAttribute("products", products);
         return "admin/index";
     }
 
