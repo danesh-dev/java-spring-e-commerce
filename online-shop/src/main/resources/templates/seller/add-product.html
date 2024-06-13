@@ -113,7 +113,7 @@
           </div><!-- /.container-fluid -->
         </section>
 
-        <form role="form">
+        <form role="form" th:action="@{/seller/add-product}" method="post" enctype="multipart/form-data">
           <div class="card-body">
             <div class="form-group col-6">
               <label for="name">نام کالا </label>
@@ -128,7 +128,7 @@
             <div class="form-group col-8">
               <label for="stock">تعداد موجودی </label>
               <input type="number" class="form-control" id="stock" name="stock"
-                placeholder=" تعداد کالا را وارد کنید">
+                     placeholder=" تعداد کالا را وارد کنید">
             </div>
             <div class="form-group col-8">
               <label> دسته بندی</label>
@@ -139,8 +139,7 @@
 
             <div class="form-group col-8">
               <label for="exampleInputEmail1"> تصویر کالا </label>
-              <input type="file" class="form-control" id="exampleInputEmail1"
-                placeholder=" تصویر کالا را انتخاب کنید">
+              <input type="file" accept="image/*" class="form-control" id="exampleInputEmail1" name="imageFile" placeholder="تصویر کالا را انتخاب کنید">
             </div>
           </div>
           <div class="card-footer">

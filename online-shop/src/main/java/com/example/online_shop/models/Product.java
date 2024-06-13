@@ -11,7 +11,8 @@ public class Product {
     private int id;
 
     private String name;
-    private String imagePath = "/assets/images/default-image.jpeg";
+
+    private String imagePath = "/assets/images/upload/default-image.jpeg";
 
     private int price;
 

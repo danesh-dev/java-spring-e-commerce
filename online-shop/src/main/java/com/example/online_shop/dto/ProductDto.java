@@ -10,7 +10,7 @@ public class ProductDto {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    private String imagePath = "/assets/images/default-image.jpeg";
+    private String imagePath = "/assets/images/upload/default-image.jpeg";
 
     @Positive(message = "product can't be free")
     @NotBlank(message = "Price not added !")

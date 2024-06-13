@@ -8,14 +8,20 @@ import com.example.online_shop.services.CustomUserDetail;
 import com.example.online_shop.services.ProductService;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/seller")
@@ -28,6 +34,9 @@ public class SellerController{
 
     @Autowired
     private UserService userService;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     @GetMapping()
     public String index(Model model){
@@ -53,21 +62,21 @@ public class SellerController{
     }
 
     @PostMapping("/add-product")
-    public String addProduct(@ModelAttribute("product") ProductDto productDto, Model model){
+    public String addProduct(@ModelAttribute("product") ProductDto productDto,
+                             @RequestParam("imageFile") MultipartFile imageFile,
+                             Model model) throws Exception {
         String sellerName = getSellerName();
         int sellerId = userService.getUserId(sellerName);
 
-        Product product = new Product();
-        product.setName(product.getName());
-        product.setPrice(product.getPrice());
-        product.setStock(productDto.getStock());
-        product.setCategory(productDto.getCategory());
-        product.setImagePath(productDto.getImagePath());
-        product.setSellerId(sellerId);
-//        todo upload image
+
+        productDto.setImagePath(saveImage(imageFile));
+        productDto.setSellerId(sellerId);
+
+        // Create the product
+        productService.create(productDto);
 
         model.addAttribute("sellerName", sellerName);
-        return "/seller/my-products";
+        return "redirect:/seller/my-products";
     }
 
 
@@ -128,5 +137,23 @@ public class SellerController{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetail userDetails = (CustomUserDetail) authentication.getPrincipal();
         return userDetails.getName();
+    }
+
+    private String saveImage(MultipartFile imageFile) throws IOException {
+        // Generate a unique file name
+        String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+
+        // Create the directory if it doesn't exist
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Save the file to the upload directory
+        String filePath = uploadDir + File.separator + fileName;
+        File destFile = new File(filePath);
+        imageFile.transferTo(destFile);
+
+        return filePath;
     }
 }
