@@ -3,7 +3,6 @@ package com.example.online_shop.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public class CategoryDto {
-
     @NotBlank(message = "category name not added !")
     private String name;
 
