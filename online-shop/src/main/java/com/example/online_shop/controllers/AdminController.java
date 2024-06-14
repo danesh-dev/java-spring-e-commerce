@@ -89,12 +89,6 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("message", "فروشنده با موفقیت اضافه شد");
         return "redirect:/admin/sellers";
     }
-    //delete seller with ajax request - not working
-//    @DeleteMapping("/sellers/{email}")
-//    public String deleteSeller(@PathVariable("email") String email) {
-//        userService.deleteUser(userService.findByEmail(email));
-//        return "redirect:/admin/sellers";
-//    }
 
     @PostMapping("/sellers/{email}")
     public String deleteSeller(@PathVariable("email") String email) {

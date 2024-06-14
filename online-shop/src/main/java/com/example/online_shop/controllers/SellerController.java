@@ -100,6 +100,8 @@ public class SellerController{
     //update
     @GetMapping("/products/update/{name}")
     public String showUpdatePage(@PathVariable("name") String name, Model model){
+        List<CategoryDto> categories = categoryService.getAllCategories();
+
         ProductDto product = new ProductDto();
         Product chosen_product = productService.findByName(name);
         product.setName(chosen_product.getName());
@@ -109,13 +111,14 @@ public class SellerController{
         product.setCategory(chosen_product.getCategory());
         product.setDescription(chosen_product.getDescription());
 
+        model.addAttribute("categories", categories);
         model.addAttribute("product", product);
-        return "/seller/edit-product";
+        return "seller/edit-product";
     }
-
     @PostMapping("/products/update")
-    public String updateProduct(@ModelAttribute("product") ProductDto productDto, Model model){
+    public String updateProduct(@ModelAttribute("product") ProductDto productDto, Model model, @RequestParam("imageFile") MultipartFile imageFile){
         try {
+            //todo add image to object
             productService.updateProduct(productDto);
             model.addAttribute("message", "محصول با موفقیت ویرایش شد");
         }catch (IOException e){
@@ -158,6 +161,6 @@ public class SellerController{
         File destFile = new File(filePath);
         imageFile.transferTo(destFile);
 
-        return filePath;
+        return "/assets/upload/" + fileName;
     }
 }

@@ -127,10 +127,6 @@
                                             <td th:text="${product.stock}"></td>
                                             <td th:text="${product.category}"></td>
                                             <td>
-<!--                                                <form th:action="@{/seller/products/delete/{name}(name=${product.name})" method="post">-->
-<!--                                                    <button class="btn btn-danger btn-sm"> حذف</button>-->
-<!--                                                </form>-->
-
                                                 <button class="btn btn-danger btn-sm" th:attr="onclick=|deleteProduct('${product.name}')|"> حذف</button>
 
                                                 <a th:href="@{/seller/products/update/{name}(name=${product.name})}">

@@ -12,7 +12,8 @@ public class Product {
 
     private String name;
 
-    private String imagePath = "/upload/default-image.jpeg";
+    @Column(columnDefinition = "TEXT")
+    private String imagePath = "/assets/upload/default-image.jpeg";
 
     private int price;
 

@@ -75,7 +75,7 @@
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/seller/add-product}" class="nav-link active">
+                <a th:href="@{/seller/add-product}" class="nav-link ">
                   <i class="nav-icon fa fa-cube"></i>
                   <p>
                     افزودن کالا
@@ -133,14 +133,14 @@
 
             <div class="form-group col-8">
               <label for="description"> توضیحات </label>
-              <input type="number" class="form-control" id="description" name="description" th:field="*{'description}"
-                     placeholder=" توضیحات کالا را وارد کنید">
+              <textarea class="form-control" id="description" name="description" th:field="*{description}"
+                        placeholder=" توضیحات کالا را وارد کنید"></textarea>
             </div>
 
             <div class="form-group col-8">
               <label> دسته بندی</label>
-              <select class="form-control">
-                <option value="">گزینه 1</option>
+              <select class="form-control" th:field="*{category}">
+                <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
               </select>
             </div>
 
@@ -151,7 +151,8 @@
             </div>
 
             <div class="form-group col-4">
-                <img th:src="@{${product.imagePath}}" alt="" width="65px">
+              <h6>تصویر :</h6>
+                <img th:src="@{${product.imagePath}}" alt="" width="70px">
             </div>
           </div>
           <div class="card-footer">
