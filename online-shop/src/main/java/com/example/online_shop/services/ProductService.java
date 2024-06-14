@@ -64,12 +64,8 @@ public class ProductService {
     }
 
     public void updateProduct(ProductDto productDto) throws IOException {
-        // Fetch the existing product to avoid overwriting important fields
-        Product existingProduct = productRepository.findByName(productDto.getName());
 
-//        if (!file.isEmpty()) {
-//            existingProduct.setImage(file.getBytes());
-//        }
+        Product existingProduct = productRepository.findByName(productDto.getName());
 
         existingProduct.setName(productDto.getName());
         existingProduct.setPrice(productDto.getPrice());

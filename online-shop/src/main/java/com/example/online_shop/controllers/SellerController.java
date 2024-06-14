@@ -118,9 +118,14 @@ public class SellerController{
     @PostMapping("/products/update")
     public String updateProduct(@ModelAttribute("product") ProductDto productDto, Model model, @RequestParam("imageFile") MultipartFile imageFile){
         try {
-            //todo add image to object
+            if(imageFile != null)
+                productDto.setImagePath(saveImage(imageFile));
+            else
+                productDto.setImagePath("/assets/upload/default-image.jpeg");
+
             productService.updateProduct(productDto);
             model.addAttribute("message", "محصول با موفقیت ویرایش شد");
+
         }catch (IOException e){
             model.addAttribute("message", e.getMessage());
         }
