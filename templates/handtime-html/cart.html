@@ -1,93 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Product</title>
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- cart style -->
+    <!-- <link href="css/product.css" rel="stylesheet" /> -->
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/cart.css">
+
 </head>
+
 <body>
-    <div class="card">
-        <div class="row">
-            <div class="col-md-8 cart">
-                <div class="title">
+    <div class="">
+        <div class="">
+            <!-- header section strats -->
+            <header class="header_section">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="index.html">
+                            <span>
+                                HandTime
+                            </span>
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class=""> </span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav  ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Home <span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html"> About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="product.html">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="testimonial.html">Testimonial</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact Us</a>
+                                </li>
+                            </ul>
+                            <div class="user_optio_box">
+                                <a href="">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!-- end header section -->
+            <section class="content p-5">
+                <div class="card">
                     <div class="row">
-                        <div class="col">
-                            <h4><b>Shopping Cart</b></h4>
+                        <div class="col-md-8 cart ">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4><b>Shopping Cart</b></h4>
+                                    </div>
+                                    <div class="col align-self-center text-right text-muted">3 items</div>
+                                </div>
+                            </div>
+                            <div class="row border-top border-bottom">
+                                <div class="row main align-items-center">
+                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                                    <div class="col">
+                                        <div class="row text-muted">Shirt</div>
+                                        <div class="row">Cotton T-shirt</div>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                                    </div>
+                                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row main align-items-center">
+                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                                    <div class="col">
+                                        <div class="row text-muted">Shirt</div>
+                                        <div class="row">Cotton T-shirt</div>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                                    </div>
+                                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                                </div>
+                            </div>
+                            <div class="row border-top border-bottom">
+                                <div class="row main align-items-center">
+                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                                    <div class="col">
+                                        <div class="row text-muted">Shirt</div>
+                                        <div class="row">Cotton T-shirt</div>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                                    </div>
+                                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                                </div>
+                            </div>
+                            <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                         </div>
-                        <div class="col align-self-center text-right text-muted">3 items</div>
+                        <div class="col-md-4 summary ">
+                            <div>
+                                <h5><b>Summary</b></h5>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col" style="padding-left:0;">ITEMS 3</div>
+                                <div class="col text-right">&euro; 132.00</div>
+                            </div>
+                            <form>
+                                <p>SHIPPING</p>
+                                <select>
+                                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                                </select>
+                                <p>GIVE CODE</p>
+                                <input id="code" placeholder="Enter your code">
+                            </form>
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <div class="col">TOTAL PRICE</div>
+                                <div class="col text-right">&euro; 137.00</div>
+                            </div>
+                            <button class="btn">CHECKOUT</button>
+                        </div>
                     </div>
+                
                 </div>
-                <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
-            </div>
-            <div class="col-md-4 summary">
-                <div>
-                    <h5><b>Summary</b></h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col" style="padding-left:0;">ITEMS 3</div>
-                    <div class="col text-right">&euro; 132.00</div>
-                </div>
-                <form>
-                    <p>SHIPPING</p>
-                    <select>
-                        <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-                    </select>
-                    <p>GIVE CODE</p>
-                    <input id="code" placeholder="Enter your code">
-                </form>
-                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                    <div class="col">TOTAL PRICE</div>
-                    <div class="col text-right">&euro; 137.00</div>
-                </div>
-                <button class="btn">CHECKOUT</button>
-            </div>
+            </section>
         </div>
-    
     </div>
+
+    <!-- todo -->
+
+    <!-- todo -->
+
+    <!-- info section -->
+
+    <!-- end info_section -->
+
+    <!-- footer section -->
+    <section class="footer_section ">
+        <section class="info_section layout_padding2">
+            <div class="container">
+                <div class="info_logo">
+                    <h2>
+                        HandTime
+                    </h2>
+                </div>
+                <!-- <div class="row">
+    
+                    <div class="col-md-3">
+                        <div class="info_contact">
+                            <h5>
+                                About Shop
+                            </h5>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/location-white.png" width="18px" alt="">
+                                </div>
+                                <p>
+                                    Address
+                                </p>
+                            </div>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/telephone-white.png" width="12px" alt="">
+                                </div>
+                                <p>
+                                    +01 1234567890
+                                </p>
+                            </div>
+                            <div>
+                                <div class="img-box">
+                                    <img src="images/envelope-white.png" width="18px" alt="">
+                                </div>
+                                <p>
+                                    demo@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info_info">
+                            <h5>
+                                Informations
+                            </h5>
+                            <p>
+                                ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            </p>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-3">
+                        <div class="info_insta">
+                            <h5>
+                                Instagram
+                            </h5>
+                            <div class="insta_container">
+                                <div class="row m-0">
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w1.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w2.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w3.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w4.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w5.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 px-0">
+                                        <a href="">
+                                            <div class="insta-box b-1">
+                                                <img src="images/w6.png" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-3">
+                        <div class="info_form ">
+                            <h5>
+                                Newsletter
+                            </h5>
+                            <form action="">
+                                <input type="email" placeholder="Enter your email">
+                                <button>
+                                    Subscribe
+                                </button>
+                            </form>
+                            <div class="social_box">
+                                <a href="">
+                                    <img src="images/fb.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/twitter.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/linkedin.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="images/youtube.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+
+        <div class="container">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://html.design/">Free Html Templates</a>
+            </p>
+        </div>
+    </section>
+    <!-- footer section -->
+    </div>
+
+    <!-- jQery -->
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="js/custom.js"></script>
+
 </body>
+
 </html>

@@ -1,11 +1,17 @@
 body {
-    background: #ddd;
+    /* background: #ddd; */
     min-height: 100vh;
     vertical-align: middle;
-    display: flex;
+    /* display: flex; */
     font-family: sans-serif;
     font-size: 0.8rem;
     font-weight: bold;
+}
+
+.card{
+    display: flex;
+    /* margin: 5%; */
+    /* margin-bottom: 50px; */
 }
 
 .title {
