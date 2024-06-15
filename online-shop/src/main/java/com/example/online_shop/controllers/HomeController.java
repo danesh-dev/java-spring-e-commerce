@@ -1,6 +1,7 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.MessageDto;
+import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.services.MessageService;
 import com.example.online_shop.services.ProductService;
@@ -59,6 +60,14 @@ public class HomeController {
     }
 
     //products
+    @GetMapping("/products")
+    public String products(Model model){
+        List<ProductDto> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+
     @GetMapping("/products/{name}")
     public String showProduct(@PathVariable("name") String name, Model model){
         Product product = productService.findByName(name);
