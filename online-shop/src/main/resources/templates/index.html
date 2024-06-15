@@ -303,6 +303,9 @@
 
   <!-- contact section -->
   <section class="contact_section layout_padding">
+    <div class="alert alert-info col-6 mx-auto pt-2 text-center mt-3" role="alert" th:if="${success != null}">
+      [[${success}]]
+    </div>
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -312,21 +315,21 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form_container">
-            <form action="">
+            <form th:action="@{/contact}" method="post" th:object="${message}">
               <div>
-                <input type="text" placeholder="Your Name" />
+                <input type="text" placeholder="Your Name" th:field="*{name}" required/>
               </div>
               <div>
-                <input type="text" placeholder="Phone Number" />
+                <input type="number" placeholder="Phone Number" th:field="*{phone}" required/>
               </div>
               <div>
-                <input type="email" placeholder="Email" />
+                <input type="email" placeholder="Email" th:field="*{email}" required/>
               </div>
               <div>
-                <input type="text" class="message-box" placeholder="Message" />
+                <input type="text" class="message-box" placeholder="Message" th:field="*{message}" required/>
               </div>
               <div class="btn_box">
-                <button>
+                <button type="submit">
                   SEND
                 </button>
               </div>
