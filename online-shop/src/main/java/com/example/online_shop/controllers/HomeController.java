@@ -30,6 +30,11 @@ public class HomeController {
         return "about";
     }
 
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
+    }
+
     @GetMapping("/products/{name}")
     public String showProduct(@PathVariable("name") String name, Model model){
         Product product = productService.findByName(name);
