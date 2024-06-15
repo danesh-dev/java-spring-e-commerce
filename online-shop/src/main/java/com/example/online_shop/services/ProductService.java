@@ -86,4 +86,8 @@ public class ProductService {
         return productRepository.findTop3ByOrderByCreatedAtDesc();
     }
 
+    public long getProductCount() {
+        return productRepository.countProducts();
+    }
+
 }

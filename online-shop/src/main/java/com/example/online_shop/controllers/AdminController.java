@@ -1,9 +1,11 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.CategoryDto;
+import com.example.online_shop.dto.MessageDto;
 import com.example.online_shop.dto.UserDto;
 import com.example.online_shop.models.User;
 import com.example.online_shop.services.CategoryService;
+import com.example.online_shop.services.MessageService;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +25,23 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private ProductService productService;
-
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping
     public String showIndexPage(Model model){
         List<ProductDto> products = productService.getAllProducts();
+        long productsCount = productService.getProductCount();
+        long usersCount = userService.getUsersCount();
+        List<MessageDto> messages = messageService.getAllMessages();
+
+        model.addAttribute("messages", messages);
+        model.addAttribute("usersCount", usersCount);
         model.addAttribute("products", products);
+        model.addAttribute("productsCount", productsCount);
         return "admin/index";
     }
 

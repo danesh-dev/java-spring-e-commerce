@@ -41,7 +41,7 @@ public class SellerController{
     @GetMapping()
     public String index(Model model){
         String sellerName = getSellerName();
-        List<ProductDto> products = productService.getAllProducts();
+        List<Product> products = productService.findProductsBySellerId(userService.getUserId(sellerName));
 
         model.addAttribute("sellerName", sellerName);
         model.addAttribute("products", products);
