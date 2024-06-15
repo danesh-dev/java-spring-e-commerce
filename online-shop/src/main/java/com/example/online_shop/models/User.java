@@ -17,6 +17,14 @@ public class User {
 
     private String role;
 
+    public User(Integer id, String name, String password, String email, String role) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
     //setter and getter
     public String getRole() {
         return role;
