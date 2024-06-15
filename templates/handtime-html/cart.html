@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Product</title>
+    <title>Cart</title>
 
 
     <!-- bootstrap core css -->
@@ -70,9 +70,6 @@
                                     <a class="nav-link" href="product.html">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="testimonial.html">Testimonial</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact Us</a>
                                 </li>
                             </ul>
@@ -80,7 +77,7 @@
                                 <a href="">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </a>
-                                <a href="">
+                                <a href="" >
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -89,21 +86,28 @@
                 </div>
             </header>
             <!-- end header section -->
+
+            <!-- main section cart -->
             <section class="content p-5">
                 <div class="card">
                     <div class="row">
+
+                        <!-- left part -->
                         <div class="col-md-8 cart ">
                             <div class="title">
                                 <div class="row">
                                     <div class="col">
                                         <h4><b>Shopping Cart</b></h4>
                                     </div>
-                                    <div class="col align-self-center text-right text-muted">3 items</div>
+                                    <div><a href="/">&leftarrow;</a><span class="text-muted">Back to
+                                        shop</span></div>
                                 </div>
                             </div>
+                            <!-- cart item -->
                             <div class="row border-top border-bottom">
                                 <div class="row main align-items-center">
-                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg">
+                                    </div>
                                     <div class="col">
                                         <div class="row text-muted">Shirt</div>
                                         <div class="row">Cotton T-shirt</div>
@@ -114,51 +118,28 @@
                                     <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="row main align-items-center">
-                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                                    <div class="col">
-                                        <div class="row text-muted">Shirt</div>
-                                        <div class="row">Cotton T-shirt</div>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                    </div>
-                                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                                </div>
-                            </div>
-                            <div class="row border-top border-bottom">
-                                <div class="row main align-items-center">
-                                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                                    <div class="col">
-                                        <div class="row text-muted">Shirt</div>
-                                        <div class="row">Cotton T-shirt</div>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                    </div>
-                                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                                </div>
-                            </div>
-                            <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+
                         </div>
+
+                        <!-- right part -->
                         <div class="col-md-4 summary ">
                             <div>
-                                <h5><b>Summary</b></h5>
+                                <h4><b>Summary</b></h4>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col" style="padding-left:0;">ITEMS 3</div>
-                                <div class="col text-right">&euro; 132.00</div>
+
+                            <div class="row pb-3">
+                                <h5><b>Informations </b></h5>
                             </div>
-                            <form>
-                                <p>SHIPPING</p>
-                                <select>
-                                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-                                </select>
-                                <p>GIVE CODE</p>
-                                <input id="code" placeholder="Enter your code">
-                            </form>
+                            <div class="row">
+                                <h6><b>Full name :</b></h6>
+                                <p> John Doe</p>
+                            </div>
+                            <div class="row">
+                                <h6><b>Address :</b></h6>
+                                <p> Us, californaia, mmd abad, maralan, yasin alley, p12, t3</p>
+                            </div>
+
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                 <div class="col">TOTAL PRICE</div>
                                 <div class="col text-right">&euro; 137.00</div>
@@ -166,15 +147,13 @@
                             <button class="btn">CHECKOUT</button>
                         </div>
                     </div>
-                
+
                 </div>
             </section>
+            <!-- nd main section cart -->
+
         </div>
     </div>
-
-    <!-- todo -->
-
-    <!-- todo -->
 
     <!-- info section -->
 
