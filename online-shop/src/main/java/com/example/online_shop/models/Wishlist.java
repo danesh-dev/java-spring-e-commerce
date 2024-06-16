@@ -22,6 +22,10 @@ public class Wishlist {
     @NotNull
     private int userId;
 
+    public Wishlist(){
+
+    }
+
     public Wishlist(Integer id, String name, String imagePath, int price, int userId) {
         this.id = id;
         this.name = name;

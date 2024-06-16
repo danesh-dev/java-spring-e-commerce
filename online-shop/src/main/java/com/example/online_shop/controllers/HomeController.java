@@ -26,8 +26,6 @@ public class HomeController {
     @Autowired
     private MessageService messageService;
 
-    @Autowired
-    private WishlistService wishlistService;
 
     @GetMapping("/")
     public String index(Model model){
@@ -62,12 +60,6 @@ public class HomeController {
         return "contact";
     }
 
-    @GetMapping("/wishlist")
-    public String wishlist(Model model){
-        List<Wishlist> wishlists = wishlistService.getWishlist("1");
-        model.addAttribute("wishlists", wishlists);
-        return "wishlist";
-    }
 
     //products
     @GetMapping("/products")

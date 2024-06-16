@@ -33,6 +33,13 @@
   <!-- responsive style -->
   <link th:href="@{/assets/css/responsive.css}" rel="stylesheet" />
 
+  <style>
+    .no-style {
+    color: inherit;  /* or specify another color */
+    text-decoration: underline;  /* or inherit to remove decoration */
+    font-weight: normal;  /* or any other style you want */
+}
+  </style>
 </head>
 
 <body>
@@ -82,7 +89,7 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" th:href="@{/wishlist}">Wish list</a>
+                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
                     <a class="dropdown-item" href="#"> کبوتر</a>
                     <a class="dropdown-item" href="/logout">Logout  </a>
                   </div>
@@ -96,12 +103,12 @@
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </a>
 
-                <!--if user is not logged in-->
                 <a href="" >
                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 </a>
 
               </div>
+
             </div>
           </nav>
         </div>
@@ -265,15 +272,13 @@
         <div class="box" th:each="product, index : ${products}">
           <div class="box-content">
             <div class="img-box">
-              <img th:src="@{${product.imagePath}}" alt="" width="65px">
+              <img th:src="@{${product.imagePath}}" alt="" height="65px">
             </div>
+
             <div class="detail-box">
               <div class="text">
-
                 <h4 th:text="${product.name}"></h4>
-
                 <h5 th:text="${product.description}"></h5>
-
               </div>
 
               <div class="like">
@@ -286,9 +291,14 @@
                 view
               </a>
 
-              <button type="button" class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+
+              <button  type="button" class="btn btn-warning">
+                <a th:href="@{/dashboard/wishlist/add/{name}(name=${product.name})}" class="no-style">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
                 <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
-              </svg></button>
+              </svg>
+                </a></button>
+
 
             </div>
           </div>

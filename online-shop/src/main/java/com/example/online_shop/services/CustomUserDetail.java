@@ -9,15 +9,20 @@ import java.util.List;
 
 public class CustomUserDetail implements UserDetails {
 
-    private User user;
+    private final User user;
 
     public CustomUserDetail(User user) {
         this.user = user;
     }
 
+    public Integer getId(){
+        return user.getId();
+    }
+
     public String getName(){
         return user.getName();
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> user.getRole());

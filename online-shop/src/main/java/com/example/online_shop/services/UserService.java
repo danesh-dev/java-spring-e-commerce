@@ -55,6 +55,9 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public User findById(int id){
+        return userRepository.findById(id);
+    }
     public void deleteUser(User entity) {
         userRepository.delete(entity);
     }
