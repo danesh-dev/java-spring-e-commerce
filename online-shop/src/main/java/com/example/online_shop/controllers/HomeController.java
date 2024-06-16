@@ -1,12 +1,13 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.MessageDto;
+import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.models.Product;
+import com.example.online_shop.models.Wishlist;
 import com.example.online_shop.services.MessageService;
 import com.example.online_shop.services.ProductService;
+import com.example.online_shop.services.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class HomeController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private WishlistService wishlistService;
 
     @GetMapping("/")
     public String index(Model model){
@@ -58,7 +62,22 @@ public class HomeController {
         return "contact";
     }
 
+    @GetMapping("/wishlist")
+    public String wishlist(Model model){
+        List<Wishlist> wishlists = wishlistService.getWishlist("1");
+        model.addAttribute("wishlists", wishlists);
+        return "wishlist";
+    }
+
     //products
+    @GetMapping("/products")
+    public String products(Model model){
+        List<ProductDto> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+
     @GetMapping("/products/{name}")
     public String showProduct(@PathVariable("name") String name, Model model){
         Product product = productService.findByName(name);
