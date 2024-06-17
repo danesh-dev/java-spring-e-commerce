@@ -1,0 +1,7 @@
+{
+  "platform": "docker",
+  "app": "college-project",
+  "port": 8080,
+  "build": { "cache": false }
+}
+
