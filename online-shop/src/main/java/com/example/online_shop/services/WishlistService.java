@@ -45,4 +45,11 @@ public class WishlistService {
             return true;
         }
     }
+
+    public Wishlist findByNameAndUserId(String name, int userID){
+        return wishlistRepository.findByNameAndUserId(name, userID);
+    }
+    public void deleteByNameAndUserId(String name, int userID){
+        wishlistRepository.delete(findByNameAndUserId(name, userID));
+    }
 }

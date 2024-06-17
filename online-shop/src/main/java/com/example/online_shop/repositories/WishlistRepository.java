@@ -15,6 +15,6 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
 
     @Query("SELECT COUNT(w) > 0 FROM Wishlist w WHERE w.name = :name AND w.userId = :userId")
     boolean existsByNameAndUserId(@Param("name") String name, @Param("userId") int userId);
-//    @Query("SELECT FROM wishlists WHERE name = :name AND user.id = :userId")
-//    public Wishlist existsByNameAndUserId(@Param("name") String name, @Param("userId") int userId);
+
+    public Wishlist findByNameAndUserId(String name, int userId);
 }

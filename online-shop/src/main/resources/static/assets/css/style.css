@@ -8,6 +8,12 @@
     url("fonts/Vazir-Thin.woff2") format("woff2");
 }
 
+.custom-link {
+  background-color:  inherit;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   /*! font-family: "vazir"; */
@@ -950,6 +956,13 @@ a:focus {
 
 .footer_section p a {
   color: inherit;
+}
+
+.no-style {
+    margin : 0;
+    padding : 0;
+    background_color : inherit;
+    font_size : inherit;
 }
 
 /*# sourceMappingURL=style.css.map */
