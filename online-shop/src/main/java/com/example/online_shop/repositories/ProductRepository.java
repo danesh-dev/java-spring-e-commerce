@@ -2,8 +2,11 @@ package com.example.online_shop.repositories;
 
 import com.example.online_shop.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,4 +25,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT COUNT(p) FROM Product p")
     public long countProducts();
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Product p SET p.name = :name, p.description = :description, p.price = :price, p.stock = :stock, p.category = :category WHERE p.id = :id")
+    int updateProduct(
+            @Param("id") Integer id,
+            @Param("name") String name,
+            @Param("description") String description,
+            @Param("price") int price,
+            @Param("stock") int stock,
+            @Param("category") String category);
+
 }

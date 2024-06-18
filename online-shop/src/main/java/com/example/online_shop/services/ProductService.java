@@ -63,20 +63,25 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void updateProduct(ProductDto productDto) throws IOException {
+    public void updateProduct(ProductDto productDto) {
+        Product existingProduct = findByName(productDto.getName());
+        if (existingProduct == null) {
+            throw new RuntimeException("Product not found");
+        }
 
-        Product existingProduct = productRepository.findByName(productDto.getName());
+        int updatedRows = productRepository.updateProduct(
+                existingProduct.getId(),
+                productDto.getName(),
+                productDto.getDescription(),
+                productDto.getPrice(),
+                productDto.getStock(),
+                productDto.getCategory());
 
-        existingProduct.setName(productDto.getName());
-        existingProduct.setPrice(productDto.getPrice());
-        existingProduct.setStock(productDto.getStock());
-        existingProduct.setCategory(productDto.getCategory());
-        existingProduct.setImagePath(productDto.getImagePath());
-        existingProduct.setSellerId(productDto.getSellerId());
-        existingProduct.setId(getProductId(productDto.getName()));
-
-        productRepository.save(existingProduct);
+        if (updatedRows == 0) {
+            throw new RuntimeException("Product not updated");
+        }
     }
+
 
     public int getProductId(String name){
         return productRepository.findByName(name).getId();

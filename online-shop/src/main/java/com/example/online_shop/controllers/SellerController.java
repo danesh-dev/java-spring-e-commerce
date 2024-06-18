@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -101,12 +103,17 @@ public class SellerController{
     @GetMapping("/products/update/{name}")
     public String showUpdatePage(@PathVariable("name") String name, Model model){
         List<CategoryDto> categories = categoryService.getAllCategories();
-
         ProductDto product = new ProductDto();
         Product chosen_product = productService.findByName(name);
+
+        if (chosen_product == null) {
+            throw new RuntimeException("Product not found");
+        }
+
         product.setName(chosen_product.getName());
         product.setPrice(chosen_product.getPrice());
         product.setStock(chosen_product.getStock());
+        product.setImagePath(chosen_product.getImagePath());
         product.setSellerId(chosen_product.getSellerId());
         product.setCategory(chosen_product.getCategory());
         product.setDescription(chosen_product.getDescription());
@@ -115,24 +122,18 @@ public class SellerController{
         model.addAttribute("product", product);
         return "seller/edit-product";
     }
+
     @PostMapping("/products/update")
-    public String updateProduct(@ModelAttribute("product") ProductDto productDto, Model model, @RequestParam("imageFile") MultipartFile imageFile){
+    public String updateProduct(@ModelAttribute("product") ProductDto productDto, RedirectAttributes redirectAttributes){
         try {
-            if(imageFile != null)
-                productDto.setImagePath(saveImage(imageFile));
-            else
-                productDto.setImagePath("/assets/upload/default-image.jpeg");
-
             productService.updateProduct(productDto);
-            model.addAttribute("message", "محصول با موفقیت ویرایش شد");
-
-        }catch (IOException e){
-            model.addAttribute("message", e.getMessage());
+            redirectAttributes.addFlashAttribute("message", "محصول با موفقیت ویرایش شد");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 
         return "redirect:/seller/my-products";
     }
-
 
     //delete
     @DeleteMapping("products/delete/{name}")
