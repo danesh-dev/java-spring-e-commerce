@@ -81,7 +81,7 @@
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" th:href="@{/wishlist}">Wish list</a>
+                                <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
                                 <a class="dropdown-item" href="#"> کبوتر</a>
                                 <a class="dropdown-item" href="/logout">Logout  </a>
                             </div>
@@ -126,7 +126,7 @@
                 <div class="form_container">
                     <form th:action="@{/contact}" method="post" th:object="${message}">
                         <div>
-                            <input type="text" placeholder="Your Name" th:field="*{name}"/>
+                            <input type="text" placeholder="Your Name" th:field="*{name}" required/>
                         </div>
                         <div>
                             <input type="text" placeholder="Phone Number" th:field="*{phone}" required/>

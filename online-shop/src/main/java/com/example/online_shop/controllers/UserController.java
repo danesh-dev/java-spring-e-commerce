@@ -84,7 +84,7 @@ public class UserController {
         int userId = getUserDetails().getId();
         List<Wishlist> wishlists = wishlistService.getWishlist(userId);
         model.addAttribute("wishlists", wishlists);
-        return "wishlist";
+        return "user/wishlist";
     }
 
     @GetMapping("/dashboard/wishlist/add/{name}")
