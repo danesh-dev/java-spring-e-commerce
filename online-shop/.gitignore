@@ -33,6 +33,3 @@ build/
 .vscode/
 
 *.log
-
-application.properties
-WebConfig.java
