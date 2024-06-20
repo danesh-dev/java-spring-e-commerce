@@ -39,5 +39,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             @Param("stock") int stock,
             @Param("category") Category category
     );
+
+    void deleteByCategory(Category category);
 }
 

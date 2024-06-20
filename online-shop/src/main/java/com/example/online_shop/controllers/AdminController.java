@@ -3,6 +3,7 @@ package com.example.online_shop.controllers;
 import com.example.online_shop.dto.CategoryDto;
 import com.example.online_shop.dto.MessageDto;
 import com.example.online_shop.dto.UserDto;
+import com.example.online_shop.models.Category;
 import com.example.online_shop.models.User;
 import com.example.online_shop.services.CategoryService;
 import com.example.online_shop.services.MessageService;
@@ -81,7 +82,8 @@ public class AdminController {
     }
     @DeleteMapping("/categories/{name}")
     public String deleteCategories(@PathVariable String name) {
-        categoryService.deleteCategory(categoryService.findByName(name));
+        Category category = categoryService.findByName(name);
+        categoryService.deleteCategory(category);
         return "redirect:/admin/categories";
     }
 

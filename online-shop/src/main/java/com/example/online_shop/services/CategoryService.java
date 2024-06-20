@@ -1,11 +1,12 @@
 package com.example.online_shop.services;
 
 import com.example.online_shop.dto.CategoryDto;
-import com.example.online_shop.dto.ProductDto;
+import com.example.online_shop.repositories.ProductRepository;
 import com.example.online_shop.models.Category;
 import com.example.online_shop.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,10 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
 
     public void create(CategoryDto categoryDto){
         Category category = new Category();
@@ -33,10 +38,6 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteCategory(Category entity) {
-        categoryRepository.delete(entity);
-    }
-
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
     }
@@ -50,7 +51,11 @@ public class CategoryService {
         }
     }
 
-    public void deleteCategoryById(int id) {
-        categoryRepository.deleteById(id);
+    @Transactional
+    public void deleteCategory(Category category) {
+        // First, delete all products associated with this category
+        productRepository.deleteByCategory(category);
+        // Then, delete the category itself
+        categoryRepository.delete(category);
     }
 }
