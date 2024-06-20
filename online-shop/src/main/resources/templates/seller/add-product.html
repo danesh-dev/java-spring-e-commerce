@@ -119,39 +119,35 @@
               <label for="name">نام کالا </label>
               <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="نام کالا را وارد کنید">
             </div>
-
             <div class="form-group col-8">
               <label for="price">قیمت (ریال) </label>
               <input type="text" class="form-control" id="price" th:field="*{price}" placeholder="قیمت کالا را وارد کنید">
             </div>
-
             <div class="form-group col-8">
               <label for="stock">تعداد موجودی </label>
               <input type="number" class="form-control" id="stock" th:field="*{stock}" placeholder=" تعداد کالا را وارد کنید">
             </div>
-
             <div class="form-group col-8">
               <label for="description"> توضیحات </label>
               <input type="text" class="form-control" id="description" th:field="*{description}" placeholder=" توضیحات کالا را وارد کنید">
             </div>
-
             <div class="form-group col-8">
               <label>دسته بندی</label>
-              <select class="form-control" id="category" th:field="*{category}">
-                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+              <select class="form-control" id="categoryId" th:field="*{categoryId}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nam}"></option>
               </select>
             </div>
-
             <div class="form-group col-8">
               <label for="imageFile"> تصویر کالا </label>
               <input type="file" accept="image/*" class="form-control" id="imageFile" name="imageFile" placeholder="تصویر کالا را انتخاب کنید">
             </div>
           </div>
-
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">افزودن</button>
           </div>
         </form>
+
+
       </section>
       <!-- /.content -->
     </div>

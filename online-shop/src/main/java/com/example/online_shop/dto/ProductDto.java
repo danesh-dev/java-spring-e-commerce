@@ -20,27 +20,15 @@ public class ProductDto {
     @Positive(message = "Inventory can't be empty")
     private int stock;
 
-    @NotBlank(message = "Category not added!")
+    private int categoryId;
+
     private Category category;
 
     private User seller;
 
     private String description = "default description";
 
-    public ProductDto() {
-    }
-
-    public ProductDto(String name, String imagePath, int price, int stock, Category category, User seller, String description) {
-        this.name = name;
-        this.imagePath = imagePath;
-        this.price = price;
-        this.stock = stock;
-        this.category = category;
-        this.seller = seller;
-        this.description = description;
-    }
-
-    // getters and setters
+    // Default constructor, getters, and setters
 
     public String getName() {
         return name;
@@ -72,6 +60,14 @@ public class ProductDto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Category getCategory() {
