@@ -10,45 +10,23 @@ public class Wishlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     @NotNull
-    private String name;
+    private Product product;
 
-    @NotNull
-    private String imagePath;
-
-    @NotNull
-    private int price;
-
-    @NotNull
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Wishlist(){
 
     }
 
-    public Wishlist(Integer id, String name, String imagePath, int price, int userId) {
+    public Wishlist(Integer id, Product product, User user) {
         this.id = id;
-        this.name = name;
-        this.imagePath = imagePath;
-        this.price = price;
-        this.userId = userId;
-    }
-
-    public @NotNull String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(@NotNull String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    @NotNull
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(@NotNull int price) {
-        this.price = price;
+        this.product = product;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -59,20 +37,19 @@ public class Wishlist {
         this.id = id;
     }
 
-    public @NotNull String getName() {
-        return name;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setName(@NotNull String name) {
-        this.name = name;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    @NotNull
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(@NotNull int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

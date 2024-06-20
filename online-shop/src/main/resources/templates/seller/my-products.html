@@ -125,7 +125,7 @@
                                             </td>
                                             <td th:text="${product.price}"></td>
                                             <td th:text="${product.stock}"></td>
-                                            <td th:text="${product.category}"></td>
+                                            <td th:text="${product.category.name}"></td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" th:attr="onclick=|deleteProduct('${product.name}')|"> حذف</button>
 

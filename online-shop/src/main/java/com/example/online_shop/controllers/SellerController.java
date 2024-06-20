@@ -2,6 +2,7 @@ package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.CategoryDto;
 import com.example.online_shop.dto.ProductDto;
+import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.services.CategoryService;
 import com.example.online_shop.services.CustomUserDetail;
@@ -73,9 +74,15 @@ public class SellerController{
         String sellerName = getSellerName();
         int sellerId = userService.getUserId(sellerName);
 
-
         productDto.setImagePath(saveImage(imageFile));
-        productDto.setSellerId(sellerId);
+        productDto.setSeller(userService.findById(sellerId));
+
+        // Log category ID to ensure it is being set correctly
+        System.out.println("Category ID: " + productDto.getCategoryId());
+
+        // Retrieve and set the category
+        Category category = categoryService.findById(productDto.getCategoryId());
+        productDto.setCategory(category);
 
         // Create the product
         productService.create(productDto);
@@ -83,6 +90,9 @@ public class SellerController{
         model.addAttribute("sellerName", sellerName);
         return "redirect:/seller/my-products";
     }
+
+
+
 
 
     //my products
@@ -114,7 +124,7 @@ public class SellerController{
         product.setPrice(chosen_product.getPrice());
         product.setStock(chosen_product.getStock());
         product.setImagePath(chosen_product.getImagePath());
-        product.setSellerId(chosen_product.getSellerId());
+        product.setSeller(chosen_product.getSeller());
         product.setCategory(chosen_product.getCategory());
         product.setDescription(chosen_product.getDescription());
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +27,7 @@ public class CategoryService {
     public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll().stream()
                 .map(item -> new CategoryDto(
+                        item.getId(),
                         item.getName()
                 ))
                 .collect(Collectors.toList());
@@ -37,6 +39,15 @@ public class CategoryService {
 
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
+    }
+
+    public Category findById(int id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        if (category.isPresent()) {
+            return category.get();
+        } else {
+            throw new RuntimeException("Category not found for id :: " + id);
+        }
     }
 
     public void deleteCategoryById(int id) {

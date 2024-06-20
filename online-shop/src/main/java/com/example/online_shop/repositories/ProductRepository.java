@@ -1,5 +1,6 @@
 package com.example.online_shop.repositories;
 
+import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,21 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    public Product findById(int id);
+    Product findById(int id);
 
-    public Product findByName(String name);
+    Product findByName(String name);
 
-    public boolean existsByNameAndCategory(String name, String category);
+    boolean existsByNameAndCategory_Name(String name, String categoryName);
 
-    public List<Product> findBySellerId(int sellerId);
+    List<Product> findBySeller_Id(int sellerId);
 
-    public List<Product> findTop3ByOrderByCreatedAtDesc();
+    List<Product> findTop3ByOrderByCreatedAtDesc();
 
     @Query("SELECT COUNT(p) FROM Product p")
-    public long countProducts();
+    long countProducts();
 
     @Modifying
     @Transactional
@@ -35,6 +37,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             @Param("description") String description,
             @Param("price") int price,
             @Param("stock") int stock,
-            @Param("category") String category);
-
+            @Param("category") Category category
+    );
 }
+

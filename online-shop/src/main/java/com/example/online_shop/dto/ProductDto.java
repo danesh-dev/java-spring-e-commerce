@@ -1,45 +1,34 @@
 package com.example.online_shop.dto;
 
+import com.example.online_shop.models.Category;
+import com.example.online_shop.models.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public class ProductDto {
 
-    @Size(min = 3, max = 100, message = "Name must be more than 3 character !")
+    @Size(min = 3, max = 100, message = "Name must be more than 3 characters!")
     @NotBlank(message = "Name is mandatory")
     private String name;
 
     private String imagePath = "/assets/upload/default-image.jpeg";
 
-    @Positive(message = "product can't be free")
-    @NotBlank(message = "Price not added !")
+    @Positive(message = "Product can't be free")
     private int price;
 
-    @Positive(message = "inventory can't be empty")
-    @NotBlank(message = "Stock not added !")
+    @Positive(message = "Inventory can't be empty")
     private int stock;
 
-    @NotBlank(message = "Category not added !")
-    private String category;
+    private int categoryId;
 
-    private int sellerId;
+    private Category category;
 
-    private String description  = "default description";
+    private User seller;
 
-    public ProductDto(){
+    private String description = "default description";
 
-    }
-
-    public ProductDto(String name, String imagePath, int price, int stock, String category, int seller_id, String description) {
-        this.name = name;
-        this.imagePath = imagePath;
-        this.price = price;
-        this.stock = stock;
-        this.category = category;
-        this.sellerId = seller_id;
-        this.description = description;
-    }
+    // Default constructor, getters, and setters
 
     public String getName() {
         return name;
@@ -49,7 +38,7 @@ public class ProductDto {
         this.name = name;
     }
 
-    public String getImagePath(){
+    public String getImagePath() {
         return imagePath;
     }
 
@@ -73,20 +62,28 @@ public class ProductDto {
         this.stock = stock;
     }
 
-    public String getCategory() {
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public int getSellerId() {
-        return sellerId;
+    public User getSeller() {
+        return seller;
     }
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
     public String getDescription() {
@@ -96,5 +93,4 @@ public class ProductDto {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

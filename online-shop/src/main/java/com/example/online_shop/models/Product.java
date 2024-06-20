@@ -1,7 +1,9 @@
 package com.example.online_shop.models;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -19,32 +21,76 @@ public class Product {
 
     private int stock;
 
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
-    private int sellerId;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    private User seller;
 
     private String description = "default description";
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public Product(String name, String imagePath, int price, int stock, String category, int seller, String description) {
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders;
+
+    @OneToMany(mappedBy = "product")
+    private List<Wishlist> wishlistItems;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems;
+
+
+    public Product() {
+    }
+
+    public Product(int id, String name, String imagePath, int price, int stock, Category category, User seller, String description, LocalDateTime createdAt, List<Order> orders, List<Wishlist> wishlistItems, List<CartItem> cartItems) {
+        this.id = id;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
         this.category = category;
-        this.sellerId = seller;
+        this.seller = seller;
         this.description = description;
+        this.createdAt = createdAt;
+        this.orders = orders;
+        this.wishlistItems = wishlistItems;
+        this.cartItems = cartItems;
     }
 
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
-    public Product(){}
 
-    //getter and setter
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Wishlist> getWishlistItems() {
+        return wishlistItems;
+    }
+
+    public void setWishlistItems(List<Wishlist> wishlistItems) {
+        this.wishlistItems = wishlistItems;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
     public int getId() {
         return id;
     }
@@ -85,28 +131,20 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public int getSellerId() {
-        return sellerId;
+    public User getSeller() {
+        return seller;
     }
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setSeller(User seller) {
+        this.seller = seller;
     }
 
     public String getDescription() {
@@ -117,4 +155,11 @@ public class Product {
         this.description = description;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

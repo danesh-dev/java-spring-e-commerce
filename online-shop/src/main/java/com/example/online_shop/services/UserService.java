@@ -29,10 +29,12 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
 
-        if(userDto.getRole() == null)
+        // Set default role if not provided
+        if (userDto.getRole() == null) {
             user.setRole("USER");
-        else
+        } else {
             user.setRole(userDto.getRole());
+        }
 
         userRepository.save(user);
     }
@@ -47,22 +49,28 @@ public class UserService {
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(item -> new UserDto(
-                        item.getName(),
-                        item.getEmail(),
-                        item.getRole()
-                ))
+                .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    public User findById(int id){
+    private UserDto convertToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setRole(user.getRole());
+        // You can add more fields if needed
+        return userDto;
+    }
+
+    public User findById(int id) {
         return userRepository.findById(id);
     }
+
     public void deleteUser(User entity) {
         userRepository.delete(entity);
     }
 
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -70,20 +78,21 @@ public class UserService {
         return userRepository.findByRole("SELLER");
     }
 
-    public int getUserId(String name){
-        return findByName(name).getId();
+    public int getUserId(String name) {
+        User user = findByName(name);
+        return user != null ? user.getId() : -1;
     }
 
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }
 
-    public User findByName(String name){
+    public User findByName(String name) {
         return userRepository.findByName(name);
     }
 
-    public long getUsersCount(){
-        return userRepository.countUsers();
+    public long getUsersCount() {
+        return userRepository.count();
     }
-
 }
+
