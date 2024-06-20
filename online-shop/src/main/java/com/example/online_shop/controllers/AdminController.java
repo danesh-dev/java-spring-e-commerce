@@ -105,7 +105,10 @@ public class AdminController {
 
     @PostMapping("/sellers/{email}")
     public String deleteSeller(@PathVariable("email") String email) {
-        userService.deleteUser(userService.findByEmail(email));
+        User user = userService.findByEmail(email);
+        if (user != null) {
+            userService.deleteUserAndProducts(user);
+        }
         return "redirect:/admin/sellers";
     }
     @GetMapping("/sellers")

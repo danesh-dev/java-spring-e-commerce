@@ -6,6 +6,7 @@ import com.example.online_shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ProductService productService;
 
     public void create(UserDto userDto) throws Exception {
         if (userRepository.existsByEmail(userDto.getEmail())) {
@@ -68,6 +72,15 @@ public class UserService {
 
     public void deleteUser(User entity) {
         userRepository.delete(entity);
+    }
+
+    @Transactional
+    public void deleteUserAndProducts(User user) {
+        // Delete all products associated with the user
+        productService.deleteProductsBySeller(user);
+
+        // Now delete the user
+        userRepository.delete(user);
     }
 
     public User findByEmail(String email) {

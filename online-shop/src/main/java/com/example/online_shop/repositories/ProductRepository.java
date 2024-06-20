@@ -2,6 +2,7 @@ package com.example.online_shop.repositories;
 
 import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
+import com.example.online_shop.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -41,5 +42,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     );
 
     void deleteByCategory(Category category);
+
+    void deleteBySeller(User seller);
 }
 

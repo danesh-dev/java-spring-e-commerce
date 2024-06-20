@@ -9,6 +9,7 @@ import com.example.online_shop.repositories.ProductRepository;
 import com.example.online_shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -66,6 +67,11 @@ public class ProductService {
 
     public void deleteProduct(Product entity) {
         productRepository.delete(entity);
+    }
+
+    @Transactional
+    public void deleteProductsBySeller(User seller) {
+        productRepository.deleteBySeller(seller);
     }
 
     public List<Product> findProductsBySellerId(int sellerId) {
