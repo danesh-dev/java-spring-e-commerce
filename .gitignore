@@ -1,3 +1,5 @@
+online-shop/src/main/java/com/example/online_shop/configurations/WebConfig.java
+online-shop/src/main/resources/application.properties
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
