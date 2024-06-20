@@ -23,31 +23,29 @@ public class WishlistService {
     private ProductService productService;
 
     public List<Wishlist> getWishlist(int id){
-        return wishlistRepository.findByUserId(id);
+        return wishlistRepository.findByUser(userService.findById(id));
     }
 
     @Transactional
     public boolean addToWishlist(String name, int userId) {
+        User user = userService.findById(userId);
+        Product product = productService.findByName(name);
 
-        if (wishlistRepository.existsByNameAndUserId(name, userId)) {
+        if (wishlistRepository.existsByProductAndUser(product, user)) {
             return false;
         }else {
-
-            Product product = productService.findByName(name);
-            User user = userService.findById(userId);
-
             Wishlist wishlist = new Wishlist();
-            wishlist.setName(name);
-            wishlist.setPrice(product.getPrice());
-            wishlist.setUserId(user.getId());
-            wishlist.setImagePath(product.getImagePath());
+            wishlist.setProduct(productService.findByName(name));
+            wishlist.setUser(userService.findById(userId));
             wishlistRepository.save(wishlist);
             return true;
         }
     }
 
     public Wishlist findByNameAndUserId(String name, int userID){
-        return wishlistRepository.findByNameAndUserId(name, userID);
+        User user = userService.findById(userID);
+        Product product = productService.findByName(name);
+        return wishlistRepository.findByProductAndUser(product, user);
     }
     public void deleteByNameAndUserId(String name, int userID){
         wishlistRepository.delete(findByNameAndUserId(name, userID));

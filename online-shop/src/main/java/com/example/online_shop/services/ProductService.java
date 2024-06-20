@@ -1,8 +1,12 @@
 package com.example.online_shop.services;
 
 import com.example.online_shop.dto.ProductDto;
+import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
+import com.example.online_shop.models.User;
+import com.example.online_shop.repositories.CategoryRepository;
 import com.example.online_shop.repositories.ProductRepository;
+import com.example.online_shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,36 +20,48 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     public void create(ProductDto productDto) throws Exception {
-        if ((productRepository.existsByNameAndCategory(productDto.getName(), productDto.getCategory())) && (productDto.getStock() > 0)) {
-            throw new Exception("Product is already in Sell");
+        // Check if a product with the same name and category already exists
+        if (productRepository.existsByNameAndCategory_Name(productDto.getName(), productDto.getCategory().getName())) {
+            throw new Exception("Product is already in sell");
         }
 
-        Product product = new Product(
-                productDto.getName(),
-                productDto.getImagePath(),
-                productDto.getPrice(),
-                productDto.getStock(),
-                productDto.getCategory(),
-                productDto.getSellerId(),
-                productDto.getDescription()
-        );
+        // Map ProductDto to Product entity
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setImagePath(productDto.getImagePath());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setCategory(productDto.getCategory());
+        product.setSeller(productDto.getSeller());
+        product.setDescription(productDto.getDescription());
 
         productRepository.save(product);
     }
 
     public List<ProductDto> getAllProducts() {
-        return productRepository.findAll().stream()
-                .map(item -> new ProductDto(
-                        item.getName(),
-                        item.getImagePath(),
-                        item.getPrice(),
-                        item.getStock(),
-                        item.getCategory(),
-                        item.getSellerId(),
-                        item.getDescription()
-                ))
+        List<Product> products = productRepository.findAll();
+        return products.stream()
+                .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    private ProductDto convertToDto(Product product) {
+        ProductDto productDto = new ProductDto();
+        productDto.setName(product.getName());
+        productDto.setImagePath(product.getImagePath());
+        productDto.setPrice(product.getPrice());
+        productDto.setStock(product.getStock());
+        productDto.setCategory(product.getCategory());
+        productDto.setSeller(product.getSeller());
+        productDto.setDescription(product.getDescription());
+        return productDto;
     }
 
     public void deleteProduct(Product entity) {
@@ -53,38 +69,34 @@ public class ProductService {
     }
 
     public List<Product> findProductsBySellerId(int sellerId) {
-        return productRepository.findBySellerId(sellerId);
+        return productRepository.findBySeller_Id(sellerId);
     }
 
     public Product findByName(String name) {
         return productRepository.findByName(name);
     }
+
     public void deleteProductById(int id) {
         productRepository.deleteById(id);
     }
 
     public void updateProduct(ProductDto productDto) {
-        Product existingProduct = findByName(productDto.getName());
-        if (existingProduct == null) {
-            throw new RuntimeException("Product not found");
-        }
+        Product existingProduct = productRepository.findByName(productDto.getName());
 
-        int updatedRows = productRepository.updateProduct(
-                existingProduct.getId(),
-                productDto.getName(),
-                productDto.getDescription(),
-                productDto.getPrice(),
-                productDto.getStock(),
-                productDto.getCategory());
+        existingProduct.setName(productDto.getName());
+        existingProduct.setImagePath(productDto.getImagePath());
+        existingProduct.setPrice(productDto.getPrice());
+        existingProduct.setStock(productDto.getStock());
 
-        if (updatedRows == 0) {
-            throw new RuntimeException("Product not updated");
-        }
-    }
+        Category category = categoryRepository.findByName(productDto.getCategory().getName());
+        existingProduct.setCategory(category);
 
+        User seller = userRepository.findByEmail(productDto.getSeller().getEmail());
+        existingProduct.setSeller(seller);
 
-    public int getProductId(String name){
-        return productRepository.findByName(name).getId();
+        existingProduct.setDescription(productDto.getDescription());
+
+        productRepository.save(existingProduct);
     }
 
     public List<Product> findLatestProducts() {
@@ -94,5 +106,5 @@ public class ProductService {
     public long getProductCount() {
         return productRepository.countProducts();
     }
-
 }
+

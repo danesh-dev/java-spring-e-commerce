@@ -70,12 +70,12 @@ public class SellerController{
     public String addProduct(@ModelAttribute("product") ProductDto productDto,
                              @RequestParam("imageFile") MultipartFile imageFile,
                              Model model) throws Exception {
+        //todo category returning null
         String sellerName = getSellerName();
         int sellerId = userService.getUserId(sellerName);
 
-
         productDto.setImagePath(saveImage(imageFile));
-        productDto.setSellerId(sellerId);
+        productDto.setSeller(userService.findById(sellerId));
 
         // Create the product
         productService.create(productDto);
@@ -114,7 +114,7 @@ public class SellerController{
         product.setPrice(chosen_product.getPrice());
         product.setStock(chosen_product.getStock());
         product.setImagePath(chosen_product.getImagePath());
-        product.setSellerId(chosen_product.getSellerId());
+        product.setSeller(chosen_product.getSeller());
         product.setCategory(chosen_product.getCategory());
         product.setDescription(chosen_product.getDescription());
 
