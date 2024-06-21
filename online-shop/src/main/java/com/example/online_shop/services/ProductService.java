@@ -88,21 +88,29 @@ public class ProductService {
 
     public void updateProduct(ProductDto productDto) {
         Product existingProduct = productRepository.findByName(productDto.getName());
+//
+//        existingProduct.setName(productDto.getName());
+//        existingProduct.setImagePath(productDto.getImagePath());
+//        existingProduct.setPrice(productDto.getPrice());
+//        existingProduct.setStock(productDto.getStock());
+//
+////        Category category = categoryRepository.findByName(productDto.getCategory().getName());
+//        existingProduct.setCategory(productDto.getCategory());
+//
+////        User seller = userRepository.findByEmail(productDto.getSeller().getEmail());
+//        existingProduct.setSeller(productDto.getSeller());
+//
+//        existingProduct.setDescription(productDto.getDescription());
+//
+//        productRepository.save(existingProduct);
 
-        existingProduct.setName(productDto.getName());
-        existingProduct.setImagePath(productDto.getImagePath());
-        existingProduct.setPrice(productDto.getPrice());
-        existingProduct.setStock(productDto.getStock());
-
-        Category category = categoryRepository.findByName(productDto.getCategory().getName());
-        existingProduct.setCategory(category);
-
-        User seller = userRepository.findByEmail(productDto.getSeller().getEmail());
-        existingProduct.setSeller(seller);
-
-        existingProduct.setDescription(productDto.getDescription());
-
-        productRepository.save(existingProduct);
+        int updatedRows = productRepository.updateProduct(
+                existingProduct.getId(),
+                productDto.getName(),
+                productDto.getDescription(),
+                productDto.getPrice(),
+                productDto.getStock(),
+                productDto.getCategory());
     }
 
     public List<Product> findLatestProducts() {

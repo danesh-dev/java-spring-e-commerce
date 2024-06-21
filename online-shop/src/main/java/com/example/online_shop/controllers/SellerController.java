@@ -101,7 +101,6 @@ public class SellerController{
         String sellerName = getSellerName();
         List<Product> products = productService.findProductsBySellerId(userService.getUserId(sellerName));
 
-        System.out.println(products.size());
         model.addAttribute("products", products);
         model.addAttribute("sellerName", sellerName);
 

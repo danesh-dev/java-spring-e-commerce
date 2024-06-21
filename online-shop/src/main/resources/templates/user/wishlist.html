@@ -122,14 +122,14 @@
                         <!-- cart item -->
                         <div class="row border-top border-bottom p-2" th:each="wishlist, index : ${wishlists}">
                             <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" th:src="@{${wishlist.imagePath}}">
+                                <div class="col-2"><img class="img-fluid" th:src="@{${wishlist.product.imagePath}}">
                                 </div>
                                 <div class="col">
-                                    <div class="row"><a th:href="@{/products/{name}(name=${wishlist.name})}"
-                                                        th:text="@{${wishlist.name}}"></a></div>
+                                    <div class="row"><a th:href="@{/products/{name}(name=${wishlist.product.name})}"
+                                                        th:text="@{${wishlist.product.name}}"></a></div>
                                 </div>
-                                <div class="col" th:text="@{${wishlist.price}}"></div>
-                                <div class="col"><span class="close" ><a th:attr="onclick=|delete('${wishlist.name}')|" th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.name})}">&#10005;</a></span></div>
+                                <div class="col" th:text="@{${wishlist.product.price}}"></div>
+                                <div class="col"><span class="close" ><a th:attr="onclick=|delete('${wishlist.product.name}')|" th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.name})}">&#10005;</a></span></div>
                             </div>
                         </div>
 

@@ -118,7 +118,7 @@
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${product.imagePath}}" alt="..." />
             </div>
             <div class="col-md-6">
-                <div class="small mb-1" th:text="${product.category}">category</div>
+                <div class="small mb-1" th:text="${product.category.name}">category</div>
                 <h1 class="display-5 fw-bolder" th:text="${product.name}">Product Name</h1>
                 <div class="fs-5 mb-5">
                     <span th:text="${product.price}+'$'"></span>
