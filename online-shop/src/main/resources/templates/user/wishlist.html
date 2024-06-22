@@ -129,7 +129,7 @@
                                                         th:text="@{${wishlist.product.name}}"></a></div>
                                 </div>
                                 <div class="col" th:text="@{${wishlist.product.price}}"></div>
-                                <div class="col"><span class="close" ><a th:attr="onclick=|delete('${wishlist.product.name}')|" th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.name})}">&#10005;</a></span></div>
+                                <div class="col"><span class="close" ><a th:attr="onclick=|delete('${wishlist.product.name}')|" th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.product.name})}">&#10005;</a></span></div>
                             </div>
                         </div>
 

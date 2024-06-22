@@ -1,5 +1,6 @@
 package com.example.online_shop.dto;
 import com.example.online_shop.models.Product;
+import com.example.online_shop.models.User;
 import jakarta.validation.constraints.NotNull;
 
 public class WishlistDto {
@@ -7,11 +8,11 @@ public class WishlistDto {
     private Product product;
 
     @NotNull
-    private int userId;
+    private User user;
 
-    public WishlistDto(Product product, int userId) {
+    public WishlistDto(Product product, User user) {
         this.product = product;
-        this.userId = userId;
+        this.user = user;
     }
 
     public Product getProduct() {
@@ -22,11 +23,11 @@ public class WishlistDto {
         this.product = product;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

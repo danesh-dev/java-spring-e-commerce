@@ -53,9 +53,6 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategory(Category category) {
-        // First, delete all products associated with this category
-//        productRepository.deleteByCategory(category);
-        // Then, delete the category itself
         categoryRepository.delete(category);
     }
 }

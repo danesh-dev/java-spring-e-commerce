@@ -62,7 +62,6 @@ public class UserService {
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());
-        // You can add more fields if needed
         return userDto;
     }
 
@@ -74,12 +73,7 @@ public class UserService {
         userRepository.delete(entity);
     }
 
-    @Transactional
     public void deleteUserAndProducts(User user) {
-        // Delete all products associated with the user
-        productService.deleteProductsBySeller(user);
-
-        // Now delete the user
         userRepository.delete(user);
     }
 

@@ -25,13 +25,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Wishlist> wishlistItems;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
 
     public User(){
