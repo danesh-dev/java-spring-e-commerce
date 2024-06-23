@@ -29,7 +29,7 @@ public class User {
     private List<Wishlist> wishlistItems;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartItems;
+    private List<Cart> cartItems;
 
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
@@ -38,7 +38,7 @@ public class User {
 
     }
 
-    public User(Integer id, String name, String password, String email, String role, List<Payment> payments, List<Order> orders, List<Wishlist> wishlistItems, List<CartItem> cartItems, List<Product> products) {
+    public User(Integer id, String name, String password, String email, String role, List<Payment> payments, List<Order> orders, List<Wishlist> wishlistItems, List<Cart> cartItems, List<Product> products) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -115,11 +115,11 @@ public class User {
         this.wishlistItems = wishlistItems;
     }
 
-    public List<CartItem> getCartItems() {
+    public List<Cart> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
+    public void setCartItems(List<Cart> cartItems) {
         this.cartItems = cartItems;
     }
 

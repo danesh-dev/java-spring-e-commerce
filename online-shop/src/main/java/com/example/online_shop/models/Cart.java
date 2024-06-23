@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cartItems")
-public class CartItem {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,9 +17,12 @@ public class CartItem {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-    private int quantity;
+    private int quantity = 1;
 
-    public CartItem(int id, User user, Product product, int quantity) {
+    public Cart(){
+
+    }
+    public Cart(int id, User user, Product product, int quantity) {
         this.id = id;
         this.user = user;
         this.product = product;

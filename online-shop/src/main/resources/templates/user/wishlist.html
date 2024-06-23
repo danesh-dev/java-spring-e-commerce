@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <a href="">
+                        <a th:href="@{/dashboard/cart}" sec:authorize="hasAuthority('USER')">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
 
@@ -108,7 +108,6 @@
             <div class="card">
                 <div class="row">
 
-                    <!-- left part -->
                     <div class="col-md-12 cart">
                         <div class="title">
                             <div class="row">
@@ -126,10 +125,13 @@
                                 </div>
                                 <div class="col">
                                     <div class="row"><a th:href="@{/products/{name}(name=${wishlist.product.name})}"
-                                                        th:text="@{${wishlist.product.name}}"></a></div>
+                                                        th:text="${wishlist.product.name}"></a></div>
                                 </div>
-                                <div class="col" th:text="@{${wishlist.product.price}}"></div>
-                                <div class="col"><span class="close" ><a th:attr="onclick=|delete('${wishlist.product.name}')|" th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.product.name})}">&#10005;</a></span></div>
+                                <div class="col" th:text="${wishlist.product.price}+'$'"></div>
+                                <div class="col"><span class="close"><a
+                                        th:attr="onclick=|delete('${wishlist.product.name}')|"
+                                        th:href="@{/dashboard/wishlist/delete/{name}(name=${wishlist.product.name})}">&#10005;</a></span>
+                                </div>
                             </div>
                         </div>
 

@@ -82,6 +82,10 @@ public class ProductService {
         return productRepository.findByName(name);
     }
 
+    public Product findById(int id){
+        return productRepository.findById(id);
+    }
+
     public void deleteProductById(int id) {
         productRepository.deleteById(id);
     }

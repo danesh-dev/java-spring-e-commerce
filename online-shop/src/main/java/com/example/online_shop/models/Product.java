@@ -41,13 +41,13 @@ public class Product {
     private List<Wishlist> wishlistItems;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartItems;
+    private List<Cart> cartItems;
 
 
     public Product() {
     }
 
-    public Product(int id, String name, String imagePath, int price, int stock, Category category, User seller, String description, LocalDateTime createdAt, List<Order> orders, List<Wishlist> wishlistItems, List<CartItem> cartItems) {
+    public Product(int id, String name, String imagePath, int price, int stock, Category category, User seller, String description, LocalDateTime createdAt, List<Order> orders, List<Wishlist> wishlistItems, List<Cart> cartItems) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
@@ -83,11 +83,11 @@ public class Product {
         this.wishlistItems = wishlistItems;
     }
 
-    public List<CartItem> getCartItems() {
+    public List<Cart> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
+    public void setCartItems(List<Cart> cartItems) {
         this.cartItems = cartItems;
     }
 

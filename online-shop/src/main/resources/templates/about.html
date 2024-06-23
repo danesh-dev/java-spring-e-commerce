@@ -85,6 +85,10 @@
                             </div>
                         </div>
 
+                        <a th:href="@{/dashboard/cart}" sec:authorize="hasAuthority('USER')">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+
                         <!-- for admin/seller -->
                         <a th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -93,10 +97,6 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
 
-                        <!--if user is not logged in-->
-                        <a href="" >
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        </a>
 
                     </div>
                 </div>

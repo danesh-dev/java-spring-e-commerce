@@ -90,17 +90,16 @@
                                 </div>
                             </div>
 
+                            <a th:href="@{/dashboard/cart}" sec:authorize="hasAuthority('USER')">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+
                             <!-- for admin/seller -->
                             <a th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             <a th:href="@{/seller}" sec:authorize="hasAuthority('SELLER')">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                            </a>
-
-                            <!--if user is not logged in-->
-                            <a href="">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>
 
                         </div>
@@ -115,7 +114,7 @@
 <section class="py-5" style="background-color: rgb(248, 248, 248);">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${product.imagePath}}" alt="..." />
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${product.imagePath}}" alt="..."/>
             </div>
             <div class="col-md-6">
                 <div class="small mb-1" th:text="${product.category.name}">category</div>
@@ -125,13 +124,18 @@
                 </div>
                 <p class="lead" th:text="${product.description}">description</p>
                 <div class="d-flex">
+
                     <button type="button" class="btn btn-dark">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-cart" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                        add to cart
+                        <a th:href="@{/dashboard/cart/add/{name}(name=${product.name})}"
+                           class="btn btn-dark p-0 m-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            add to cart
+                        </a>
                     </button>
+
                     <button type="button" class="btn btn-warning ">
                         <a th:href="@{/dashboard/wishlist/add/{name}(name=${product.name})}"
                            class="btn btn-warning p-0 m-0" style="background-color : #ffc107">
