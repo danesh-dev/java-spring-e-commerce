@@ -18,6 +18,8 @@ public class UserDto {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
+    private String address;
+
     private String role;
 
     public UserDto(String name, String email, String role) {
@@ -26,8 +28,24 @@ public class UserDto {
         this.role = role;
     }
 
+    public UserDto(String name, String email, String password, String address, String role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.role = role;
+    }
+
     public UserDto(){
 
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPassword() {

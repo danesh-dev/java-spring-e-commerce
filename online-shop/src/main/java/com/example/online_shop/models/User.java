@@ -15,6 +15,8 @@ public class User {
 
     private String password;
 
+    private String address;
+
     private String email;
 
     private String role;
@@ -129,5 +131,13 @@ public class User {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

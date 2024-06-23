@@ -101,5 +101,11 @@ public class UserService {
     public long getUsersCount() {
         return userRepository.count();
     }
+
+    public void updateAddress(int userId, String newAddress) {
+        User user = userRepository.findById(userId);
+        user.setAddress(newAddress);
+        userRepository.save(user);
+    }
 }
 
