@@ -33,7 +33,7 @@ public class UserController {
     private ProductService productService;
 
 
-    @GetMapping("/")
+    @GetMapping()
     public String dashboard(Model model) {
         User user = userService.findById(getUserDetails().getId());
         model.addAttribute("user", user);

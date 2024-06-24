@@ -78,14 +78,16 @@
 
                         <div class="user_optio_box">
                             <div class="dropdown" sec:authorize="hasAuthority('USER')">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
-                                    <a class="dropdown-item" href="#"> کبوتر</a>
-                                    <a class="dropdown-item" href="/logout">Logout </a>
+                                <div class="dropdown" sec:authorize="hasAuthority('USER')">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" th:href="@{/dashboard}"><i class="fa fa-dashboard p-2"></i> Dashboard</a>
+                                        <a class="dropdown-item" th:href="@{/dashboard/wishlist}"><i class="fa fa-heart p-2"></i>Wish list</a>
+                                        <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt p-2"></i>Logout </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -104,8 +106,12 @@
             <div class="alert alert-info col-4 mx-auto pt-2 text-center mt-3" role="alert" th:if="${success != null}">
                 [[${success}]]
             </div>
-            <div class="row">
-                <div class="col-md-9 content">
+            <div class="alert alert-danger col-4 mx-auto pt-2 text-center mt-3" role="alert" th:if="${error != null}">
+                [[${error}]]
+            </div>
+
+            <div class="row mx-auto">
+                <div class="col-md-8 content">
                     <h5>User Information</h5>
                     <form id="userInfoForm" th:object="${user}" th:action="@{/dashboard/updateAddress}" method="post">
                         <div class="form-group">
@@ -121,13 +127,12 @@
                             <label for="address">Address</label>
                             <input type="text" class="form-control" id="address" th:field="*{address}">
                         </div>
-                        <button type="submit" class="btn btn-darkblue" id="saveChangesBtn" disabled>
-                            Save Changes
-                        </button>
+                        <button type="submit" class="btn btn-darkblue" id="saveChangesBtn" disabled>Save
+                            Changes</button>
                     </form>
                 </div>
 
-                <div class="col-md-3 sidebar">
+                <div class="col-md-3 sidebar text-end">
                     <h5 style="direction: rtl;" class="text-center pb-3">Dashboard</h5>
                     <a href="/wishlist"><i class="fa fa-user p-2"></i> My Profile </a>
                     <a href="/wishlist"><i class="fa fa-heart p-2"></i> Wishlist</a>
@@ -142,145 +147,147 @@
     </div>
 </div>
 
-<!-- footer section -->
-<section class="footer_section ">
-    <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="info_logo">
-                <h2>
-                    HandTime
-                </h2>
-            </div>
-            <div class="row">
+<!-- info section -->
+<section class="info_section layout_padding2">
+    <div class="container">
+        <div class="info_logo">
+            <h2>
+                HandTime
+            </h2>
+        </div>
+        <div class="row">
 
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            About Shop
-                        </h5>
-                        <div>
-                            <div class="img-box">
-                                <img src="images/location-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                Address
-                            </p>
+            <div class="col-md-3">
+                <div class="info_contact">
+                    <h5>
+                        About Shop
+                    </h5>
+                    <div>
+                        <div class="img-box">
+                            <img src="/assets/images/location-white.png" width="18px" alt="">
                         </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="images/telephone-white.png" width="12px" alt="">
-                            </div>
-                            <p>
-                                +01 1234567890
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="images/envelope-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                demo@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
                         <p>
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            Address
+                        </p>
+                    </div>
+                    <div>
+                        <div class="img-box">
+                            <img src="/assets/images/telephone-white.png" width="12px" alt="">
+                        </div>
+                        <p>
+                            +01 1234567890
+                        </p>
+                    </div>
+                    <div>
+                        <div class="img-box">
+                            <img src="a/ssets/images/envelope-white.png" width="18px" alt="">
+                        </div>
+                        <p>
+                            demo@gmail.com
                         </p>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info_info">
+                    <h5>
+                        Informations
+                    </h5>
+                    <p>
+                        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    </p>
+                </div>
+            </div>
 
-                <div class="col-md-3">
-                    <div class="info_insta">
-                        <h5>
-                            Instagram
-                        </h5>
-                        <div class="insta_container">
-                            <div class="row m-0">
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w1.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w2.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w3.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w4.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w5.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="images/w6.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
+            <div class="col-md-3">
+                <div class="info_insta">
+                    <h5>
+                        Instagram
+                    </h5>
+                    <div class="insta_container">
+                        <div class="row m-0">
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w1.png" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w2.png" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w3.png" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w4.png" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w5.png" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-4 px-0">
+                                <a href="">
+                                    <div class="insta-box b-1">
+                                        <img src="/assets/images/w6.png" alt="">
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Newsletter
-                        </h5>
-                        <form action="">
-                            <input type="email" placeholder="Enter your email">
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="">
-                                <img src="images/fb.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="images/twitter.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="images/linkedin.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="images/youtube.png" alt="">
-                            </a>
-                        </div>
+            <div class="col-md-3">
+                <div class="info_form ">
+                    <h5>
+                        Newsletter
+                    </h5>
+                    <form action="">
+                        <input type="email" placeholder="Enter your email">
+                        <button>
+                            Subscribe
+                        </button>
+                    </form>
+                    <div class="social_box">
+                        <a href="">
+                            <img src="/assets/images/fb.png" alt="">
+                        </a>
+                        <a href="">
+                            <img src="/assets/images/twitter.png" alt="">
+                        </a>
+                        <a href="">
+                            <img src="/assets/images/linkedin.png" alt="">
+                        </a>
+                        <a href="">
+                            <img src="/assets/images/youtube.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<!-- end info_section -->
 
+<!-- footer section -->
+<section class="footer_section">
     <div class="container">
         <p>
             &copy; <span id="displayYear"></span> All Rights Reserved By
@@ -289,7 +296,6 @@
     </div>
 </section>
 <!-- footer section -->
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

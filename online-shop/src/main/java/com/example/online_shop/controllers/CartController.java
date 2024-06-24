@@ -62,6 +62,35 @@ public class CartController {
         }
     }
 
+
+    @GetMapping("/dashboard/cart/checkout")
+    public String checkAddress(RedirectAttributes redirectAttributes){
+        String address = getUserDetails().getAddress();
+        if(address.isEmpty() || address.isBlank()){
+            redirectAttributes.addFlashAttribute("error", "Please fill the address field before checkout!");
+            return "redirect:/dashboard";
+        }else {
+            return "payment page";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    private CustomUserDetail getUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (CustomUserDetail) authentication.getPrincipal();
+    }
+
+
     public static class UpdateQuantityRequest {
         private int productId;
         private int userId;
@@ -92,25 +121,5 @@ public class CartController {
             this.quantity = quantity;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    private CustomUserDetail getUserDetails() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (CustomUserDetail) authentication.getPrincipal();
-    }
-
-
-
-
-
 
 }

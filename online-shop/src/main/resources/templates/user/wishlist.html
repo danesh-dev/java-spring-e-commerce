@@ -71,13 +71,13 @@
                         <div class="user_optio_box">
                             <div class="dropdown" sec:authorize="hasAuthority('USER')">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="true">
+                                   aria-expanded="false">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
-                                    <a class="dropdown-item" href="#"> کبوتر</a>
-                                    <a class="dropdown-item" href="/logout">Logout </a>
+                                    <a class="dropdown-item" th:href="@{/dashboard}"><i class="fa fa-dashboard p-2"></i> Dashboard</a>
+                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}"><i class="fa fa-heart p-2"></i>Wish list</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt p-2"></i>Logout </a>
                                 </div>
                             </div>
                         </div>
