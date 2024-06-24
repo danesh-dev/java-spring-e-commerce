@@ -1,0 +1,205 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+    <head>
+        <title>Fashion Template for Bootstrap</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+        <!-- Bootstrap core CSS -->
+        <link href="@{vendor/bootstrap/css/bootstrap.css}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="@{css/styles.css}" rel="stylesheet">
+        <link href="@{css/animate.css}" rel="stylesheet">
+        <link href="@{css/owl-carousel.css}" rel="stylesheet">
+        <link href="@{css/lightbox.css}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="hero_area">
+            <!-- header section strats -->
+            <header class="header_section">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="/">
+                    <span>
+                      HandTime
+                    </span>
+                        </a>
+        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class=""> </span>
+                        </button>
+        
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav  ">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" th:href="@{/about}"> About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/products}">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/contact}">Contact Us</a>
+                                </li>
+                            </ul>
+                            <div class="user_optio_box">
+                                <!--if user is not logged in-->
+                                <a th:href="@{/login}" sec:authorize="isAnonymous()">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                </a>
+        
+                                <!-- links to panel depending on role-->
+                                <!-- for user -->
+                                <div class="dropdown" sec:authorize="hasAuthority('USER')">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
+                                        <a class="dropdown-item" href="/logout">Logout  </a>
+                                    </div>
+                                </div>
+        
+                                <a th:href="@{/dashboard/cart}" sec:authorize="hasAuthority('USER')">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+        
+                                <!-- for admin/seller -->
+                                <a th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+                                <a th:href="@{/seller}" sec:authorize="hasAuthority('SELLER')">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+        
+        
+                            </div>
+                        </div>
+                    </nav>
+        
+                </div>
+            </header>
+            <!-- end header section -->
+        </div>
+        <div class="cart-area table-area pt-110 pb-95 float-left w-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12 float-left cart-wrapper">
+                        <div class="table-responsive">
+                            <table class="table product-table text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="table-remove text-capitalize">remove</th>
+                                        <th class="table-image text-capitalize">image</th>
+                                        <th class="table-p-name text-capitalize">product</th>
+                                        <th class="table-p-price text-capitalize">price</th>
+                                        <th class="table-p-qty text-capitalize">quantity</th>
+                                        <th class="table-total text-capitalize">total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cart-body">
+                                    <tr>
+                                        <td class="table-remove"><button><i class="material-icons">delete</i></button></td>
+                                        <td class="table-image"><a href="product-details.html"><img src="img/products/02.jpg" alt=""></a></td>
+                                        <td class="table-p-name text-capitalize"><a href="product-details.html">aspetur autodit autfugit</a></td>
+                                        <td class="table-p-price"><p>$100.00</p></td>
+                                        <td class="table-p-qty"><input value="1" name="cart-qty" type="number" min="0" class="quantity"></td>
+                                        <td class="table-total"><p>$100.00</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-remove"><button><i class="material-icons">delete</i></button></td>
+                                        <td class="table-image"><a href="product-details.html"><img src="img/products/03.jpg" alt=""></a></td>
+                                        <td class="table-p-name text-capitalize"><a href="product-details.html">magni dolores eosquies</a></td>
+                                        <td class="table-p-price"><p>$100.00</p></td>
+                                        <td class="table-p-qty"><input value="1" name="cart-qty" type="number" min="0" class="quantity"></td>
+                                        <td class="table-total"><p>$100.00</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-total-wrapper d-flex justify-content-end pt-60 col-md-12 col-sm-12 col-lg-4 float-left align-items-center">
+                        <div class="table-total-content">
+                            <h2 class="pb-20">Cart totals</h2>
+                            <div class="table-total-amount">
+                                <div class="single-total-content d-flex justify-content-between float-left w-100">
+                                    <strong>Subtotal</strong>
+                                    <span class="c-total-price" id="subtotal"></span>
+                                </div>
+                                <div class="single-total-content d-flex justify-content-between float-left w-100">
+                                    <strong>Shipping</strong>
+                                    <span class="c-total-price"><span>Flat Rate:</span> $5.00</span>
+                                </div>
+                                <div class="single-total-content tt-total d-flex justify-content-between float-left w-100">
+                                    <strong>Total</strong>
+                                    <span class="c-total-price" id="total"></span>
+                                </div>
+                                <a href="checkout_page.html" class="btn btn-primary float-left w-100 text-center">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="@{js/jquery.min.js}"></script>
+        <script src="@{js/bootstrap.min.js}"></script>
+        <script src="@{js/owl.carousel.min.js}"></script>
+        <script src="@{js/custom.js}"></script>
+        <script src="@{js/parallax.js}"></script>
+        <script src="@{js/lightbox-2.6.min.js}"></script>
+        <script src="@{js/ResizeSensor.min.js}"></script>
+        <script src="@{js/theia-sticky-sidebar.min.js}"></script>
+        <script src="@{js/inview.js}"></script>
+        <script src="@{js/cookiealert.js}"></script>
+        <script src="@{js/jquery.countdown.min.js}"></script>
+        <script src="@{js/masonry.pkgd.min.js}"></script>
+        <script src="@{js/imagesloaded.pkgd.min.js}"></script>
+        <script src="@{js/jquery.zoom.min.js}"></script>
+
+        <!-- Start of Tawk.to Script -->
+        <script type="text/javascript">
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+            })();
+        </script>
+
+        <!-- Script to calculate totals -->
+        <script>
+            $(document).ready(function() {
+                function updateTotals() {
+                    let subtotal = 0;
+                    $('#cart-body tr').each(function() {
+                        const price = parseFloat($(this).find('.table-p-price p').text().replace('$', ''));
+                        const quantity = $(this).find('.quantity').val();
+                        const total = price * quantity;
+                        $(this).find('.table-total p').text('$' + total.toFixed(2));
+                        subtotal += total;
+                    });
+                    $('#subtotal').text('$' + subtotal.toFixed(2));
+                    const shipping = 5.00; // Flat rate
+                    const grandTotal = subtotal + shipping;
+                    $('#total').text('$' + grandTotal.toFixed(2));
+                }
+
+                $('.quantity').on('input', function() {
+                    updateTotals();
+                });
+
+                updateTotals(); // Initial calculation
+            });
+        </script>
+    </body>
+</html>
