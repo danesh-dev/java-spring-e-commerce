@@ -107,5 +107,6 @@ public class UserService {
         user.setAddress(newAddress);
         userRepository.save(user);
     }
+
 }
 

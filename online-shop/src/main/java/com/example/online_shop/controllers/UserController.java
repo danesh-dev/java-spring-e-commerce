@@ -2,6 +2,7 @@ package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.UserDto;
 import com.example.online_shop.models.Product;
+import com.example.online_shop.models.User;
 import com.example.online_shop.models.Wishlist;
 import com.example.online_shop.services.CustomUserDetail;
 import com.example.online_shop.services.ProductService;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequestMapping("/dashboard")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -30,56 +32,24 @@ public class UserController {
     @Autowired
     private ProductService productService;
 
-    //register
-    @GetMapping("/register")
-    public String register(Model model) {
-        UserDto user = new UserDto();
+
+    @GetMapping("/")
+    public String dashboard(Model model) {
+        User user = userService.findById(getUserDetails().getId());
         model.addAttribute("user", user);
-        return "register";
+        return "user/dashboard";
     }
 
-    @PostMapping("/register")
-    public String create(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("errors", bindingResult.getAllErrors());
-            return "register";
-        }
-
-        try {
-            userService.create(userDto);
-            model.addAttribute("message", "Registered successfully!");
-            return "redirect:/login?email=" + userDto.getEmail();
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "register";
-        }
+    @PostMapping("/updateAddress")
+    public String updateAddress(@RequestParam("address") String address, Model model){
+        User user = userService.findById(getUserDetails().getId());
+        userService.updateAddress(user.getId(), address);
+        model.addAttribute("user", user);
+        model.addAttribute("success", "Address updated successfully!");
+        return "user/dashboard";
     }
 
-    //login
-    @GetMapping("/login")
-    public String login(@RequestParam(value = "email", required = false) String email, Model model) {
-        model.addAttribute("email", email);
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String processLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-        if (userService.verifyPassword(password, email)) {
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
-        }
-    }
-
-
-    //user dashboard
-    @GetMapping("/dashboard")
-    public String panel() {
-        return "user-panel";
-    }
-
-    @GetMapping("/dashboard/wishlist")
+    @GetMapping("/wishlist")
     public String wishlist(Model model) {
         int userId = getUserDetails().getId();
         List<Wishlist> wishlists = wishlistService.getWishlist(userId);
@@ -87,7 +57,7 @@ public class UserController {
         return "user/wishlist";
     }
 
-    @GetMapping("/dashboard/wishlist/add/{name}")
+    @GetMapping("/wishlist/add/{name}")
     public String addProductToWishList(@PathVariable String name, Model model, RedirectAttributes redirectAttributes) {
         int userId = getUserDetails().getId();
 
@@ -99,13 +69,15 @@ public class UserController {
         return "redirect:/dashboard/wishlist";
     }
 
-    @GetMapping("/dashboard/wishlist/delete/{name}")
+    @GetMapping("/wishlist/delete/{name}")
     public String delete(@PathVariable String name, RedirectAttributes redirectAttributes){
         int userId = getUserDetails().getId();
         wishlistService.deleteByNameAndUserId(name, userId);
         redirectAttributes.addFlashAttribute("deleted", "item removed successfully !");
         return "redirect:/dashboard/wishlist";
     }
+
+
 
 
     private CustomUserDetail getUserDetails() {
