@@ -149,7 +149,7 @@
                                 <div class="col">TOTAL PRICE</div>
                                 <div id="total_price" class="col text-right"></div>
                             </div>
-                            <button class="btn">CHECKOUT</button>
+                            <button class="btn"><a th:href="@{/dashboard/checkout}">CHECKOUT</a></button>
                         </div>
                     </div>
 
@@ -367,17 +367,6 @@
         });
     });
     </script>
-
-    <!-- jQery -->
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <!-- popper js -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-    <!-- bootstrap js -->
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <!-- custom js -->
-    <script type="text/javascript" src="js/custom.js"></script>
 
 </body>
 
