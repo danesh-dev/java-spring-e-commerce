@@ -124,30 +124,18 @@
                             <!-- cart item -->
                             <div class="row border-top border-bottom p-2" th:each="item, index : ${items}">
                                 <div class="row main align-items-center">
-                                    <div class="col-2"><img class="img-fluid" th:src="@{${item.product.imagePath}}">
-                                    </div>
+                                    <div class="col-2"><img class="img-fluid" th:src="@{${item.product.imagePath}}"></div>
                                     <div class="col">
-                                        <div class="row"><a th:href="@{/products/{name}(name=${item.product.name})}"
-                                                th:text="@{${item.product.name}}"></a></div>
+                                        <div class="row"><a th:href="@{/products/{name}(name=${item.product.name})}" th:text="@{${item.product.name}}"></a></div>
                                     </div>
-                                    <div class="col" th:text="${item.product.price}+'$'"></div>
-                                    <!--todo-->
-                                    <div class="col">
-                                        <a href="#" class="btn-quantity" data-action="subtract"
-                                            th:attr="data-product-id=${item.product.id}, data-user-id=${item.user.id}, data-stock=${item.product.stock}">-</a>
-                                        <span th:id="'quantity-' + ${item.product.id}" class="border"
-                                            th:text="${item.quantity}">1</span>
-                                        <a href="#" class="btn-quantity" data-action="add"
-                                            th:attr="data-product-id=${item.product.id}, data-user-id=${item.user.id}, data-stock=${item.product.stock}">+</a>
-                                        <div th:id="'error-' + ${item.product.id}" class="error-message"></div>
+                                    <div class="col" th:text="${item.product.price}+'$'" th:attr="data-price=${item.product.price}"></div>
+                                    <div style="padding-top: 35px">
+                                        <input style="width: 50px" type="number" min="0" th:onchange="calculate()" th:value="${item.quantity}">
                                     </div>
-
-                                    <div class="col"><span class="close"><a
-                                                th:attr="onclick=|deleteItem('${item.product.name}')|"
-                                                th:href="@{/dashboard/cart/delete/{name}(name=${item.product.name})}">&#10005;</a></span>
-                                    </div>
+                                    <div class="col"><span class="close"><a th:attr="onclick=|deleteItem('${item.product.name}')|" th:href="@{/dashboard/cart/delete/{name}(name=${item.product.name})}">&#10005;</a></span></div>
                                 </div>
                             </div>
+
 
                         </div>
 
@@ -156,23 +144,10 @@
                             <div>
                                 <h4><b>Summary</b></h4>
                             </div>
-                            <hr>
-
-                            <div class="row pb-3">
-                                <h5><b>Informations </b></h5>
-                            </div>
-                            <div class="row">
-                                <h6><b>Full name : </b></h6>
-                                <p> John Doe</p>
-                            </div>
-                            <div class="row">
-                                <h6><b>Address :</b></h6>
-                                <p> Us, californaia, mmd abad, maralan, yasin alley, p12, t3</p>
-                            </div>
 
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                 <div class="col">TOTAL PRICE</div>
-                                <div class="col text-right" th:text="${totalPrice}"></div>
+                                <div id="total_price" class="col text-right"></div>
                             </div>
                             <button class="btn">CHECKOUT</button>
                         </div>
@@ -344,99 +319,53 @@
     <script type="text/javascript" th:src="@{/assets/js/custom.js}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.btn-quantity').forEach(function (button) {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
 
-                    const action = button.getAttribute('data-action');
-                    const productId = parseInt(button.getAttribute('data-product-id'));
-                    const userId = parseInt(button.getAttribute('data-user-id'));
-                    const stock = parseInt(button.getAttribute('data-stock'));
-                    const quantityElement = document.getElementById(`quantity-${productId}`);
-                    const errorElement = document.getElementById(`error-${productId}`);
-
-                    if (quantityElement && errorElement) {
-                        let quantity = parseInt(quantityElement.textContent);
-
-                        if (action === 'add') {
-                            if (quantity < stock) {
-                                quantity++;
-                                errorElement.textContent = '';
-                            } else {
-                                errorElement.textContent = 'Not enough product in stock';
-                            }
-                        } else if (action === 'subtract') {
-                            if (quantity > 1) {
-                                quantity--;
-                                errorElement.textContent = '';
-                            }
-                        }
-
-                        if (quantity <= stock && quantity > 0) {
-                            quantityElement.textContent = quantity;
-
-                            fetch('/dashboard/cart/updateQuantity', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ productId: productId, userId: userId, quantity: quantity })
-                            })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('Network response was not ok');
-                                    }
-                                    return response.text();
-                                })
-                                .then(data => {
-                                    console.log('Quantity updated successfully:', data);
-                                })
-                                .catch(error => {
-                                    console.error('Error updating quantity:', error);
-                                });
-                        }
-                    }
-                });
-            });
+        function calculate() {
+        let totalPrice = 0;
+        document.querySelectorAll('.row.main').forEach(function (row) {
+            const priceElement = row.querySelector('.col:nth-child(3)');
+            const quantityElement = row.querySelector('input[type="number"]');
+            const price = parseFloat(priceElement.getAttribute('data-price'));
+            const quantity = parseInt(quantityElement.value);
+            totalPrice += price * quantity;
         });
-
-        function updateQuantity(productId, userId, quantity) {
-            fetch(`/dashboard/cart/updateQuantity`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ productId: productId, userId: userId, quantity: quantity })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Quantity updated successfully:', data);
-                })
-                .catch(error => {
-                    console.error('Error updating quantity:', error);
-                });
-        }
+        document.getElementById("total_price").textContent = `$${totalPrice}`;
+    }
 
         function deleteItem(name) {
-            if (confirm('Are you sure you want to remove this item form list ?')) {
-                $.ajax({
-                    url: '/dashboard/wishlist/delete/' + name,
-                    type: 'DELETE',
-                    success: function (result) {
-                        location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        location.reload();
+        if (confirm('Are you sure you want to remove this item from the list?')) {
+            $.ajax({
+                url: '/dashboard/wishlist/delete/' + name,
+                type: 'DELETE',
+                success: function (result) {
+                    // Find and remove the item row from the DOM
+                    const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
+                    if (itemRow) {
+                        itemRow.remove();
                     }
-                });
-            }
+                    // Recalculate the total price
+                    calculate();
+                },
+                error: function (xhr, status, error) {
+                    const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
+                    if (itemRow) {
+                        itemRow.remove();
+                    }
+                    // Recalculate the total price
+                    calculate();
+                }
+            });
         }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        calculate(); // Call calculate on page load
+
+        // Attach event listeners to each quantity input for changes
+        document.querySelectorAll('input[type="number"]').forEach(function (input) {
+            input.addEventListener('change', calculate);
+        });
+    });
     </script>
 
     <!-- jQery -->
