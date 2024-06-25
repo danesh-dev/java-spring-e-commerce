@@ -31,4 +31,9 @@ public class PaymentService {
 
         return paymentDto;
     }
+
+
+    public Double getTotalAmount() {
+        return paymentRepository.getTotalAmount();
+    }
 }

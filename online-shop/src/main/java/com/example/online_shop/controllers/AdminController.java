@@ -16,16 +16,12 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private MessageService messageService;
-    @Autowired
-    private PaymentService paymentService;
+    @Autowired private UserService userService;
+    @Autowired private ProductService productService;
+    @Autowired private CategoryService categoryService;
+    @Autowired private MessageService messageService;
+    @Autowired private PaymentService paymentService;
+    @Autowired private OrderService orderService;
 
 
     @GetMapping
@@ -35,7 +31,11 @@ public class AdminController {
         long usersCount = userService.getUsersCount();
         List<MessageDto> messages = messageService.getAllMessages();
         List<PaymentDto> payments = paymentService.getAllPayments();
+        double sumOfPayments = paymentService.getTotalAmount();
+        long countOfOrders = orderService.getOrdersCount();
 
+        model.addAttribute("countOfOrders", countOfOrders);
+        model.addAttribute("sumOfPayments", sumOfPayments);
         model.addAttribute("payments", payments);
         model.addAttribute("messages", messages);
         model.addAttribute("usersCount", usersCount);

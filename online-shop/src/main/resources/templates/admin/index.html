@@ -149,11 +149,8 @@
                 <span class="info-box-icon bg-info elevation-1"><i class="fa fa-rectangle-list"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">سفارش ها</span>
-                  <span class="info-box-number">
-                    10
-                    <small>%</small>
-                  </span>
+                  <span class="info-box-text">محصولات فروخته شده</span>
+                  <span class="info-box-number" th:text="${countOfOrders}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -166,7 +163,7 @@
 
                 <div class="info-box-content">
                   <span class="info-box-text">مجموع فروش</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-number" th:text="${sumOfPayments}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -266,7 +263,7 @@
                       <tr>
                         <th>ردیف</th>
                         <th>نام کاربر</th>
-                        <th>ایمیل فرستنده</th>
+                        <th>ایمیل کاربر</th>
                         <th> مبلغ</th>
                         <th>تاریخ</th>
                       </tr>
