@@ -1,18 +1,12 @@
 package com.example.online_shop.controllers;
 
-import com.example.online_shop.dto.CategoryDto;
-import com.example.online_shop.dto.MessageDto;
-import com.example.online_shop.dto.UserDto;
+import com.example.online_shop.dto.*;
 import com.example.online_shop.models.Category;
 import com.example.online_shop.models.User;
-import com.example.online_shop.services.CategoryService;
-import com.example.online_shop.services.MessageService;
-import com.example.online_shop.services.UserService;
+import com.example.online_shop.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.example.online_shop.dto.ProductDto;
-import com.example.online_shop.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,9 +22,11 @@ public class AdminController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
-
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private PaymentService paymentService;
+
 
     @GetMapping
     public String showIndexPage(Model model){
@@ -38,7 +34,9 @@ public class AdminController {
         long productsCount = productService.getProductCount();
         long usersCount = userService.getUsersCount();
         List<MessageDto> messages = messageService.getAllMessages();
+        List<PaymentDto> payments = paymentService.getAllPayments();
 
+        model.addAttribute("payments", payments);
         model.addAttribute("messages", messages);
         model.addAttribute("usersCount", usersCount);
         model.addAttribute("products", products);

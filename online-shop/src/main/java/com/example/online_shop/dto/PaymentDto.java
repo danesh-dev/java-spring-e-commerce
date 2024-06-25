@@ -1,36 +1,20 @@
-package com.example.online_shop.models;
+package com.example.online_shop.dto;
 
-import jakarta.persistence.*;
+import com.example.online_shop.models.Order;
+import com.example.online_shop.models.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "payments")
-public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PaymentDto {
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
     private BigDecimal amount;
-
-    @Column(name = "paid_at", nullable = false, updatable = false)
     private LocalDateTime paidAt;
-
-    @OneToMany(mappedBy = "payment")
     private List<Order> orders;
 
-    @PrePersist
-    protected void onCreate() {
-        paidAt = LocalDateTime.now();
-    }
-
-    public Payment(int id, User user, BigDecimal amount, LocalDateTime paidAt, List<Order> orders) {
+    public PaymentDto(int id, User user, BigDecimal amount, LocalDateTime paidAt, List<Order> orders) {
         this.id = id;
         this.user = user;
         this.amount = amount;
@@ -38,7 +22,14 @@ public class Payment {
         this.orders = orders;
     }
 
-    public Payment() {
+    public PaymentDto(User user, BigDecimal amount, LocalDateTime paidAt, List<Order> orders) {
+        this.user = user;
+        this.amount = amount;
+        this.paidAt = paidAt;
+        this.orders = orders;
+    }
+
+    public PaymentDto() {
     }
 
     public int getId() {
