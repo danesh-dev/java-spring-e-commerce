@@ -53,15 +53,14 @@ public class CartService {
         cartRepository.delete(findByNameAndUserId(name, userID));
     }
 
-    //add to quantity
-    //delete all items
 
-    //get total price
-    @Transactional(readOnly = true)
     public Double getTotalPriceByUser(int userId) {
-        User user = userService.findById(userId);
-        return cartRepository.getTotalPriceByUser(user);
+        List<Cart> cartItems = getCart(userId);
+        return cartItems.stream()
+                .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+                .sum();
     }
+
 
     @Transactional
     public void deleteAllCartItemsByUser(int userId) {

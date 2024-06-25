@@ -22,7 +22,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query("SELECT COUNT(c) > 0 FROM Cart c WHERE c.product = :product AND c.user = :user")
     boolean existsByProductAndUser(@Param("product") Product product, @Param("user") User user);
 
-    @Query("SELECT SUM(c.product.price ) FROM Cart c WHERE c.user = :user")
+    @Query("SELECT SUM(c.product.price * c.quantity) FROM Cart c WHERE c.user = :user")
     Double getTotalPriceByUser(@Param("user") User user);
 
     @Modifying

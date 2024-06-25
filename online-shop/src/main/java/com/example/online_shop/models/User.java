@@ -17,6 +17,8 @@ public class User {
 
     private String address;
 
+    private Long number;
+
     private String email;
 
     private String role;
@@ -139,5 +141,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 }

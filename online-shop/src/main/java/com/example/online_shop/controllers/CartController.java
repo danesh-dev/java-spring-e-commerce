@@ -6,7 +6,6 @@ import com.example.online_shop.services.CartService;
 import com.example.online_shop.services.CustomUserDetail;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,11 +29,9 @@ public class CartController {
     public String cart(Model model){
         int userId = getUserDetails().getId();
         List<Cart> items = cartService.getCart(userId);
-        Double totalPrice = cartService.getTotalPriceByUser(userId);
         User user = userService.findById(userId);
 
         model.addAttribute("user", user);
-        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("items", items);
         return "user/cart";
     }
@@ -60,27 +57,25 @@ public class CartController {
     }
 
     @PostMapping("/dashboard/cart/updateQuantity")
-    public ResponseEntity<?> updateQuantity(@RequestBody UpdateQuantityRequest updateRequest) {
-        boolean success = cartService.updateQuantity(updateRequest.getProductId(), updateRequest.getUserId(), updateRequest.getQuantity());
-        if (success) {
-            return ResponseEntity.ok("Quantity updated successfully");
-        } else {
-            return ResponseEntity.badRequest().body("Failed to update quantity");
-        }
+    public void updateQuantity(@RequestBody List<UpdateQuantityRequest> updateRequests) {
+        int userId = getUserDetails().getId();
+        for (UpdateQuantityRequest updateRequest : updateRequests)
+            cartService.updateQuantity(updateRequest.getProductId(), userId, updateRequest.getQuantity());
     }
 
     @GetMapping("/dashboard/checkout")
     public String checkout(Model model){
         int userId = getUserDetails().getId();
-        List<Cart> items = cartService.getCart(userId);
-        model.addAttribute("items", items);
+        Double totalPrice = cartService.getTotalPriceByUser(userId);
+        User user = userService.findById(userId);
+        model.addAttribute("user", user);
+        model.addAttribute("totalPrice", totalPrice);
 
-        return "user/order-confirmation";
+        return "user/checkout";
     }
 
     public static class UpdateQuantityRequest {
         private int productId;
-        private int userId;
         private int quantity;
 
         // Getters and setters
@@ -92,14 +87,6 @@ public class CartController {
             this.productId = productId;
         }
 
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
-
         public int getQuantity() {
             return quantity;
         }
@@ -109,24 +96,8 @@ public class CartController {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     private CustomUserDetail getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (CustomUserDetail) authentication.getPrincipal();
     }
-
-
-
-
-
-
 }
