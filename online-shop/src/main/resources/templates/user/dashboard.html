@@ -77,14 +77,14 @@
                         </ul>
 
                         <div class="user_optio_box">
-                            <div class="dropdown" sec:authorize="hasAuthority('USER')">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                            <div class=" dropdown" sec:authorize="hasAuthority('USER')">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user" aria-hidden="true"></i> dashboard
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}">Wish list</a>
-                                    <a class="dropdown-item" href="/logout">Logout </a>
+                                    <a class="dropdown-item" th:href="@{/dashboard}"><i class="fa fa-dashboard p-2"></i> Profile</a>
+                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}"><i class="fa fa-heart p-2"></i>Wish list</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt p-2"></i>Logout </a>
                                 </div>
                             </div>
 
@@ -103,8 +103,8 @@
             <div class="alert alert-info col-4 mx-auto pt-2 text-center mt-3" role="alert" th:if="${success != null}">
                 [[${success}]]
             </div>
-            <div class="row">
-                <div class="col-md-9 content">
+            <div class="row mx-auto">
+                <div class="col-md-8 content">
                     <h5>User Information</h5>
                     <form id="userInfoForm" th:object="${user}" th:action="@{/dashboard/updateAddress}" method="post">
                         <div class="form-group">
@@ -128,7 +128,7 @@
 
                 <div class="col-md-3 sidebar">
                     <h5 style="direction: rtl;" class="text-center pb-3">Dashboard</h5>
-                    <a href="/wishlist"><i class="fa fa-user p-2"></i> My Profile </a>
+                    <a href="/wishlist" class="active"><i class="fa fa-user p-2"></i> My Profile </a>
                     <a href="/wishlist"><i class="fa fa-heart p-2"></i> Wishlist</a>
                     <a href="/order-history"><i class="fa fa-history p-2"></i> Order History</a>
                     <a href="/cart"><i class="fa fa-shopping-cart p-2"></i> Cart</a>

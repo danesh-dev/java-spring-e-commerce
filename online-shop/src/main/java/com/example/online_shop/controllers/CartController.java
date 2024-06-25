@@ -1,8 +1,10 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.models.Cart;
+import com.example.online_shop.models.User;
 import com.example.online_shop.services.CartService;
 import com.example.online_shop.services.CustomUserDetail;
+import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,17 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/dashboard/cart")
     public String cart(Model model){
         int userId = getUserDetails().getId();
         List<Cart> items = cartService.getCart(userId);
         Double totalPrice = cartService.getTotalPriceByUser(userId);
+        User user = userService.findById(userId);
 
+        model.addAttribute("user", user);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("items", items);
         return "user/cart";
@@ -44,7 +51,7 @@ public class CartController {
         return "redirect:/dashboard/cart";
     }
 
-    @GetMapping("/dashboard/cart/delete/{name}")
+    @DeleteMapping("/dashboard/cart/delete/{name}")
     public String delete(@PathVariable String name, RedirectAttributes redirectAttributes){
         int userId = getUserDetails().getId();
         cartService.deleteByNameAndUserId(name, userId);
@@ -60,6 +67,15 @@ public class CartController {
         } else {
             return ResponseEntity.badRequest().body("Failed to update quantity");
         }
+    }
+
+    @GetMapping("/dashboard/checkout")
+    public String checkout(Model model){
+        int userId = getUserDetails().getId();
+        List<Cart> items = cartService.getCart(userId);
+        model.addAttribute("items", items);
+
+        return "user/order-confirmation";
     }
 
     public static class UpdateQuantityRequest {
