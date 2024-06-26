@@ -27,6 +27,10 @@ public class Order {
     @Column(name = "ordered_at", nullable = false, updatable = false)
     private LocalDateTime orderedAt;
 
+    public Order() {
+
+    }
+
     @PrePersist
     protected void onCreate() {
         orderedAt = LocalDateTime.now();

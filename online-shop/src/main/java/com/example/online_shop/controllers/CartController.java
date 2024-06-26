@@ -4,9 +4,9 @@ import com.example.online_shop.models.Cart;
 import com.example.online_shop.models.User;
 import com.example.online_shop.services.CartService;
 import com.example.online_shop.services.CustomUserDetail;
+import com.example.online_shop.services.OrderService;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,9 @@ public class CartController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/cart")
     public String cart(Model model){
@@ -80,6 +83,7 @@ public class CartController {
     @PostMapping("/checkout")
     public void checkout(@RequestBody Map<String, String> contactInfo){
         int userId = getUserDetails().getId();
+        List<Cart> items = cartService.getCart(userId);
         String newPhoneStr = contactInfo.get("phone");
         String newAddress = contactInfo.get("address");
 
@@ -91,6 +95,8 @@ public class CartController {
                 System.out.println(e);
             }
         }
+        for (Cart item: items)
+            orderService.addToOrder(item.getProduct().getName(), userId);
 
         userService.updateContactInfo(userId, newPhone, newAddress);
     }
