@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequestMapping("/dashboard")
 public class CartController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class CartController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/dashboard/cart")
+    @GetMapping("/cart")
     public String cart(Model model){
         int userId = getUserDetails().getId();
         List<Cart> items = cartService.getCart(userId);
@@ -36,7 +38,7 @@ public class CartController {
         return "user/cart";
     }
 
-    @GetMapping("/dashboard/cart/add/{name}")
+    @GetMapping("/cart/add/{name}")
     public String add(@PathVariable String name, Model model, RedirectAttributes redirectAttributes){
         int userId = getUserDetails().getId();
 
@@ -48,7 +50,7 @@ public class CartController {
         return "redirect:/dashboard/cart";
     }
 
-    @DeleteMapping("/dashboard/cart/delete/{name}")
+    @DeleteMapping("/cart/delete/{name}")
     public String delete(@PathVariable String name, RedirectAttributes redirectAttributes){
         int userId = getUserDetails().getId();
         cartService.deleteByNameAndUserId(name, userId);
@@ -56,14 +58,15 @@ public class CartController {
         return "redirect:/dashboard/cart";
     }
 
-    @PostMapping("/dashboard/cart/updateQuantity")
-    public void updateQuantity(@RequestBody List<UpdateQuantityRequest> updateRequests) {
+    @PostMapping("/cart/updateQuantity")
+    public String updateQuantity(@RequestBody List<UpdateQuantityRequest> updateRequests) {
         int userId = getUserDetails().getId();
         for (UpdateQuantityRequest updateRequest : updateRequests)
             cartService.updateQuantity(updateRequest.getProductId(), userId, updateRequest.getQuantity());
+        return "redirect:/dashboard/checkout";
     }
 
-    @GetMapping("/dashboard/checkout")
+    @GetMapping("/checkout")
     public String checkout(Model model){
         int userId = getUserDetails().getId();
         Double totalPrice = cartService.getTotalPriceByUser(userId);
@@ -72,6 +75,29 @@ public class CartController {
         model.addAttribute("totalPrice", totalPrice);
 
         return "user/checkout";
+    }
+
+    @PostMapping("/checkout")
+    public void checkout(@RequestBody Map<String, String> contactInfo){
+        int userId = getUserDetails().getId();
+        String newPhoneStr = contactInfo.get("phone");
+        String newAddress = contactInfo.get("address");
+
+        Long newPhone = null;
+        if (newPhoneStr != null) {
+            try {
+                newPhone = Long.parseLong(newPhoneStr);
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+
+        userService.updateContactInfo(userId, newPhone, newAddress);
+    }
+
+    @GetMapping("/order-confirmation")
+    public String orderConfirm(Model model){
+        return "user/order-confirmation";
     }
 
     public static class UpdateQuantityRequest {

@@ -108,5 +108,25 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateContactInfo(int userId, Long newPhone, String newAddress) {
+        User user = userRepository.findById(userId);
+        boolean updated = false;
+
+        if (newPhone != null && !newPhone.equals(user.getNumber())) {
+            user.setNumber(newPhone);
+            updated = true;
+        }
+
+        if (newAddress != null && !newAddress.equals(user.getAddress())) {
+            user.setAddress(newAddress);
+            updated = true;
+        }
+
+        if (updated) {
+            userRepository.save(user);
+        }
+    }
+
+
 }
 

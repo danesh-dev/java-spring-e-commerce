@@ -38,7 +38,7 @@
                         <strong>Total (USD)</strong>
                         <strong th:text="'$' + ${totalPrice + 3}"></strong>
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg btn-primary" id="placeOrderBtn">Place an order</button>
+                    <a th:href="@{/dashboard/order-confirmation}"><button type="button" class="btn btn-primary btn-lg btn-primary" id="placeOrderBtn">Place an order</button></a>
                 </div>
             </div>
             <div class="cart-block-right col-md-8 order-md-1">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="phone">Phone <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="phone" th:value="${user.number}" required disabled>
+                        <input type="number" class="form-control" id="phone" th:value="${user.number}" required disabled>
                         <div class="invalid-feedback">Your phone is required.</div>
                     </div>
                     <div class="mb-3">
@@ -91,6 +91,28 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        let originalPhone = $('#phone').val();
+        let originalAddress = $('#address').val();
+
+        // Function to send updated data
+        function sendUpdatedData(phone, address) {
+            $.ajax({
+                type: "POST",
+                url: "/dashboard/checkout",
+                contentType: "application/json",
+                data: JSON.stringify({ phone: phone, address: address })
+            });
+        }
+
+        // Toggle address fields based on checkbox
+        $('#same-address').change(function () {
+            if ($(this).is(':checked')) {
+                $('#phone, #address').prop('disabled', false);
+            } else {
+                $('#phone, #address').prop('disabled', true);
+            }
+        });
+
         $('#placeOrderBtn').click(function () {
             // Reset validation classes and messages
             $('.is-invalid').removeClass('is-invalid');
@@ -120,21 +142,15 @@
 
             // If form is valid, proceed with submission
             if (isValid) {
-                // Perform your form submission here
-                // Example: $('#yourFormId').submit();
-                alert('Form is valid. Proceed with submission.');
-            } else {
-                // Optionally, scroll to the top of the form or show a message
-                alert('Please fill in all required fields.');
-            }
-        });
+                // Send updated data before submission
+                let newPhone = $('#phone').val();
+                let newAddress = $('#address').val();
 
-        // Toggle address fields based on checkbox
-        $('#same-address').change(function () {
-            if ($(this).is(':checked')) {
-                $('#phone, #email, #address').prop('disabled', false);
+                if (newPhone !== originalPhone || newAddress !== originalAddress) {
+                    sendUpdatedData(newPhone, newAddress);
+                }
             } else {
-                $('#phone, #email, #address').prop('disabled', true);
+                alert('Please fill in all required fields.');
             }
         });
     });
