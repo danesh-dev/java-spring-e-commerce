@@ -136,7 +136,7 @@
                     </div>
 
                     <!-- right part -->
-                    <div class="col-md-4 summary ">
+                    <div class="col-md-4 summary " style="position: relative;">
                         <div>
                             <h4><b>Summary</b></h4>
                         </div>
@@ -153,11 +153,15 @@
                             <p><b>$3</b></p>
                         </div>
 
-                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                            <div class="col">TOTAL PRICE</div>
-                            <div id="total_price" class="col text-right"></div>
+
+
+                        <div style="position: absolute; bottom: 20px; " >
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <div class="col">TOTAL PRICE</div>
+                                <div id="total_price" class="col text-right"></div>
+                            </div>
+                            <a th:href="@{/dashboard/checkout}" class="mx-auto" style="width: 65%"><button class="btn" id="checkout-btn">CHECKOUT</button></a>
                         </div>
-                        <a th:href="@{/dashboard/checkout}"><button class="btn" id="checkout-btn">CHECKOUT</button></a>
                     </div>
                 </div>
 

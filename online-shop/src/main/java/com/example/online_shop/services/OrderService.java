@@ -28,7 +28,7 @@ public class OrderService {
         Order order = new Order();
         order.setProduct(productService.findByName(name));
         order.setUser(userService.findById(userId));
-        order.setPayment(0);
+        order.setPayment(null);
         orderRepository.save(order);
     }
 }
