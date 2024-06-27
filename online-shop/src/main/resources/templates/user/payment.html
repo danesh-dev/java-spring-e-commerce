@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <html  lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحه پرداخت با پیش نمایش - نت کپی</title>
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{/assets/css2/style.css}">
 
 </head>
 <body>
@@ -17,8 +19,7 @@
 
         <div class="front">
             <div class="image">
-                <img src="image/chip.png" alt="">
-                <img src="image/logo.png" alt="">
+                <img th:href="@{/assets/images/chip.png}">
             </div>
             <div class="card-number-box">################</div>
             <div class="flexbox">
@@ -44,7 +45,7 @@
         </div>
         <div class="inputBox">
             <span>رمز اینترنتی</span>
-            <input type="text" maxlength="6" class="card-holder-input">
+            <input type="password" maxlength="6" class="card-holder-input">
         </div>
         <div class="flexbox">
             <div class="inputBox">
@@ -60,7 +61,8 @@
                 <input type="text" maxlength="4" class="cvv-input">
             </div>
         </div>
-        <input type="button" value="پرداخت" class="submit-btn">
+        <a th:href="@{/dashboard/order-confirmation}"><input type="button" value="پرداخت" class="submit-btn"></a>
+        <a th:href="@{/dashboard/checkout}"><input type="button" value="انصراف" class="submit-btn"></a>
     </form>
 
 </div>    

@@ -1,6 +1,7 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.models.Cart;
+import com.example.online_shop.models.Payment;
 import com.example.online_shop.models.User;
 import com.example.online_shop.services.CartService;
 import com.example.online_shop.services.CustomUserDetail;
@@ -83,6 +84,7 @@ public class CartController {
     @PostMapping("/checkout")
     public void checkout(@RequestBody Map<String, String> contactInfo){
         int userId = getUserDetails().getId();
+        Payment payment = null;
         List<Cart> items = cartService.getCart(userId);
         String newPhoneStr = contactInfo.get("phone");
         String newAddress = contactInfo.get("address");
@@ -96,9 +98,14 @@ public class CartController {
             }
         }
         for (Cart item: items)
-            orderService.addToOrder(item.getProduct().getName(), userId);
+            orderService.addToOrder(item.getProduct().getName(), userId, payment);
 
         userService.updateContactInfo(userId, newPhone, newAddress);
+    }
+
+    @GetMapping("/payment")
+    public String payment(Model model){
+        return "user/payment";
     }
 
     @GetMapping("/order-confirmation")

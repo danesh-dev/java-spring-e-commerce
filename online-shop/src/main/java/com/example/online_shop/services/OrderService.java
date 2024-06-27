@@ -1,6 +1,7 @@
 package com.example.online_shop.services;
 
 import com.example.online_shop.models.Order;
+import com.example.online_shop.models.Payment;
 import com.example.online_shop.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,11 @@ public class OrderService {
     }
 
     @Transactional
-    public void addToOrder(String name, int userId) {
+    public void addToOrder(String name, int userId, Payment payment) {
         Order order = new Order();
         order.setProduct(productService.findByName(name));
         order.setUser(userService.findById(userId));
-        order.setPayment(null);
+        order.setPayment(payment);
         orderRepository.save(order);
     }
 }
