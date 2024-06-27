@@ -92,7 +92,7 @@ public class CartController {
             try {
                 newPhone = Long.parseLong(newPhoneStr);
             } catch (NumberFormatException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
         for (Cart item: items)
