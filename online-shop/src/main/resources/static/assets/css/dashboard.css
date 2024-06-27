@@ -61,8 +61,6 @@ body {
     opacity: 0.6;
 }
 
-
-
 #saveChangesBtn {
     color: white;
     width: 100%;
@@ -80,4 +78,8 @@ body {
     -webkit-box-shadow: none;
     -webkit-user-select: none;
     transition: none;
+}
+
+.active {
+    background-color: #e0e2e4;
 }

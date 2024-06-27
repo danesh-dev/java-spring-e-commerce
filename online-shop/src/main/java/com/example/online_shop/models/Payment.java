@@ -38,6 +38,9 @@ public class Payment {
         this.orders = orders;
     }
 
+    public Payment() {
+    }
+
     public int getId() {
         return id;
     }

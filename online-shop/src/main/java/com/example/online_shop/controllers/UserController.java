@@ -1,13 +1,11 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.UserDto;
+import com.example.online_shop.models.Payment;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.models.User;
 import com.example.online_shop.models.Wishlist;
-import com.example.online_shop.services.CustomUserDetail;
-import com.example.online_shop.services.ProductService;
-import com.example.online_shop.services.UserService;
-import com.example.online_shop.services.WishlistService;
+import com.example.online_shop.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -31,6 +29,8 @@ public class UserController {
     private WishlistService wishlistService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private PaymentService paymentService;
 
 
     @GetMapping()
@@ -76,6 +76,14 @@ public class UserController {
         wishlistService.deleteByNameAndUserId(name, userId);
         redirectAttributes.addFlashAttribute("deleted", "item removed successfully !");
         return "redirect:/dashboard/wishlist";
+    }
+
+    @GetMapping("/payment-history")
+    public String showPayments(Model model){
+        User user = userService.findById(getUserDetails().getId());
+        List<Payment> payments = paymentService.findByUser(user);
+        model.addAttribute("payments", payments);
+        return "user/payment-history";
     }
 
 
