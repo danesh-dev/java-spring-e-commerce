@@ -70,13 +70,17 @@
 
                         <div class="user_optio_box">
                             <div class=" dropdown" sec:authorize="hasAuthority('USER')">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
                                     <i class="fa fa-user" aria-hidden="true"></i> dashboard
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" th:href="@{/dashboard}"><i class="fa fa-dashboard p-2"></i> Profile</a>
-                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}"><i class="fa fa-heart p-2"></i>Wish list</a>
-                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt p-2"></i>Logout </a>
+                                    <a class="dropdown-item" th:href="@{/dashboard}"><i class="fa fa-dashboard p-2"></i>
+                                        Profile</a>
+                                    <a class="dropdown-item" th:href="@{/dashboard/wishlist}"><i
+                                            class="fa fa-heart p-2"></i>Wish list</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out-alt p-2"></i>Logout
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -117,20 +121,29 @@
                                 <div class="col">
                                     <h4><b>Shopping Cart</b></h4>
                                 </div>
+                                <div><a href="/">&leftarrow;</a>
+                                    <span class="text-muted">Back tomain page</span>
+                                </div>
                             </div>
                         </div>
                         <!-- cart item -->
                         <div class="row border-top border-bottom p-2" th:each="item, index : ${items}">
                             <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" th:src="@{${item.product.imagePath}}" th:attr="data-product-id=${item.product.id}"></div>
+                                <div class="col-2">
+                                    <img class="img-fluid" th:src="@{${item.product.imagePath}}" th:attr="data-product-id=${item.product.id}">
+                                </div>
                                 <div class="col">
-                                    <div class="row"><a th:href="@{/products/{name}(name=${item.product.name})}" th:text="@{${item.product.name}}"></a></div>
+                                    <div class="row"><a th:href="@{/products/{name}(name=${item.product.name})}"
+                                                        th:text="@{${item.product.name}}"></a></div>
                                 </div>
-                                <div class="col" th:text="${item.product.price}+'$'" th:attr="data-price=${item.product.price}"></div>
+                                <div class="col" th:text="${item.product.price}+'$'"
+                                     th:attr="data-price=${item.product.price}"></div>
                                 <div style="padding-top: 35px">
-                                    <input style="width: 50px" type="number" min="0" th:onchange="calculate()" th:value="${item.quantity}">
+                                    <input style="width: 50px" type="number" min="0" th:onchange="calculate()"
+                                           th:value="${item.quantity}">
                                 </div>
-                                <div class="col"><span class="close"><a th:attr="onclick=|deleteItem('${item.product.name}')|">&#10005;</a></span></div>
+                                <div class="col"><span class="close"><a
+                                        th:attr="onclick=|deleteItem('${item.product.name}')|">&#10005;</a></span></div>
                             </div>
                         </div>
                     </div>
@@ -153,15 +166,16 @@
                             <p><b>$3</b></p>
                         </div>
 
-
-
-                        <div style="position: absolute; bottom: 20px; " >
-                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                <div class="col">TOTAL PRICE</div>
-                                <div id="total_price" class="col text-right"></div>
-                            </div>
-                            <a th:href="@{/dashboard/checkout}" class="mx-auto" style="width: 65%"><button class="btn" id="checkout-btn">CHECKOUT</button></a>
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div id="total_price" class="col text-right"></div>
                         </div>
+
+                        <a th:href="@{/dashboard/checkout}" class="mx-auto"
+                           style="position: absolute; bottom: 20px; width: 65%">
+                            <button class="btn" id="checkout-btn">CHECKOUT</button>
+                        </a>
+
                     </div>
                 </div>
 
@@ -330,76 +344,76 @@
 <script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
 <script type="text/javascript" th:src="@{/assets/js/custom.js}"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-calculate(); // Call calculate on page load
+    document.addEventListener('DOMContentLoaded', function () {
+    calculate(); // Call calculate on page load
 
-// Attach event listeners to each quantity input for changes
-document.querySelectorAll('input[type="number"]').forEach(function (input) {
-input.addEventListener('change', calculate);
-});
+    // Attach event listeners to each quantity input for changes
+    document.querySelectorAll('input[type="number"]').forEach(function (input) {
+    input.addEventListener('change', calculate);
+    });
 
-document.getElementById('checkout-btn').addEventListener('click', function () {
-const items = [];
-document.querySelectorAll('.row.main').forEach(function (row) {
-const productId = parseInt(row.querySelector('.col-2 img').getAttribute('data-product-id'));
-const quantity = parseInt(row.querySelector('input[type="number"]').value);
-items.push({
-productId: productId,
-quantity: quantity
-});
-});
+    document.getElementById('checkout-btn').addEventListener('click', function () {
+    const items = [];
+    document.querySelectorAll('.row.main').forEach(function (row) {
+    const productId = parseInt(row.querySelector('.col-2 img').getAttribute('data-product-id'));
+    const quantity = parseInt(row.querySelector('input[type="number"]').value);
+    items.push({
+    productId: productId,
+    quantity: quantity
+    });
+    });
 
-$.ajax({
-url: '/dashboard/cart/updateQuantity',
-type: 'POST',
-contentType: 'application/json',
-data: JSON.stringify(items),
-success: function (response) {
-alert(response);
-},
-error: function (xhr, status, error) {
-alert('Failed to update quantity');
-}
-});
-});
-});
+    $.ajax({
+    url: '/dashboard/cart/updateQuantity',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(items),
+    success: function (response) {
+    alert(response);
+    },
+    error: function (xhr, status, error) {
+    alert('Failed to update quantity');
+    }
+    });
+    });
+    });
 
-function calculate() {
-let totalPrice = 0;
-document.querySelectorAll('.row.main').forEach(function (row) {
-const priceElement = row.querySelector('.col:nth-child(3)');
-const quantityElement = row.querySelector('input[type="number"]');
-const price = parseFloat(priceElement.getAttribute('data-price'));
-const quantity = parseInt(quantityElement.value);
-totalPrice += price * quantity;
-});
-document.getElementById("price").textContent = `$${totalPrice}`;
-totalPrice += 3;
-document.getElementById("total_price").textContent = `$${totalPrice}`;
-}
+    function calculate() {
+    let totalPrice = 0;
+    document.querySelectorAll('.row.main').forEach(function (row) {
+    const priceElement = row.querySelector('.col:nth-child(3)');
+    const quantityElement = row.querySelector('input[type="number"]');
+    const price = parseFloat(priceElement.getAttribute('data-price'));
+    const quantity = parseInt(quantityElement.value);
+    totalPrice += price * quantity;
+    });
+    document.getElementById("price").textContent = `$${totalPrice}`;
+    totalPrice += 3;
+    document.getElementById("total_price").textContent = `$${totalPrice}`;
+    }
 
-function deleteItem(name) {
-if (confirm('Are you sure you want to remove this item from the list?')) {
-$.ajax({
-url: '/dashboard/cart/delete/' + name,
-type: 'DELETE',
-success: function (result) {
-const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
-if (itemRow) {
-itemRow.remove();
-}
-calculate();
-},
-error: function (xhr, status, error) {
-const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
-if (itemRow) {
-itemRow.remove();
-}
-calculate();
-}
-});
-}
-}
+    function deleteItem(name) {
+    if (confirm('Are you sure you want to remove this item from the list?')) {
+    $.ajax({
+    url: '/dashboard/cart/delete/' + name,
+    type: 'DELETE',
+    success: function (result) {
+    const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
+    if (itemRow) {
+    itemRow.remove();
+    }
+    calculate();
+    },
+    error: function (xhr, status, error) {
+    const itemRow = document.querySelector(`a[onclick="deleteItem('${name}')"]`).closest('.row.main');
+    if (itemRow) {
+    itemRow.remove();
+    }
+    calculate();
+    }
+    });
+    }
+    }
 </script>
 
 </body>

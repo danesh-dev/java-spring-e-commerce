@@ -70,24 +70,21 @@ public class SellerController{
     @PostMapping("/add-product")
     public String addProduct(@ModelAttribute("product") ProductDto productDto,
                              @RequestParam("imageFile") MultipartFile imageFile,
-                             Model model) throws Exception {
+                             RedirectAttributes redirectAttributes) throws Exception {
         String sellerName = getSellerName();
         int sellerId = userService.getUserId(sellerName);
 
         productDto.setImagePath(saveImage(imageFile));
         productDto.setSeller(userService.findById(sellerId));
 
-        // Log category ID to ensure it is being set correctly
-        System.out.println("Category ID: " + productDto.getCategoryId());
-
-        // Retrieve and set the category
         Category category = categoryService.findById(productDto.getCategoryId());
         productDto.setCategory(category);
 
         // Create the product
         productService.create(productDto);
 
-        model.addAttribute("sellerName", sellerName);
+        redirectAttributes.addFlashAttribute("sellerName", sellerName);
+        redirectAttributes.addFlashAttribute("message", "new product created successfully");
         return "redirect:/seller/my-products";
     }
 
