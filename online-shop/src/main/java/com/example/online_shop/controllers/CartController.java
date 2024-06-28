@@ -1,6 +1,7 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.models.Cart;
+import com.example.online_shop.models.Order;
 import com.example.online_shop.models.Payment;
 import com.example.online_shop.models.User;
 import com.example.online_shop.services.*;
@@ -107,7 +108,7 @@ public class CartController {
 
     @GetMapping("/order-confirmation")
     @Transactional
-    public String orderConfirm(RedirectAttributes redirectAttributes) {
+    public String orderConfirm(RedirectAttributes redirectAttributes, Model model) {
         User user = userService.findById(getUserDetails().getId());
         Double totalAmount = cartService.getTotalPriceByUser(getUserDetails().getId());
         List<Cart> items = cartService.getCart(user.getId());
@@ -118,15 +119,25 @@ public class CartController {
         paymentService.create(payment);
 
         for (Cart item : items) {
-            orderService.addToOrder(item.getProduct(), user, payment);
+            orderService.addToOrder(item.getProduct(), item.getQuantity(), user, payment);
             productService.updateInventory(item.getProduct(), item.getQuantity());
         }
 
+        List<Order> orders = orderService.findByUserAndPayment(user, payment);
+
         cartService.deleteAllCartItemsByUser(getUserDetails().getId());
 
-        redirectAttributes.addFlashAttribute("totalAmount", totalAmount);
+//        redirectAttributes.addFlashAttribute("totalAmount", totalAmount);
+//        redirectAttributes.addFlashAttribute("orders", orders);
+//        redirectAttributes.addFlashAttribute("user", user);
+
+        model.addAttribute("totalAmount", totalAmount);
+        model.addAttribute("orders", orders);
+        model.addAttribute("user", user);
         return "user/order-confirmation";
     }
+
+
 
 
     private CustomUserDetail getUserDetails() {

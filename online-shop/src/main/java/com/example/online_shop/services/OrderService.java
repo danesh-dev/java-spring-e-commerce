@@ -25,15 +25,16 @@ public class OrderService {
     public List<Order> getOrder(int id){
         return orderRepository.findByUser(userService.findById(id));
     }
-    List<Order> findByUserAndPayment(User user, Payment payment){
+    public List<Order> findByUserAndPayment(User user, Payment payment){
         return orderRepository.findByUserAndPayment(user, payment);
     }
 
     @Transactional
-    public void addToOrder(Product product, User user, Payment payment) {
+    public void addToOrder(Product product, int quantity, User user, Payment payment) {
         Order order = new Order();
         order.setProduct(product);
         order.setUser(user);
+        order.setQuantity(quantity);
         order.setPayment(payment);
         orderRepository.save(order);
     }

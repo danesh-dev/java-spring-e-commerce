@@ -32,17 +32,18 @@
                     <h3 class="card-title">order items</h3>
                     <div class="order-confirmation-table float-left w-100">
                         <div class="order-line float-left w-100">
-                            <div class="row">
+                            <!-- todo order items -->
+                            <div class="row" th:each="order : ${orders}">
                                 <div class="col-sm-1 col-xs-3 float-left">
-                                    <img src="img/products/02.jpg" alt="">
+                                    <img th:src="@{${order.product.imagePath}}" alt="" width="45px">
                                 </div>
                                 <div class="col-sm-5 col-xs-9 details float-left">
-                                    <span>aspetur autodit autfugit</span>
+                                    <span th:text="${order.product.name}"></span>
                                 </div>
                                 <div class="col-sm-6 col-xs-12 qty float-left d-flex">
-                                    <div class="col-xs-5 col-sm-5 text-sm-right text-xs-left">$100.00</div>
-                                    <div class="col-xs-2 col-sm-2">1</div>
-                                    <div class="col-xs-5 col-sm-5 text-sm-right bold">$100.00</div>
+                                    <div class="col-xs-5 col-sm-5 text-sm-right text-xs-left" th:text="${order.product.price}+'$'"></div>
+                                    <div class="col-xs-2 col-sm-2" th:text="${order.quantity}"></div>
+                                    <div class="col-xs-5 col-sm-5 text-sm-right bold" th:text="${order.product.price}*${order.quantity} +'$'"></div>
                                 </div>
                             </div>
                         </div>
@@ -51,26 +52,24 @@
                             <tbody>
                             <tr class="mb-10">
                                 <td>Subtotal</td>
-                                <td class="text-right">$100.00</td>
+                                <td class="text-right" th:text="${totalAmount}+'$'"></td>
                             </tr>
                             <tr class="mb-10">
                                 <td>Shipping and handling</td>
-                                <td class="text-right">$7.00</td>
+                                <td class="text-right" >3.00$</td>
                             </tr>
                             <tr class="font-weight-bold">
-                                <td><span class="text-uppercase">Total</span> (tax excl.)</td>
-                                <td class="text-right">$107.00</td>
+                                <td><span class="text-uppercase">Total</span> </td>
+                                <td class="text-right" th:text="${totalAmount}+3.0 +'$'"></td>
                             </tr>
                             </tbody>
                         </table>
                         <div id="order-details" class="float-left w-100">
-                            <h3 class="h3 card-title">Order details:</h3>
+                            <h3 class="h3 card-title">Receiver details:</h3>
                             <ul>
-                                <li>Payment method: Bank transfer</li>
-                                <li>
-                                    Shipping method: Demo Store<br><br>
-                                    <em>Pick up in-store</em>
-                                </li>
+                                <li th:text="'Name: ' + ${user.name}"></li>
+                                <li th:text="'Address: ' + ${user.address}"></li>
+                                <li th:text="'Phone number: ' + ${user.number}"></li>
                             </ul>
                         </div>
 
