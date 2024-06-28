@@ -1,5 +1,6 @@
 package com.example.online_shop.services;
 
+import com.example.online_shop.controllers.CartController;
 import com.example.online_shop.models.Cart;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.models.User;
@@ -69,17 +70,14 @@ public class CartService {
     }
 
     @Transactional
-    public boolean updateQuantity(int productId, int userId, int quantity) {
-        Product product = productService.findById(productId);
-        User user = userService.findById(userId);
-
-        Cart cart = cartRepository.findByProductAndUser(product, user);
-        if (cart != null) {
-            cart.setQuantity(quantity);
-            cartRepository.save(cart);
-            return true;
-        } else {
-            return false;
+    public void updateQuantities(List<CartController.UpdateQuantityRequest> requests, User user) {
+        for (CartController.UpdateQuantityRequest request : requests) {
+            Product product = productService.findById(request.getProductId());
+            Cart cart = cartRepository.findByProductAndUser(product, user);
+            if (cart != null) {
+                cart.setQuantity(request.getQuantity());
+                cartRepository.save(cart);
+            }
         }
     }
 

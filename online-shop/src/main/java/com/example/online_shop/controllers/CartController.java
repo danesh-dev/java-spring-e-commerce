@@ -8,6 +8,7 @@ import com.example.online_shop.services.CustomUserDetail;
 import com.example.online_shop.services.OrderService;
 import com.example.online_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -62,14 +63,6 @@ public class CartController {
         return "redirect:/dashboard/cart";
     }
 
-    @PostMapping("/cart/updateQuantity")
-    public String updateQuantity(@RequestBody List<UpdateQuantityRequest> updateRequests) {
-        int userId = getUserDetails().getId();
-        for (UpdateQuantityRequest updateRequest : updateRequests)
-            cartService.updateQuantity(updateRequest.getProductId(), userId, updateRequest.getQuantity());
-        return "redirect:/dashboard/checkout";
-    }
-
     @GetMapping("/checkout")
     public String checkout(Model model){
         int userId = getUserDetails().getId();
@@ -82,7 +75,7 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public void checkout(@RequestBody Map<String, String> contactInfo){
+    public void checkout(@RequestBody Map<String, String> contactInfo) {
         int userId = getUserDetails().getId();
         Payment payment = null;
         List<Cart> items = cartService.getCart(userId);
@@ -97,10 +90,25 @@ public class CartController {
                 System.out.println(e.getMessage());
             }
         }
-        for (Cart item: items)
+        for (Cart item : items) {
             orderService.addToOrder(item.getProduct().getName(), userId, payment);
+        }
 
         userService.updateContactInfo(userId, newPhone, newAddress);
+    }
+
+    @PostMapping("/cart/updateQuantities")
+    @ResponseBody
+    public ResponseEntity<?> updateQuantities(@RequestBody List<UpdateQuantityRequest> requests) {
+        User user = userService.findById(getUserDetails().getId());
+        cartService.updateQuantities(requests, user);
+        return ResponseEntity.ok().build();
+    }
+
+
+    private CustomUserDetail getUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (CustomUserDetail) authentication.getPrincipal();
     }
 
     @GetMapping("/payment")
@@ -117,7 +125,6 @@ public class CartController {
         private int productId;
         private int quantity;
 
-        // Getters and setters
         public int getProductId() {
             return productId;
         }
@@ -133,10 +140,5 @@ public class CartController {
         public void setQuantity(int quantity) {
             this.quantity = quantity;
         }
-    }
-
-    private CustomUserDetail getUserDetails() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (CustomUserDetail) authentication.getPrincipal();
     }
 }
