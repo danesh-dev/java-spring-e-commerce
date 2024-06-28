@@ -1,6 +1,7 @@
 package com.example.online_shop.repositories;
 
 import com.example.online_shop.models.Order;
+import com.example.online_shop.models.Payment;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,9 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer>{
 
     List<Order> findByUser(User user);
+
+    List<Order> findByUserAndPayment(User user, Payment payment);
+
 
     Order findByProductAndUser(Product product, User user);
 }

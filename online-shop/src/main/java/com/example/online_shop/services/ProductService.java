@@ -81,7 +81,7 @@ public class ProductService {
         return productRepository.findByName(name);
     }
 
-    public Product findById(int id){
+    public Product findById(int id) {
         return productRepository.findById(id);
     }
 
@@ -110,14 +110,9 @@ public class ProductService {
         return productRepository.countProducts();
     }
 
-    public boolean updateInventory(int productId, int quantity) {
-        Product product = productRepository.findById(productId);
-        if (product != null && product.getInventory() >= quantity) {
-            product.setInventory(product.getInventory() - quantity);
-            productRepository.save(product);
-            return true;
-        }
-        return false;
+    public void updateInventory(Product product, int quantity) {
+        product.setInventory(product.getInventory() - quantity);
+        productRepository.save(product);
     }
 }
 

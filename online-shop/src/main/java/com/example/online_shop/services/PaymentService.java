@@ -17,4 +17,8 @@ public class PaymentService {
     public List<Payment> findByUser(User user){
         return paymentRepository.findByUser(user);
     }
+
+    public void create(Payment payment){
+        paymentRepository.save(payment);
+    }
 }

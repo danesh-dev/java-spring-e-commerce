@@ -3,19 +3,18 @@ package com.example.online_shop.controllers;
 import com.example.online_shop.models.Cart;
 import com.example.online_shop.models.Payment;
 import com.example.online_shop.models.User;
-import com.example.online_shop.services.CartService;
-import com.example.online_shop.services.CustomUserDetail;
-import com.example.online_shop.services.OrderService;
-import com.example.online_shop.services.UserService;
+import com.example.online_shop.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -25,15 +24,17 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private PaymentService paymentService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/cart")
-    public String cart(Model model){
+    public String cart(Model model) {
         int userId = getUserDetails().getId();
         List<Cart> items = cartService.getCart(userId);
         User user = userService.findById(userId);
@@ -44,7 +45,7 @@ public class CartController {
     }
 
     @GetMapping("/cart/add/{name}")
-    public String add(@PathVariable String name, Model model, RedirectAttributes redirectAttributes){
+    public String add(@PathVariable String name, Model model, RedirectAttributes redirectAttributes) {
         int userId = getUserDetails().getId();
 
         if (cartService.addToCart(name, userId)) {
@@ -56,7 +57,7 @@ public class CartController {
     }
 
     @DeleteMapping("/cart/delete/{name}")
-    public String delete(@PathVariable String name, RedirectAttributes redirectAttributes){
+    public String delete(@PathVariable String name, RedirectAttributes redirectAttributes) {
         int userId = getUserDetails().getId();
         cartService.deleteByNameAndUserId(name, userId);
         redirectAttributes.addFlashAttribute("deleted", "item removed successfully !");
@@ -64,7 +65,7 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String checkout(Model model){
+    public String checkout(Model model) {
         int userId = getUserDetails().getId();
         Double totalPrice = cartService.getTotalPriceByUser(userId);
         User user = userService.findById(userId);
@@ -76,25 +77,19 @@ public class CartController {
 
     @PostMapping("/checkout")
     public void checkout(@RequestBody Map<String, String> contactInfo) {
-        int userId = getUserDetails().getId();
+        User user = userService.findById(getUserDetails().getId());
         Payment payment = null;
-        List<Cart> items = cartService.getCart(userId);
+
+        //update info
         String newPhoneStr = contactInfo.get("phone");
         String newAddress = contactInfo.get("address");
+        Long newPhone = Long.parseLong(contactInfo.get("phone"));
 
-        Long newPhone = null;
-        if (newPhoneStr != null) {
-            try {
-                newPhone = Long.parseLong(newPhoneStr);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        for (Cart item : items) {
-            orderService.addToOrder(item.getProduct().getName(), userId, payment);
-        }
+        if(newPhoneStr != null || newAddress != null)
+            userService.updateContactInfo(user.getId(), newPhone, newAddress);
 
-        userService.updateContactInfo(userId, newPhone, newAddress);
+
+
     }
 
     @PostMapping("/cart/updateQuantities")
@@ -105,21 +100,40 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/payment")
+    public String payment(Model model) {
+        return "user/payment";
+    }
+
+    @GetMapping("/order-confirmation")
+    @Transactional
+    public String orderConfirm(RedirectAttributes redirectAttributes) {
+        User user = userService.findById(getUserDetails().getId());
+        Double totalAmount = cartService.getTotalPriceByUser(getUserDetails().getId());
+        List<Cart> items = cartService.getCart(user.getId());
+
+        Payment payment = new Payment();
+        payment.setUser(user);
+        payment.setAmount(totalAmount);
+        paymentService.create(payment);
+
+        for (Cart item : items) {
+            orderService.addToOrder(item.getProduct(), user, payment);
+            productService.updateInventory(item.getProduct(), item.getQuantity());
+        }
+
+        cartService.deleteAllCartItemsByUser(getUserDetails().getId());
+
+        redirectAttributes.addFlashAttribute("totalAmount", totalAmount);
+        return "user/order-confirmation";
+    }
+
 
     private CustomUserDetail getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (CustomUserDetail) authentication.getPrincipal();
     }
 
-    @GetMapping("/payment")
-    public String payment(Model model){
-        return "user/payment";
-    }
-
-    @GetMapping("/order-confirmation")
-    public String orderConfirm(Model model){
-        return "user/order-confirmation";
-    }
 
     public static class UpdateQuantityRequest {
         private int productId;

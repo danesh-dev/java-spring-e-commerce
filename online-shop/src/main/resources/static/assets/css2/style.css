@@ -29,7 +29,7 @@
     padding: 20px;
     width: 600px;
     padding-top: 160px;
-    direction: rtl;
+    direction: ltr;
 }
 
 .container form .inputBox{
@@ -62,7 +62,8 @@
 
 .container form .submit-btn{
     width: 100%;
-    background:linear-gradient(45deg, #D83A56, #FF616D);
+    /* background:linear-gradient(45deg, #D83A56, #FF616D); */
+    background-color: #36393a;
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;
@@ -89,7 +90,8 @@
     height: 100%;
     width: 100%;
     top: 0; left: 0;
-    background:linear-gradient(45deg, #D83A56, #FF616D);
+    /* background:linear-gradient(45deg, #D83A56, #FF616D); */
+    background-color: #36393a;
     border-radius: 5px;
     backface-visibility: hidden;
     box-shadow: 0 15px 25px rgba(0,0,0,.2);

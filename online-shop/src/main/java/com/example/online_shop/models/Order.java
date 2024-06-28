@@ -20,6 +20,8 @@ public class Order {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
+    private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
     private Payment payment;
@@ -36,10 +38,11 @@ public class Order {
         orderedAt = LocalDateTime.now();
     }
 
-    public Order(int id, User user, Product product, Payment payment, LocalDateTime orderedAt) {
+    public Order(int id, User user, Product product, int quantity, Payment payment, LocalDateTime orderedAt) {
         this.id = id;
         this.user = user;
         this.product = product;
+        this.quantity = quantity;
         this.payment = payment;
         this.orderedAt = orderedAt;
     }
@@ -82,5 +85,13 @@ public class Order {
 
     public void setOrderedAt(LocalDateTime orderedAt) {
         this.orderedAt = orderedAt;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

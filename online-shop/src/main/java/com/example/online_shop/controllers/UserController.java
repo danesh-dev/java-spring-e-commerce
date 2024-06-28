@@ -43,7 +43,6 @@ public class UserController {
     @PostMapping("/update")
     public String updateAddress(@RequestParam("address") String address, @RequestParam("number") Long number, Model model){
         User user = userService.findById(getUserDetails().getId());
-        userService.updateAddress(user.getId(), address);
         userService.updateContactInfo(user.getId(), number, address);
         model.addAttribute("user", user);
         model.addAttribute("success", "your information updated successfully!");

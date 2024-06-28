@@ -17,7 +17,7 @@ public class Payment {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    private BigDecimal amount;
+    private double amount;
 
     @Column(name = "paid_at", nullable = false, updatable = false)
     private LocalDateTime paidAt;
@@ -30,7 +30,7 @@ public class Payment {
         paidAt = LocalDateTime.now();
     }
 
-    public Payment(int id, User user, BigDecimal amount, LocalDateTime paidAt, List<Order> orders) {
+    public Payment(int id, User user, double amount, LocalDateTime paidAt, List<Order> orders) {
         this.id = id;
         this.user = user;
         this.amount = amount;
@@ -57,11 +57,11 @@ public class Payment {
         this.user = user;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
