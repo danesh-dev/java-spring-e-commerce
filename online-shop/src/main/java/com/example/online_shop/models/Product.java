@@ -21,6 +21,8 @@ public class Product {
 
     private int stock;
 
+    private int inventory;
+
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
@@ -47,12 +49,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String imagePath, int price, int stock, Category category, User seller, String description, LocalDateTime createdAt, List<Order> orders, List<Wishlist> wishlistItems, List<Cart> cartItems) {
+    public Product(int id, String name, String imagePath, int price, int stock, int left, Category category, User seller, String description,
+                   LocalDateTime createdAt, List<Order> orders, List<Wishlist> wishlistItems, List<Cart> cartItems) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
         this.stock = stock;
+        this.inventory = left;
         this.category = category;
         this.seller = seller;
         this.description = description;
@@ -161,5 +165,13 @@ public class Product {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 }

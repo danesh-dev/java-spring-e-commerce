@@ -1,7 +1,6 @@
 package com.example.online_shop.services;
 
 import com.example.online_shop.dto.ProductDto;
-import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
 import com.example.online_shop.models.User;
 import com.example.online_shop.repositories.CategoryRepository;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +39,7 @@ public class ProductService {
         product.setStock(productDto.getStock());
         product.setCategory(productDto.getCategory());
         product.setSeller(productDto.getSeller());
+        product.setInventory(product.getStock());
         product.setDescription(productDto.getDescription());
 
         productRepository.save(product);
@@ -99,6 +98,7 @@ public class ProductService {
                 productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getStock(),
+                productDto.getInventory(),
                 productDto.getCategory());
     }
 
@@ -108,6 +108,16 @@ public class ProductService {
 
     public long getProductCount() {
         return productRepository.countProducts();
+    }
+
+    public boolean updateInventory(int productId, int quantity) {
+        Product product = productRepository.findById(productId);
+        if (product != null && product.getInventory() >= quantity) {
+            product.setInventory(product.getInventory() - quantity);
+            productRepository.save(product);
+            return true;
+        }
+        return false;
     }
 }
 

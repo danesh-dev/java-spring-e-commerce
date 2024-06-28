@@ -31,13 +31,14 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Product p SET p.name = :name, p.description = :description, p.price = :price, p.stock = :stock, p.category = :category WHERE p.id = :id")
+    @Query("UPDATE Product p SET p.name = :name, p.description = :description, p.price = :price, p.stock = :stock, p.inventory = :inventory, p.category = :category WHERE p.id = :id")
     int updateProduct(
             @Param("id") Integer id,
             @Param("name") String name,
             @Param("description") String description,
             @Param("price") int price,
             @Param("stock") int stock,
+            @Param("inventory") int inventory,
             @Param("category") Category category
     );
 

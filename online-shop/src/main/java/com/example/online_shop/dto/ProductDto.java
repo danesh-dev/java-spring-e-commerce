@@ -20,6 +20,8 @@ public class ProductDto {
     @Positive(message = "Inventory can't be empty")
     private int stock;
 
+    private int inventory;
+
     private int categoryId;
 
     private Category category;
@@ -28,7 +30,7 @@ public class ProductDto {
 
     private String description = "default description";
 
-    // Default constructor, getters, and setters
+    // constructor, getters, and setters
 
     public String getName() {
         return name;
@@ -92,5 +94,13 @@ public class ProductDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 }
