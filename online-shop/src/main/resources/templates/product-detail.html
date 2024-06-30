@@ -123,13 +123,14 @@
             <div class="col-md-6">
                 <div class="small mb-1" th:text="${product.category.name}">category</div>
                 <h1 class="display-5 fw-bolder" th:text="${product.name}">Product Name</h1>
+                <h6 class="display-5 fw-bolder" th:if="${product.inventory == 0}" >Out of stock!</h6>
                 <div class="fs-5 mb-5">
                     <span th:text="${product.price}+'$'"></span>
                 </div>
                 <p class="lead" th:text="${product.description}">description</p>
                 <div class="d-flex">
 
-                    <button type="button" class="btn btn-dark">
+                    <button th:if="${product.inventory != 0}" type="button" class="btn btn-dark">
                         <a th:href="@{/dashboard/cart/add/{name}(name=${product.name})}"
                            class="btn btn-dark p-0 m-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
