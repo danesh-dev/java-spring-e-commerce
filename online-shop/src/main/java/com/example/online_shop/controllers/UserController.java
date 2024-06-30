@@ -1,10 +1,7 @@
 package com.example.online_shop.controllers;
 
 import com.example.online_shop.dto.UserDto;
-import com.example.online_shop.models.Payment;
-import com.example.online_shop.models.Product;
-import com.example.online_shop.models.User;
-import com.example.online_shop.models.Wishlist;
+import com.example.online_shop.models.*;
 import com.example.online_shop.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,8 @@ public class UserController {
     private ProductService productService;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private OrderService orderService;
 
 
     @GetMapping()
@@ -83,6 +82,16 @@ public class UserController {
         List<Payment> payments = paymentService.findByUser(user);
         model.addAttribute("payments", payments);
         return "user/payment-history";
+    }
+
+    @GetMapping("/payments/{id}")
+    public String showOrders(@PathVariable("id") int id, Model model){
+        User user = userService.findById(getUserDetails().getId());
+        Payment payment = paymentService.findById(id);
+        List<Order> orders = orderService.findByUserAndPayment(user, payment);
+
+        model.addAttribute("orders", orders);
+        return "user/orders-history";
     }
 
 

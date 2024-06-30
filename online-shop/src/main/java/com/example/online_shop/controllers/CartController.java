@@ -127,10 +127,6 @@ public class CartController {
 
         cartService.deleteAllCartItemsByUser(getUserDetails().getId());
 
-//        redirectAttributes.addFlashAttribute("totalAmount", totalAmount);
-//        redirectAttributes.addFlashAttribute("orders", orders);
-//        redirectAttributes.addFlashAttribute("user", user);
-
         model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("orders", orders);
         model.addAttribute("user", user);

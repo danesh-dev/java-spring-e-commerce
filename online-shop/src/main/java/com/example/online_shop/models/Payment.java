@@ -22,7 +22,7 @@ public class Payment {
     @Column(name = "paid_at", nullable = false, updatable = false)
     private LocalDateTime paidAt;
 
-    @OneToMany(mappedBy = "payment")
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     @PrePersist

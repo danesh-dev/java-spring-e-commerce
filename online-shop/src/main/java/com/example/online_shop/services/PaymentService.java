@@ -18,6 +18,10 @@ public class PaymentService {
         return paymentRepository.findByUser(user);
     }
 
+    public Payment findById(int id){
+        return paymentRepository.findById(id);
+    }
+
     public void create(Payment payment){
         paymentRepository.save(payment);
     }

@@ -25,6 +25,7 @@ public class OrderService {
     public List<Order> getOrder(int id){
         return orderRepository.findByUser(userService.findById(id));
     }
+
     public List<Order> findByUserAndPayment(User user, Payment payment){
         return orderRepository.findByUserAndPayment(user, payment);
     }

@@ -109,22 +109,26 @@
             </div>
             <div class="row mx-auto">
                 <div class="col-md-8 content">
-                    <h5 class="pb-2">My Payment History</h5>
-                    <table class="table table-striped table-hover">
-                        <thead>
+                    <h5 class="pb-2">My Orders List</h5>
+                    <table class="table table-hover">
+                        <thead class="table-light">
                         <tr>
                             <th scope="col" >#</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">image</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">quantity</th>
                             <th scope="col">Total Price</th>
-                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="payment, index : ${payments}">
-                            <th scope="row" th:text="${index.index + 1}">1</th>
-                            <td th:text="${payment.paidAt}">2024-06-30 17:09:28</td>
-                            <td th:text="${payment.amount}">5689000.00</td>
-                            <td><a class="btn m-0 p-1 btn-outline-secondary" th:href="@{/dashboard/payments/{id}(id=${payment.id})}">see more</a></td>
+                        <tr th:each="order, index : ${orders}">
+                            <th scope="row" th:text="${index.index + 1}"></th>
+                            <td><img th:src="@{${order.product.imagePath}}" alt="" width="45px"></td>
+                            <td th:text="${order.product.name}"></td>
+                            <td th:text="${order.product.price}+'$'"></td>
+                            <td th:text="${order.quantity}"></td>
+                            <td th:text="${order.product.price}*${order.quantity} +'$'"></td>
                         </tr>
                         </tbody>
                     </table>
