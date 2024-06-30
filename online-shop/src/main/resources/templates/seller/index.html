@@ -10,6 +10,8 @@
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
   <!-- Theme style -->
   <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
   <!-- Google Font: Source Sans Pro -->
@@ -95,14 +97,11 @@
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
+                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-rectangle-list"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">ترافیک Cpu</span>
-                  <span class="info-box-number">
-                    10
-                    <small>%</small>
-                  </span>
+                  <span class="info-box-text">تعداد محصولات فروخته شده</span>
+                  <span class="info-box-number" th:text="${totalCountOfSales}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -111,11 +110,11 @@
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-money-bill-wave"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">لایک‌ها</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text">مجموع فروش</span>
+                  <span class="info-box-number" th:text="${totalSalesAmount}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -128,30 +127,16 @@
 
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-box-open"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">فروش</span>
-                  <span class="info-box-number">760</span>
+                  <span class="info-box-text">محصولات</span>
+                  <span class="info-box-number" th:text="*{productsCount}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
               <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">اعضای جدید</span>
-                  <span class="info-box-number">2,000</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
           </div>
           <!-- /.row -->
 

@@ -42,4 +42,12 @@ public class OrderService {
     public long getOrdersCount() {
         return orderRepository.count();
     }
+
+    public Double getTotalSalesAmount(User seller) {
+        return orderRepository.calculateTotalSalesAmount(seller);
+    }
+
+    public Long getTotalProductsSold(User seller) {
+        return orderRepository.calculateTotalProductsSold(seller);
+    }
 }

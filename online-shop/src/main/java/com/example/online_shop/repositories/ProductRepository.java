@@ -45,5 +45,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     void deleteByCategory(Category category);
 
     void deleteBySeller(User seller);
+
+
+    @Query("SELECT COUNT(p) FROM Product p WHERE p.seller = :seller")
+    public int countBySeller(@Param("seller") User seller);
 }
 

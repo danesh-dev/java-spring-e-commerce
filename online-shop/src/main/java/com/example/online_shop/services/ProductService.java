@@ -60,6 +60,7 @@ public class ProductService {
         productDto.setStock(product.getStock());
         productDto.setCategory(product.getCategory());
         productDto.setSeller(product.getSeller());
+        productDto.setInventory(product.getInventory());
         productDto.setDescription(product.getDescription());
         return productDto;
     }
@@ -108,6 +109,10 @@ public class ProductService {
 
     public long getProductCount() {
         return productRepository.countProducts();
+    }
+
+    public int countProductsBySeller(User seller) {
+        return productRepository.countBySeller(seller);
     }
 
     public void updateInventory(Product product, int quantity) {

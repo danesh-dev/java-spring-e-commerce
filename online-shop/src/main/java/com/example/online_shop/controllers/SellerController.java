@@ -4,10 +4,8 @@ import com.example.online_shop.dto.CategoryDto;
 import com.example.online_shop.dto.ProductDto;
 import com.example.online_shop.models.Category;
 import com.example.online_shop.models.Product;
-import com.example.online_shop.services.CategoryService;
-import com.example.online_shop.services.CustomUserDetail;
-import com.example.online_shop.services.ProductService;
-import com.example.online_shop.services.UserService;
+import com.example.online_shop.models.User;
+import com.example.online_shop.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -35,6 +33,8 @@ public class SellerController{
     private CategoryService categoryService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -42,8 +42,15 @@ public class SellerController{
     @GetMapping()
     public String index(Model model){
         String sellerName = getSellerName();
+        User seller = userService.findByName(sellerName);
         List<Product> products = productService.findProductsBySellerId(userService.getUserId(sellerName));
+        Double totalSalesAmount = orderService.getTotalSalesAmount(seller);
+        Long totalCountOfSales = orderService.getTotalProductsSold(seller);
+        int productsCount = productService.countProductsBySeller(seller);
 
+        model.addAttribute("totalSalesAmount", totalSalesAmount);
+        model.addAttribute("totalCountOfSales", totalCountOfSales);
+        model.addAttribute("productsCount", productsCount);
         model.addAttribute("sellerName", sellerName);
         model.addAttribute("products", products);
         return "seller/index";
