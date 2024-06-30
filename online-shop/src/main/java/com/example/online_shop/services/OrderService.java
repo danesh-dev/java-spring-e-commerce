@@ -39,4 +39,7 @@ public class OrderService {
         order.setPayment(payment);
         orderRepository.save(order);
     }
+    public long getOrdersCount() {
+        return orderRepository.count();
+    }
 }

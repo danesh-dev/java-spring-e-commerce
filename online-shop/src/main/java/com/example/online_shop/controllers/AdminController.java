@@ -1,18 +1,12 @@
 package com.example.online_shop.controllers;
 
-import com.example.online_shop.dto.CategoryDto;
-import com.example.online_shop.dto.MessageDto;
-import com.example.online_shop.dto.UserDto;
+import com.example.online_shop.dto.*;
 import com.example.online_shop.models.Category;
 import com.example.online_shop.models.User;
-import com.example.online_shop.services.CategoryService;
-import com.example.online_shop.services.MessageService;
-import com.example.online_shop.services.UserService;
+import com.example.online_shop.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.example.online_shop.dto.ProductDto;
-import com.example.online_shop.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,15 +16,13 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;
+    @Autowired private UserService userService;
+    @Autowired private ProductService productService;
+    @Autowired private CategoryService categoryService;
+    @Autowired private MessageService messageService;
+    @Autowired private PaymentService paymentService;
+    @Autowired private OrderService orderService;
 
-    @Autowired
-    private MessageService messageService;
 
     @GetMapping
     public String showIndexPage(Model model){
@@ -38,7 +30,13 @@ public class AdminController {
         long productsCount = productService.getProductCount();
         long usersCount = userService.getUsersCount();
         List<MessageDto> messages = messageService.getAllMessages();
+        List<PaymentDto> payments = paymentService.getAllPayments();
+        double sumOfPayments = paymentService.getTotalAmount();
+        long countOfOrders = orderService.getOrdersCount();
 
+        model.addAttribute("countOfOrders", countOfOrders);
+        model.addAttribute("sumOfPayments", sumOfPayments);
+        model.addAttribute("payments", payments);
         model.addAttribute("messages", messages);
         model.addAttribute("usersCount", usersCount);
         model.addAttribute("products", products);

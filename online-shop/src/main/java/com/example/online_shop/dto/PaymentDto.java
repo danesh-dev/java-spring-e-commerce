@@ -8,44 +8,52 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class PaymentDto {
+    private int id;
     private User user;
     private double amount;
-    private List<Order> orders;
     private LocalDateTime paidAt;
+    private List<Order> orders;
 
-    public PaymentDto(User user, double amount, LocalDateTime paidAt, List<Order> orders){
+    public PaymentDto(int id, User user, double amount, LocalDateTime paidAt, List<Order> orders) {
+        this.id = id;
         this.user = user;
         this.amount = amount;
-        this.orders = orders;
         this.paidAt = paidAt;
+        this.orders = orders;
     }
 
-    public PaymentDto(){
-
-    }
-
-    public void setUser(User user){
+    public PaymentDto(User user, double amount, LocalDateTime paidAt, List<Order> orders) {
         this.user = user;
+        this.amount = amount;
+        this.paidAt = paidAt;
+        this.orders = orders;
     }
 
-    public User getUser(){
+    public PaymentDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public double getAmount(){
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount){
+    public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public List<Order> getOrders(){
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders){
-        this.orders = orders;
     }
 
     public LocalDateTime getPaidAt() {
@@ -54,5 +62,13 @@ public class PaymentDto {
 
     public void setPaidAt(LocalDateTime paidAt) {
         this.paidAt = paidAt;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

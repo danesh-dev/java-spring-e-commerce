@@ -10,6 +10,7 @@
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
   <!-- Google Font: Source Sans Pro -->
@@ -145,14 +146,11 @@
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
+                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-rectangle-list"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">ترافیک Cpu</span>
-                  <span class="info-box-number">
-                    10
-                    <small>%</small>
-                  </span>
+                  <span class="info-box-text">محصولات فروخته شده</span>
+                  <span class="info-box-number" th:text="${countOfOrders}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -161,11 +159,11 @@
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-money-bill-wave"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">لایک‌ها</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text">مجموع فروش</span>
+                  <span class="info-box-number" th:text="${sumOfPayments}"></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -178,7 +176,7 @@
 
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-box-open"></i></span>
 
                 <div class="info-box-content">
                   <span class="info-box-text">محصولات</span>
@@ -238,10 +236,10 @@
                       <tbody>
                         <tr th:each="message, index : ${messages}">
                           <td th:text="${index.index + 1}"></td>
-                          <td th:text="${message.name + 1}"></td>
-                          <td th:text="${message.email + 1}"></td>
-                          <td th:text="${message.phone + 1}"></td>
-                          <td th:text="${message.message + 1}"></td>
+                          <td th:text="${message.name }"></td>
+                          <td th:text="${message.email }"></td>
+                          <td th:text="${message.phone }"></td>
+                          <td th:text="${message.message }"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -251,7 +249,43 @@
                 <!-- /.card-body -->
                 <!-- /.card-footer -->
               </div>
-              <!-- /.card -->
+
+              <!--payments list-->
+              <div class="card pt-2">
+                <div class="card-header border-transparent">
+                  <h3 class="card-title">آخرین پرداخت ها  </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table m-0">
+                      <thead>
+                      <tr>
+                        <th>ردیف</th>
+                        <th>نام کاربر</th>
+                        <th>ایمیل کاربر</th>
+                        <th> مبلغ</th>
+                        <th>تاریخ</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="payment, index : ${payments}">
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${payment.user.name }"></td>
+                        <td th:text="${payment.user.email }"></td>
+                        <td th:text="${payment.amount }"></td>
+                        <td th:text="${payment.paidAt}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.table-responsive -->
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+              </div>
+              <!--end payment list-->
+
             </div>
             <!-- /.col -->
 
@@ -282,6 +316,9 @@
                 <!-- /.card-footer -->
               </div>
               <!-- /.card -->
+
+
+
             </div>
             <!-- /.col -->
           </div>
