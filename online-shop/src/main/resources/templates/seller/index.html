@@ -169,35 +169,31 @@
               <div class="card">
                 <div class="card-header border-transparent">
                   <h3 class="card-title">موجودی انبار من </h3>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse">
-                      <i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-widget="remove">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table m-0">
                       <thead>
-                        <tr>
-                          <th>ردیف  </th>
+                        <tr >
+                          <th>ردیف</th>
                           <th>محصول</th>
+                          <th>قیمت</th>
+                          <th>باقی مانده</th>
+                          <th>فروخته شده</th>
                           <th>وضعیت</th>
-                          <th>تعداد</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                          <td>بازی ندای وظیفه ۱۰</td>
-                          <td><span class="badge badge-success">ارسال شده</span></td>
+                        <tr th:each="product, index : ${products}">
+                          <td th:text="${index.index + 1}"></td>
+                          <td th:text="${product.name}"></td>
+                          <td th:text="${product.price}"></td>
+                          <td th:text="${product.inventory}"></td>
+                          <td th:text="${product.stock}-${product.inventory}"></td>
                           <td>
-                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                            <span th:if="${product.inventory != 0}" class="badge badge-success">موجود</span>
+                            <span th:if="${product.inventory == 0}" class="badge badge-danger">تمام شده</span>
                           </td>
                         </tr>
                       </tbody>
@@ -206,11 +202,6 @@
                   <!-- /.table-responsive -->
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                  <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">سفارش جدید</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">مشاهده همه سفار</a>
-                </div>
-                <!-- /.card-footer -->
               </div>
               <!-- /.card -->
             </div>

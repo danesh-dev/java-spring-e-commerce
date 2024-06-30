@@ -286,6 +286,45 @@
               </div>
               <!--end payment list-->
 
+              <!--start inventory list-->
+              <div class="card">
+                <div class="card-header border-transparent">
+                  <h3 class="card-title">موجودی انبار </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table m-0">
+                      <thead>
+                      <tr>
+                        <th>ردیف</th>
+                        <th>محصول</th>
+                        <th>فروشنده</th>
+                        <th>باقی مانده</th>
+                        <th>فروخته شده</th>
+                        <th>وضعیت</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="product, index : ${products}">
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.seller.name}"></td>
+                        <td th:text="${product.inventory}"></td>
+                        <td th:text="${product.stock}-${product.inventory}"></td>
+                        <td>
+                          <span th:if="${product.inventory != 0}" class="badge badge-success">موجود</span>
+                          <span th:if="${product.inventory == 0}" class="badge badge-danger">تمام شده</span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--end inventory list-->
+
+
             </div>
             <!-- /.col -->
 

@@ -22,8 +22,6 @@ public class ProductDto {
 
     private int inventory;
 
-    private int categoryId;
-
     private Category category;
 
     private User seller;
@@ -62,14 +60,6 @@ public class ProductDto {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Category getCategory() {

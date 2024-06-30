@@ -31,10 +31,8 @@ import java.util.UUID;
 public class SellerController{
     @Autowired
     private ProductService productService;
-
     @Autowired
     private CategoryService categoryService;
-
     @Autowired
     private UserService userService;
 
@@ -75,10 +73,8 @@ public class SellerController{
         int sellerId = userService.getUserId(sellerName);
 
         productDto.setImagePath(saveImage(imageFile));
-        productDto.setSeller(userService.findById(sellerId));
-
-        Category category = categoryService.findById(productDto.getCategoryId());
-        productDto.setCategory(category);
+        productDto.setSeller(productDto.getSeller());
+        productDto.setCategory(productDto.getCategory());
 
         // Create the product
         productService.create(productDto);
