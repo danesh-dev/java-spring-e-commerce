@@ -1,7 +1,12 @@
 {
   "platform": "docker",
-  "app": "college-project",
+  "app": "handtime",
   "port": 8080,
-  "build": { "cache": false }
+  "build": { "cache": false },
+  "disks": [
+    {
+      "name": "my-disk",
+      "mountTo": "handtime"
+    }
+  ]
 }
-
