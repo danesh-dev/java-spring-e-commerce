@@ -31,7 +31,7 @@ public class AdminController {
         long usersCount = userService.getUsersCount();
         List<MessageDto> messages = messageService.getAllMessages();
         List<PaymentDto> payments = paymentService.getAllPayments();
-        double sumOfPayments = paymentService.getTotalAmount();
+        double sumOfPayments = (paymentService.getTotalAmount() != null) ? paymentService.getTotalAmount():0;
         long countOfOrders = orderService.getOrdersCount();
 
         model.addAttribute("countOfOrders", countOfOrders);

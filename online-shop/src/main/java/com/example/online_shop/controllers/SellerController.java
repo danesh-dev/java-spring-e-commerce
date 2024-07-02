@@ -77,11 +77,14 @@ public class SellerController{
                              @RequestParam("imageFile") MultipartFile imageFile,
                              RedirectAttributes redirectAttributes) throws Exception {
         String sellerName = getSellerName();
-        int sellerId = userService.getUserId(sellerName);
+        User seller = userService.findByName(sellerName);
 
         productDto.setImagePath(saveImage(imageFile));
-        productDto.setSeller(productDto.getSeller());
-        productDto.setCategory(productDto.getCategory());
+        productDto.setSeller(seller);
+
+        Category category = categoryService.findById(productDto.getCategoryId());
+        productDto.setCategory(category);
+//        productDto.setCategory(productDto.getCategory());
 
         // Create the product
         productService.create(productDto);

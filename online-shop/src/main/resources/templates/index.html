@@ -329,7 +329,7 @@
                             <input type="text" placeholder="Your Name" th:field="*{name}" required/>
                         </div>
                         <div>
-                            <input type="number" maxlength="11" placeholder="Phone Number" th:field="*{phone}" required/>
+                            <input type="number" onKeyDown="if(this.value.length==11) return false;" placeholder="Phone Number" th:field="*{phone}" required/>
                         </div>
                         <div>
                             <input type="email" placeholder="Email" th:field="*{email}" required/>

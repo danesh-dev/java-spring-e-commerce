@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="phone">Phone <span class="required">*</span></label>
-                        <input type="number" maxlength="11" class="form-control" id="phone" th:value="${user.number}" required disabled>
+                        <input type="number" onKeyDown="if(this.value.length==11) return false;" class="form-control" id="phone" th:value="${user.number}" required disabled>
                         <div class="invalid-feedback">Your phone is required.</div>
                     </div>
                     <div class="mb-3">

@@ -39,7 +39,7 @@ public class ProductService {
         product.setStock(productDto.getStock());
         product.setCategory(productDto.getCategory());
         product.setSeller(productDto.getSeller());
-        product.setInventory(product.getStock());
+        product.setInventory(productDto.getStock());
         product.setDescription(productDto.getDescription());
 
         productRepository.save(product);

@@ -121,7 +121,7 @@
                         </div>
                         <div class="form-group">
                             <label for="number">Phone Number</label>
-                            <input type="number" maxlength="11" class="form-control col-8" id="number" th:field="*{number}">
+                            <input type="number" onKeyDown="if(this.value.length==11) return false;" class="form-control col-8" id="number" th:field="*{number}">
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
