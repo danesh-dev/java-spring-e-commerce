@@ -124,8 +124,8 @@
                             <input type="number" onKeyDown="if(this.value.length==11) return false;" class="form-control col-8" id="number" th:field="*{number}">
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" th:field="*{address}">
+                            <label for="Somewhere in Tabriz">Somewhere in Tabriz</label>
+                            <input type="text" class="form-control" id="Somewhere in Tabriz" th:field="*{Somewhere in Tabriz}">
                         </div>
                         <button type="submit" class="btn btn-darkblue" id="saveChangesBtn" disabled>
                             Save Changes
@@ -169,7 +169,7 @@
                                 <img src="/assets/images/location-white.png" width="18px" alt="">
                             </div>
                             <p>
-                                Address
+                                Somewhere in Tabriz
                             </p>
                         </div>
                         <div>
@@ -193,7 +193,7 @@
                 <div class="col-md-3">
                     <div class="info_info">
                         <h5>
-                            Informations
+                            Information
                         </h5>
                         <p>
                             Hand time is a college project made with java spring boot
@@ -290,7 +290,7 @@
     <div class="container">
         <p>
             &copy; <span id="displayYear"></span> All Rights Reserved By
-            <a href="/">Ashkan Tavassoli & Helena Danesh</a>
+            <a href="/"><b>Ashkan Tavassoli & Helena Danesh</b></a>
         </p>
     </div>
 </section>
@@ -298,14 +298,14 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const addressField = document.getElementById('address');
+        const Somewhere in TabrizField = document.getElementById('Somewhere in Tabriz');
         const numberField = document.getElementById('number');
         const saveChangesBtn = document.getElementById('saveChangesBtn');
-        const originalAddress = addressField.value;
+        const originalSomewhere in Tabriz = Somewhere in TabrizField.value;
         const originalNumber = numberField.value;
 
-        addressField.addEventListener('input', function () {
-            if (addressField.value !== originalAddress) {
+        Somewhere in TabrizField.addEventListener('input', function () {
+            if (Somewhere in TabrizField.value !== originalSomewhere in Tabriz) {
                 saveChangesBtn.disabled = false;
             } else {
                 saveChangesBtn.disabled = true;

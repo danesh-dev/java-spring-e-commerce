@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="cart-block-right col-md-8 order-md-1">
-                <h4 class="mb-3">Address</h4>
+                <h4 class="mb-3">Somewhere in Tabriz</h4>
                 <form class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="fullName">Full Name <span class="required">*</span></label>
@@ -57,17 +57,17 @@
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
                         <input type="email" class="form-control" id="email" th:value="${user.email}" disabled>
-                        <div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>
+                        <div class="invalid-feedback">Please enter a valid email Somewhere in Tabriz for shipping updates.</div>
                     </div>
                     <div class="mb-3">
-                        <label for="address">Address<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="address" th:value="${user.address}" required disabled>
-                        <div class="invalid-feedback">Please enter your shipping address.</div>
+                        <label for="Somewhere in Tabriz">Somewhere in Tabriz<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="Somewhere in Tabriz" th:value="${user.Somewhere in Tabriz}" required disabled>
+                        <div class="invalid-feedback">Please enter your shipping Somewhere in Tabriz.</div>
                     </div>
                     <hr class="mb-4">
-                    <div class="custom-control custom-checkbox" id="same-address-main">
-                        <input type="checkbox" class="custom-control-input" id="same-address">
-                        <label class="custom-control-label" for="same-address">Another address?!</label>
+                    <div class="custom-control custom-checkbox" id="same-Somewhere in Tabriz-main">
+                        <input type="checkbox" class="custom-control-input" id="same-Somewhere in Tabriz">
+                        <label class="custom-control-label" for="same-Somewhere in Tabriz">Another Somewhere in Tabriz?!</label>
                     </div>
                 </form>
             </div>
@@ -92,24 +92,24 @@
 <script type="text/javascript">
     $(document).ready(function () {
         let originalPhone = $('#phone').val();
-        let originalAddress = $('#address').val();
+        let originalSomewhere in Tabriz = $('#Somewhere in Tabriz').val();
 
         // Function to send updated data
-        function sendUpdatedData(phone, address) {
+        function sendUpdatedData(phone, Somewhere in Tabriz) {
             $.ajax({
                 type: "POST",
                 url: "/dashboard/checkout",
                 contentType: "application/json",
-                data: JSON.stringify({ phone: phone, address: address })
+                data: JSON.stringify({ phone: phone, Somewhere in Tabriz: Somewhere in Tabriz })
             });
         }
 
-        // Toggle address fields based on checkbox
-        $('#same-address').change(function () {
+        // Toggle Somewhere in Tabriz fields based on checkbox
+        $('#same-Somewhere in Tabriz').change(function () {
             if ($(this).is(':checked')) {
-                $('#phone, #address').prop('disabled', false);
+                $('#phone, #Somewhere in Tabriz').prop('disabled', false);
             } else {
-                $('#phone, #address').prop('disabled', true);
+                $('#phone, #Somewhere in Tabriz').prop('disabled', true);
             }
         });
 
@@ -134,9 +134,9 @@
                 isValid = false;
             }
 
-            if ($('#address').val().trim() === '') {
-                $('#address').addClass('is-invalid');
-                $('#address').next('.invalid-feedback').css('display', 'block');
+            if ($('#Somewhere in Tabriz').val().trim() === '') {
+                $('#Somewhere in Tabriz').addClass('is-invalid');
+                $('#Somewhere in Tabriz').next('.invalid-feedback').css('display', 'block');
                 isValid = false;
             }
 
@@ -144,10 +144,10 @@
             if (isValid) {
                 // Send updated data before submission
                 let newPhone = $('#phone').val();
-                let newAddress = $('#address').val();
+                let newSomewhere in Tabriz = $('#Somewhere in Tabriz').val();
 
-                if (newPhone !== originalPhone || newAddress !== originalAddress) {
-                    sendUpdatedData(newPhone, newAddress);
+                if (newPhone !== originalPhone || newSomewhere in Tabriz !== originalSomewhere in Tabriz) {
+                    sendUpdatedData(newPhone, newSomewhere in Tabriz);
                 }
             } else {
                 alert('Please fill in all required fields.');
