@@ -1,5 +1,5 @@
 # E-Commerce web application 
----
+
 ## Technologies That Are used :
 
 ### Backend : 
@@ -18,5 +18,5 @@
 - mysql
 ---
 #### developers : 
-- Ashkan Tavassoli : [link] https://github.com/ashykng
-- Danesh : [link] https://github.com/danesh-dev
+- Ashkan Tavassoli : [[github](https://github.com/ashykng)] 
+- Danesh : [[github](https://github.com/danesh-dev)] 
